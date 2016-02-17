@@ -67,42 +67,32 @@ bool intersect(cpiece a, cpiece b){
 		if(b->small){
 			if(a->estHorizontal){
 				if(b->estHorizontal){
-					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));														//a small, b small, a hor, b hor
+					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));
 				}
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));	//a small, b small, a hor, b ver
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));
 			}
-			if(b->estHorizontal){
-				//return																																				//a small, b small, a ver, b hor
+			if(!(b->estHorizontal)){
+				//return
 			}
-			//return																																					//a small, b small, a ver, b ver
+			//return
 		}
-		if(!(b->small)){		
-			if(a->estHorizontal){
-				if(b->estHorizontal){
-					//a small, b tall, a hor, b hor
-				}
-				//a small, b tall, a hor, b hor
-			}
-			//a small, b tall, a ver, b hor
-		}
-		//a small, b tall, a ver, b ver
-	}
-	if(p2->small){
 		if(a->estHorizontal){
 			if(b->estHorizontal){
-				//a tall, b small, a hor, b hor
+				//return
 			}
-			//a tall, b small, a hor, b ver
+			//return
 		}
-		if(b->estHorizontal){
-			//a tall, b small, a ver, b hor
+		if(b->estHoriontal){
+			//return
 		}
-		//a tall, b small, a ver, b ver
+		
 	}
-	//a tall, b tall (à faire)
+	if(p2->small){
+		//code
+	}
+	//si ils sont tous grand
 }
 
-bool 
 /*
 int get_x(cpiece p);
 
