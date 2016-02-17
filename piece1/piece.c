@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "piece.h"
+//yolo
 
 struct piece_s{
 	int abs;
