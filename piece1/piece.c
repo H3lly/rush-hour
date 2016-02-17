@@ -59,6 +59,7 @@ bool movement_is_allowed(piece p, dir d){
 
 
 bool intersect(cpiece a, cpiece b){
+	//faire un add différent si tall
 	int ax = a->abs;
 	int ay = a->ord;
 	int bx = b->abs;
@@ -69,21 +70,23 @@ bool intersect(cpiece a, cpiece b){
 				if(b->estHorizontal){
 					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));														//a small, b small, a hor, b hor
 				}
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));	//a small, b small, a hor, b ver ==
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx);	//a small, b small, a hor, b ver
 			}
 			if(b->estHorizontal){
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));  //a small, b small, a ver, b hor ==
+				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1));  //a small, b small, a ver, b hor
 			}
-			//return																																					//a small, b small, a ver, b ver
+			return (ax==bx)&&(ay==by||ay==(by+1)||(ay+1)==by);																//a small, b small, a ver, b ver)
 		}
 		if(!(b->small)){		
 			if(a->estHorizontal){
 				if(b->estHorizontal){
-					//a small, b tall, a hor, b hor
+					return (ay==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2)||(ax+1)==bx);								//a small, b tall, a hor, b hor
 				}
-				//a small, b tall, a hor, b hor
+				return (ax==bx||(ax+1)==bx)&&(ay==by||ay==(by+1)||ay==(by+2));									//a small, b tall, a hor, b hor
 			}
-			//a small, b tall, a ver, b hor
+			if(b->estHorizontal){
+				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2));									//a small, b tall, a ver, b hor
+			}
 		}
 		//a small, b tall, a ver, b ver
 	}
