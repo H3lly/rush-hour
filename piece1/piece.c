@@ -5,6 +5,7 @@
 #include "piece.h"
 //yolo
 //ofijoifjoiefjezoijez
+//sdofkjsdoikdsfo
 
 struct piece_s{
 	int abs;
