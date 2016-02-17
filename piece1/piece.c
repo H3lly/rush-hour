@@ -59,17 +59,26 @@ bool movement_is_allowed(piece p, dir d){
 }
 
 
-bool intersect(cpiece p1, cpiece p2){
-	if(p1->small){
-		if(p2->small){
-			//code
+bool intersect(cpiece a, cpiece b){
+	int ax = a->abs;
+	int ay = a->ord;
+	int bx = b->abs;
+	int by = b->ord;
+	if(a->small){
+		if(b->small){
+			if(a->estHorizontal){
+				if(b->estHorizontal){
+					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));
+				}
+				
+			}
 		}
 		//code si p2 grand
 	}
 	if(p2->small){
 		//code
 	}
-	//si ils sont tous smoll
+	//si ils sont tous grand
 }
 
 /*
