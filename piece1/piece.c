@@ -69,10 +69,10 @@ bool intersect(cpiece a, cpiece b){
 				if(b->estHorizontal){
 					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));														//a small, b small, a hor, b hor
 				}
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));	//a small, b small, a hor, b ver
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));	//a small, b small, a hor, b ver ==
 			}
 			if(b->estHorizontal){
-				//return																																				//a small, b small, a ver, b hor
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));  //a small, b small, a ver, b hor ==
 			}
 			//return																																					//a small, b small, a ver, b ver
 		}
@@ -100,6 +100,16 @@ bool intersect(cpiece a, cpiece b){
 		//a tall, b small, a ver, b ver
 	}
 	//a tall, b tall (à faire)
+	if(a->estHorizontal){
+		if(b->estHorizontal){
+			//a tall, b tall, a hor, b hor
+		}
+		//a tall, b tall, a hor, b ver
+	}
+	if(b->estHorizontal){
+		//a tall, b tall, a ver, b hor
+	}
+	//a tall, b tall, a ver, b ver
 }
 
 bool 
