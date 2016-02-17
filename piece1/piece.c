@@ -70,7 +70,7 @@ bool intersect(cpiece a, cpiece b){
 				if(b->estHorizontal){
 					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));
 				}
-				
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx||ax==(bx+1)||(ax+1)==(bx+1));
 			}
 		}
 		//code si p2 grand
