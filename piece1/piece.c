@@ -20,7 +20,7 @@ piece new_piece_rh (int x, int y, bool small, bool horizontal){	// inversion de 
 	p -> ord = y;
 	p -> small = small;
 	p -> estHorizontal = horizontal;
-  	return p;
+  return p;
 }
 
 void delete_piece (piece p){
@@ -34,89 +34,48 @@ void copy_piece (cpiece src, piece dst){
 	dst -> estHorizontal = src -> estHorizontal;
 }
 
-
 void move_piece (piece p, dir d, int distance){
-	if(movement_is_allowed(p,d){
+	if movement_is_allowed(p, d){
 		switch (d) {
 			case UP:
-				while (distance !=0){
-					if (!can_move(p, UP)){
-						break;
-					}
-					//code bouger
-					distance-=1;
-					}
+				p -> ord += distance;
 				break;
-
-
 			case DOWN:
-				while (distance !=0){
-					if (!can_move(p, DOWN)){
-						break;					}
-					//code bouger
-					distance-=1;
-				}
+				p -> ord -= distance;
 				break;
-
-
 			case RIGHT:
-				while (distance !=0){
-					if (!can_move(p, RIGHT)){
-						break;
-					}
-					//code bouger
-					distance-=1;
-				}
+				p -> abs += distance;
 				break;
-
-
 			case LEFT:
-				while (distance !=0){
-					if (!can_move(p, LEFT)){
-						break;
-					}
-					//code bouger
-					distance-=1;
-				}
+				p -> abs -= distance;
 				break;
-			}
 		}
-	}	
+	}
 	printf("Not moved");
 	break;
 }
 
-bool can_move(piece p, dir d){
-	switch(d){
-		case UP:
-			
-			
-	}
-	
-}
-
 bool movement_is_allowed(piece p, dir d){
-	if (((d==UP || d==down)&&(p.estHorizontal))||((d==LEFT || d==RIGHT)&&(!p.estHorizontal))){	
+	if (((d==UP || d==DOWN)&&(p.estHorizontal))||((d==LEFT || d==RIGHT)&&(!p.estHorizontal))){	
 		return false;
 	return true;
 }
 
 
-/*	
-int i = 1;
-if (!p.small){		//prend en compte la taille de la pièce pour faire les tests de déplacements
-	i+=1;
-}	
-if ((d==UP)&&(p.ord==5-i)||(d==DOWN)&&(p.ord==0)||(d==LEFT)&&(p.abs==0)||(d==RIGHT)&&(p.abs==5-i)){
-	return false;
+bool intersect(cpiece p1, cpiece p2){
+	if(p1->small){
+		if(p2->small){
+			//code
+		}
+		//code si p2 grand
+	}
+	if(p2->small){
+		//code
+	}
+	//si ils sont tous smoll
 }
-*/
-
-
 
 /*
-bool intersect(cpiece p1, cpiece p2);
-
 int get_x(cpiece p);
 
 int get_y(cpiece p);
