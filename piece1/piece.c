@@ -11,7 +11,7 @@ struct piece_s{
 };
 
 piece new_piece_rh (int x, int y, bool small, bool horizontal){	// inversion de x et y
-	piece p = malloc(sizeof(struct piece));								// <=> piece p = new piece();
+	piece p = malloc(sizeof(struct piece_s));								// <=> piece p = new piece();
 	p -> abs = x;
 	p -> ord = y;
 	p -> small = small;
@@ -31,7 +31,7 @@ void copy_piece (cpiece src, piece dst){
 }
 
 void move_piece (piece p, dir d, int distance){
-	if movement_is_allowed(p, d){
+	if (movement_is_allowed(p,d)){
 		switch (d) {
 			case UP:
 				p -> ord += distance;
@@ -48,12 +48,12 @@ void move_piece (piece p, dir d, int distance){
 		}
 	}
 	printf("Not moved");
-	break;
 }
 
 bool movement_is_allowed(piece p, dir d){
-	if (((d==UP || d==DOWN)&&(p.estHorizontal))||((d==LEFT || d==RIGHT)&&(!p.estHorizontal))){	
+	if (((d==UP || d==DOWN)&&(p->estHorizontal))||((d==LEFT || d==RIGHT)&&(!(p->estHorizontal)))){	
 		return false;
+	}
 	return true;
 }
 
@@ -88,6 +88,7 @@ bool intersect(cpiece a, cpiece b){
 		}
 		return (ax==by)&&(ay==by||ay==(by+1)||ay==(by+2)||(ay+1)==by);				//a small, b tall, a ver, b ver
 	}
+
 	if(b->small){
 		if(a->estHorizontal){
 			if(b->estHorizontal){
@@ -100,6 +101,7 @@ bool intersect(cpiece a, cpiece b){
 		}
 		return (ax==bx)&&(ay==by||(ay+1)==by||ay==(by+1)||(ay+2)==by);//a tall, b small, a ver, b ver
 	}
+
 	if(a->estHorizontal){
 		if(b->estHorizontal){
 			return (ay==by)&&((ax+2)==bx||(ax+1)==bx||ax==bx||ax==(bx+1)||ax==(bx+2));//a tall, b tall, a hor, b hor
@@ -111,8 +113,6 @@ bool intersect(cpiece a, cpiece b){
 	}
 	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay|by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
 }
-
-bool 
 /*
 int get_x(cpiece p);
 
