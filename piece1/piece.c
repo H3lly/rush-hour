@@ -10,8 +10,9 @@ struct piece_s{
 	bool estHorizontal;
 };
 
-piece new_piece_rh (int x, int y, bool small, bool horizontal){	// inversion de x et y
-	piece p = malloc(sizeof(struct piece_s));								// <=> piece p = new piece();
+//constructor
+piece new_piece_rh (int x, int y, bool small, bool horizontal){
+	piece p = malloc(sizeof(struct piece_s));								
 	p -> abs = x;
 	p -> ord = y;
 	p -> small = small;
@@ -19,10 +20,12 @@ piece new_piece_rh (int x, int y, bool small, bool horizontal){	// inversion de 
   return p;
 }
 
+//free the piece's allocated memoire 
 void delete_piece (piece p){
 	free(p);
 }
 
+//create a copy of a piece p
 void copy_piece (cpiece src, piece dst){
 	dst -> abs = src -> abs;
 	dst -> ord = src -> ord;
@@ -30,6 +33,7 @@ void copy_piece (cpiece src, piece dst){
 	dst -> estHorizontal = src -> estHorizontal;
 }
 
+//moves the piece in the direction d if the movement is allowed
 void move_piece (piece p, dir d, int distance){
 	if (!(((d==UP || d==DOWN)&&(p->estHorizontal))||((d==LEFT || d==RIGHT)&&(!(p->estHorizontal))))){
 		switch (d) {
@@ -47,11 +51,10 @@ void move_piece (piece p, dir d, int distance){
 				break;
 		}
 	}
-	printf("Not moved");
 }
 
+//returns if there two pieces are superposed. Tests all cases. (can (probably) be optimized)
 bool intersect(cpiece a, cpiece b){
-	//faire un add différent si tall
 	int ax = a->abs;
 	int ay = a->ord;
 	int bx = b->abs;
@@ -136,8 +139,4 @@ int get_width(cpiece p){
 
 bool is_horizontal(cpiece p){
 	return p->estHorizontal;
-}
-
-int main (void){
-	printf("hello");
 }
