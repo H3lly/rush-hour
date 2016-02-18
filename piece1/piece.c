@@ -31,7 +31,7 @@ void copy_piece (cpiece src, piece dst){
 }
 
 void move_piece (piece p, dir d, int distance){
-	if (movement_is_allowed(p,d)){
+	if (!(((d==UP || d==DOWN)&&(p->estHorizontal))||((d==LEFT || d==RIGHT)&&(!(p->estHorizontal))))){
 		switch (d) {
 			case UP:
 				p -> ord += distance;
@@ -49,14 +49,6 @@ void move_piece (piece p, dir d, int distance){
 	}
 	printf("Not moved");
 }
-
-bool movement_is_allowed(piece p, dir d){
-	if (((d==UP || d==DOWN)&&(p->estHorizontal))||((d==LEFT || d==RIGHT)&&(!(p->estHorizontal)))){	
-		return false;
-	}
-	return true;
-}
-
 
 bool intersect(cpiece a, cpiece b){
 	//faire un add différent si tall
@@ -112,6 +104,10 @@ bool intersect(cpiece a, cpiece b){
 		return (by==ay||by==(ay+1)||by==(ay+2))&&(bx==ax||(bx+1)==ax||(bx+2)==ax);//a tall, b tall, a ver, b hor
 	}
 	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay|by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
+}
+
+int main (void){
+	printf("hello");
 }
 /*
 int get_x(cpiece p);
