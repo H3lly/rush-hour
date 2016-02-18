@@ -68,41 +68,38 @@ bool intersect(cpiece a, cpiece b){
 		if(b->small){
 			if(a->estHorizontal){
 				if(b->estHorizontal){
-					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));														//a small, b small, a hor, b hor
+					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));							//a small, b small, a hor, b hor
 				}
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx);	//a small, b small, a hor, b ver
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx);								//a small, b small, a hor, b ver
 			}
 			if(b->estHorizontal){
-				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1));  //a small, b small, a ver, b hor
+				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1));  							//a small, b small, a ver, b hor
 			}
-			return (ax==bx)&&(ay==by||ay==(by+1)||(ay+1)==by);																//a small, b small, a ver, b ver)
-		}
-		if(!(b->small)){		
-			if(a->estHorizontal){
-				if(b->estHorizontal){
-					return (ay==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2)||(ax+1)==bx);								//a small, b tall, a hor, b hor
-				}
-				return (ax==bx||(ax+1)==bx)&&(ay==by||ay==(by+1)||ay==(by+2));									//a small, b tall, a hor, b hor
-			}
-			if(b->estHorizontal){
-				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2));									//a small, b tall, a ver, b hor
-			}
-		}
-		//a small, b tall, a ver, b ver
-	}
-	if(p2->small){
+			return (ax==bx)&&(ay==by||ay==(by+1)||(ay+1)==by);									//a small, b small, a ver, b ver
+		}	
 		if(a->estHorizontal){
 			if(b->estHorizontal){
-				//a tall, b small, a hor, b hor
+				return (ay==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2)||(ax+1)==bx);		//a small, b tall, a hor, b hor
 			}
-			//a tall, b small, a hor, b ver
+			return (ax==bx||(ax+1)==bx)&&(ay==by||ay==(by+1)||ay==(by+2));			//a small, b tall, a hor, b ver
 		}
 		if(b->estHorizontal){
-			//a tall, b small, a ver, b hor
+			return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1)||ax==(bx+2));			//a small, b tall, a ver, b hor
 		}
-		//a tall, b small, a ver, b ver
+		return (ax==by)&&(ay==by||ay==(by+1)||ay==(by+2)||(ay+1)==by);				//a small, b tall, a ver, b ver
 	}
-	//a tall, b tall (à faire)
+	if(b->small){
+		if(a->estHorizontal){
+			if(b->estHorizontal){
+				return (ay==by)&&(bx==ax||bx==(ax+1)||bx==(ax+2)||(bx+1)==ax);//a tall, b small, a hor, b hor
+			}
+			return (ay==by||ax==(bx+1))&&(ay==by||by==(ay+1)||by==(ay+2));//a tall, b small, a hor, b ver
+		}
+		if(b->estHorizontal){
+			return (ay==by||(ay+1)==by||(ay+2)==by)&&(ax==bx||ax==(bx+1));//a tall, b small, a ver, b hor
+		}
+		return (ax==bx)&&(ay==by||(ay+1)==by||ay==(by+1)||(ay+2)==by);//a tall, b small, a ver, b ver
+	}
 	if(a->estHorizontal){
 		if(b->estHorizontal){
 			//a tall, b tall, a hor, b hor
