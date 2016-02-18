@@ -7,14 +7,14 @@
 struct game_s{
 	int nb_pieces;
 	int	nb_moves;
-	//piece *liste_piece;
+	//piece *liste_piece; ???
 };
 
 game new_game_hr (int nb_pieces, piece *pieces){
 	game g = malloc(sizeof(struct game_s));
 	g->nb_moves=0;
 	g->nb_pieces=nb_pieces;
-	//g->liste_piece
+	//g->liste_piece ???
 }
 
 void delete_game (game g){
@@ -23,8 +23,8 @@ void delete_game (game g){
 
 void copy_game (cgame src, game dst){
 	dst->nb_pieces = src->nb_pieces;
-	dst->nb_move = src->nb_move;
-	//g->liste_piece
+	dst->nb_moves = src->nb_moves;
+	//dst->liste_piece=src->liste piece ???
 }
 
 int game_nb_pieces(cgame g){
