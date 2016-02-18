@@ -102,14 +102,14 @@ bool intersect(cpiece a, cpiece b){
 	}
 	if(a->estHorizontal){
 		if(b->estHorizontal){
-			//a tall, b tall, a hor, b hor
+			return (ay==by)&&((ax+2)==bx||(ax+1)==bx||ax==bx||ax==(bx+1)||ax==(bx+2));//a tall, b tall, a hor, b hor
 		}
-		//a tall, b tall, a hor, b ver
+		return (ay==by||ay==(by+1)||ay==(by+2))&&(ax==bx||(ax+1)==bx||(ax+2)==bx);//a tall, b tall, a hor, b ver
 	}
 	if(b->estHorizontal){
-		//a tall, b tall, a ver, b hor
+		return (by==ay||by==(ay+1)||by==(ay+2))&&(bx==ax||(bx+1)==ax||(bx+2)==ax);//a tall, b tall, a ver, b hor
 	}
-	//a tall, b tall, a ver, b ver
+	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay|by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
 }
 
 bool 
