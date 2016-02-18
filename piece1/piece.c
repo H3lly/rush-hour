@@ -106,17 +106,38 @@ bool intersect(cpiece a, cpiece b){
 	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay|by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
 }
 
+int get_x(cpiece p){
+	return p->abs;
+}
+
+int get_y(cpiece p){
+	return p->ord;
+}
+
+int get_height(cpiece p){
+	if(!(p->estHorizontal)){
+		if(p->small){
+			return 2;
+		}
+		return 3;
+	}
+	return 1;
+}
+
+int get_width(cpiece p){
+	if(p->estHorizontal){
+		if(p->small){
+			return 2;
+		}
+		return 3;
+	}
+	return 1;
+}
+
+bool is_horizontal(cpiece p){
+	return p->estHorizontal;
+}
+
 int main (void){
 	printf("hello");
 }
-/*
-int get_x(cpiece p);
-
-int get_y(cpiece p);
-
-int get_height(cpiece p);
-
-int get_width(cpiece p);
-
-bool is_horizontal(cpiece p);
-*/
