@@ -5,7 +5,7 @@
 
 struct game_s{
 	int nb_pieces;
-	int	nb_moves;
+	int nb_moves;
 	piece *liste_piece;
 };
 
@@ -53,6 +53,7 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
                 }
             }
+            g->nb_moves+=distance;
             break;
         case DOWN:
             move_piece(p, DOWN, distance);
@@ -62,6 +63,7 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
                 }
             }
+            g->nb_moves+=distance;
             break;
         case LEFT:
             move_piece(p, LEFT, distance);
@@ -71,6 +73,7 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
                 }
             }
+            g->nb_moves+=distance;
             break;
         case RIGHT:
             move_piece(p, RIGHT, distance);
@@ -80,9 +83,8 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
                 }
             }
-            break;
-            
-            
+            g->nb_moves+=distance;
+            break;      
     }
 }
 
