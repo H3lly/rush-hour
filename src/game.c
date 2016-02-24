@@ -6,14 +6,14 @@
 struct game_s{
 	int nb_pieces;
 	int	nb_moves;
-	//piece *liste_piece; ???
+	piece *liste_piece;
 };
 
 game new_game_hr (int nb_pieces, piece *pieces){
 	game g = malloc(sizeof(struct game_s));
 	g->nb_moves=0;
 	g->nb_pieces=nb_pieces;
-	//g->liste_piece = p;
+	g->liste_piece = pieces;
 }
 /*
 int nbPiece = 3;
@@ -28,31 +28,26 @@ void delete_game (game g){
 void copy_game (cgame src, game dst){
 	dst->nb_pieces = src->nb_pieces;
 	dst->nb_moves = src->nb_moves;
-	//dst->liste_piece=src->liste piece ???
+	dst->liste_piece=src->liste_piece;
 }
 
 int game_nb_pieces(cgame g){
 	return g->nb_pieces;
 }
 
-/*
 cpiece game_piece(cgame g, int piece_num){
-
+    return g->liste_piece[piece_num-1];
 }
-*/
 
-/*
 bool game_over_hr(cgame g){
-	//return position voiture 0 == (4,3);
+    return (get_x(g->liste_piece[0])== 4) && (get_y(g->liste_piece[0])==3);
 }
-*/
 
 /*
 bool play_move(game g, int piece_num, dir d, int distance){
 
 }
 */
-
 
 int game_nb_moves(cgame g){
 	return g->nb_moves;

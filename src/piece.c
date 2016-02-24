@@ -62,14 +62,14 @@ bool intersect(cpiece a, cpiece b){
 		if(b->small){
 			if(a->estHorizontal){
 				if(b->estHorizontal){
-					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));							//a small, b small, a hor, b hor
+					return (ay==by)&&(ax==bx||(ax+1)==bx||ax==(bx+1));		//a small, b small, a hor, b hor
 				}
-				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx);								//a small, b small, a hor, b ver
+				return (ay==by||ay==(by+1))&&(ax==bx||(ax+1)==bx);			//a small, b small, a hor, b ver
 			}
 			if(b->estHorizontal){
-				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1));  							//a small, b small, a ver, b hor
+				return (ay==by||(ay+1)==by)&&(ax==bx||ax==(bx+1));                  	//a small, b small, a ver, b hor
 			}
-			return (ax==bx)&&(ay==by||ay==(by+1)||(ay+1)==by);									//a small, b small, a ver, b ver
+			return (ax==bx)&&(ay==by||ay==(by+1)||(ay+1)==by);                              //a small, b small, a ver, b ver
 		}	
 		if(a->estHorizontal){
 			if(b->estHorizontal){
