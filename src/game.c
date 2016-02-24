@@ -13,9 +13,14 @@ game new_game_hr (int nb_pieces, piece *pieces){
 	game g = malloc(sizeof(struct game_s));
 	g->nb_moves=0;
 	g->nb_pieces=nb_pieces;
-	//g->liste_piece ???
+	//g->liste_piece = p;
 }
+/*
+int nbPiece = 3;
+int p[nbpiece*2];
+game g = new_game_hr(nbPiece, p); *p=p[0]
 
+*/
 void delete_game (game g){
 	free(g);
 }
