@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "piece.h"
 
-
 struct piece_s{
 	int abs;
 	int ord;
