@@ -9,6 +9,8 @@ struct game_s{
 	piece *liste_piece;
 };
 
+typedef const struct game_s* cgame;
+
 game new_game_hr (int nb_pieces, piece *pieces){
 	game g = malloc(sizeof(struct game_s));
 	g->nb_moves=0;
@@ -39,11 +41,11 @@ bool game_over_hr(cgame g){
 }
 
 bool equals(cpiece p1, cpiece p2){
-    return (get_x(p1)==get_x(p2))&&(get_y(p1)==get_y(p2))&&(is_horizontal(p1)==is_horizontal(p2))&&(p1->small==p2->small);
+    return (get_x(p1)==get_x(p2))&&(get_y(p1)==get_y(p2))&&(get_width(p1)==get_width(p2))&&(get_height(p1)==get_height(p2));
 }
 
 bool play_move(game g, int piece_num, dir d, int distance){
-    cpiece p = game_piece(g, piece_num);
+    piece p = g->liste_piece[piece_num];
     switch(d){
         case UP:
             move_piece(p, UP, distance);
