@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-//#include "affichage.h"
-
-typedef struct grille_s* grille;
-grille new_grille();
-void afficher_grille(grille g);
-
+#include "affichage.h"
 
 
 struct grille_s{
