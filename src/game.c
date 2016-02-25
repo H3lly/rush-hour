@@ -52,41 +52,41 @@ bool play_move(game g, int piece_num, dir d, int distance){
             for (int i=0;i< g->nb_pieces;++i){
                 if (!(equals(p,(game_piece(g,i))))&&intersect(p, game_piece(g, i))){
                     move_piece(p, DOWN, distance);
-                    break;
+                    return false;
                 }
             }
             g->nb_moves+=distance;
-            break;
+            return true;
         case DOWN:
             move_piece(p, DOWN, distance);
             for (int i=0;i< g->nb_pieces;++i){
                 if (!(equals(p,(game_piece(g,i))))&&intersect(p, game_piece(g, i))){
                     move_piece(p, UP, distance);
-                    break;
+                    return false;
                 }
             }
             g->nb_moves+=distance;
-            break;
+            return true;
         case LEFT:
             move_piece(p, LEFT, distance);
             for (int i=0;i< g->nb_pieces;++i){
                 if (!(equals(p,(game_piece(g,i))))&&intersect(p, game_piece(g, i))){
                     move_piece(p, RIGHT, distance);
-                    break;
+                    return false;
                 }
             }
             g->nb_moves+=distance;
-            break;
+            return true;
         case RIGHT:
             move_piece(p, RIGHT, distance);
             for (int i=0;i< g->nb_pieces;++i){
                 if (!(equals(p,(game_piece(g,i))))&&intersect(p, game_piece(g, i))){
                     move_piece(p, LEFT, distance);
-                    break;
+                    return false;
                 }
             }
             g->nb_moves+=distance;
-            break;      
+            return true;      
     }
 }
 
