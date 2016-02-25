@@ -5,6 +5,12 @@
 
 #define NB_PIECES 4
 
+bool test_equality_int(int expected, int value, char * msg);
+bool test_equality_bool(bool expected, bool value, char * msg);
+void set_up();
+void tear_down();
+void set_game();
+bool test_new_game_hr();
 /**
  * On teste si value == expected
  */
