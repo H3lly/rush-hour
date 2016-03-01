@@ -106,7 +106,7 @@ bool intersect(cpiece a, cpiece b){
 	if(b->estHorizontal){
 		return (by==ay||by==(ay+1)||by==(ay+2))&&(bx==ax||(bx+1)==ax||(bx+2)==ax);//a tall, b tall, a ver, b hor
 	}
-	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay|by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
+	return (ax==bx)&&((by+2)==ay||(by+1)==ay||by==ay||by==(ay+1)||by==(ay+2));//a tall, b tall, a ver, b ver
 }
 
 int get_x(cpiece p){
