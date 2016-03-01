@@ -1,0 +1,14 @@
+01/03/2016 - 10:46 :
+Groupe : IN400A1
+Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
+
+Nous avons initialisé le dépôt sur git à l'adresse suivante : https://github.com/H3lly/rush-hour. Nous avons commencé le code du fichier piece.c ensemble, puis nous nous sommes répartis les tâches.
+
+Luc : 
+	J'ai commencé à faire le fichier affichage.c permettant d'afficher une partie en cours de façon dynamique : création de la structure grille, fonction d'affichage, création de l'interface affichage.h et intégration au Makefile. J'ai aussi participé à la correction et relecture des différents fichiers du projet.
+
+Camille :
+	J'ai terminé le fichier piece.c, et fait le code du fichier game.c avec l'aide de Luc. J'ai rédigé un premier Makefile fonctionnel mais optimisable qui génère automatiquement une bibliothèque libgame.a, et j'ai ré-arrangé la structure de notre dépôt. J'ai ensuite fait les différentes modifications nécessaires à chaque fichier ajouté (à savoir, game_test1.c, affichage.c et affichage.h).
+
+Ny Andry et Alexandre :
+	Nous avons aidé à la finition du fichier game.c et nous avons fait la vérification du fichier piece.c. Nous avons commencé le fichier game_test1.c sur le compte d'Alexandre.
