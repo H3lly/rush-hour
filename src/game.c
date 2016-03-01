@@ -16,6 +16,7 @@ game new_game_hr (int nb_pieces, piece *pieces){
 	g->nb_moves=0;
 	g->nb_pieces=nb_pieces;
 	g->liste_piece = pieces;
+    return g;
 }
 
 void delete_game (game g){
