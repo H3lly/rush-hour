@@ -73,6 +73,15 @@ bool test_new_game_hr() {
     }
     return result;
 }
-/*
+
 bool test_game_over_hr(){
- */
+  return game_over_hr(g);
+}
+
+bool test_play_move(){
+    bool result = true;
+    set_up()
+    game g = new_game_hr(NB_PIECES, pieces);
+    play_move(g, 0, LEFT, 1);
+    play_move(g, 1, DOWN, 1)
+}
