@@ -18,4 +18,4 @@ affichage:
 	gcc game.o piece.o affichage.o -o affichage
 
 clean:
-	rm -f game.o piece.o test_piece1.o test_piece1 lib/libgame.a affichage affichage.o -d lib
+	rm -f game.o piece.o test_piece1.o test_piece1 lib/libgame.a affichage affichage.o game_test1.o -d lib
