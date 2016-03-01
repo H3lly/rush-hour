@@ -45,6 +45,7 @@ bool equals(cpiece p1, cpiece p2) {
     return (get_x(p1) == get_x(p2))&&(get_y(p1) == get_y(p2))&&(get_width(p1) == get_width(p2))&&(get_height(p1) == get_height(p2));
 }
 
+//ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
     piece p = g->liste_piece[piece_num];
     switch (d) {
