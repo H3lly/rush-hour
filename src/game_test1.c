@@ -41,10 +41,10 @@ piece pieces[NB_PIECES];
 ...1..
  */
 void set_up() {
-  pieces[0] = new_piece_rh(3, 3, true, true);
-  pieces[1] = new_piece_rh(3, 0, true, false);
-  pieces[2] = new_piece_rh(4, 1, true, true);
-  pieces[3] = new_piece_rh(5, 3, false, false);
+  pieces[0] = new_piece_hr(3, 3, true, true);
+  pieces[1] = new_piece_hr(3, 0, true, false);
+  pieces[2] = new_piece_hr(4, 1, true, true);
+  pieces[3] = new_piece_hr(5, 3, false, false);
 }
 void tear_down() {
   for (int i = 0 ; i < NB_PIECES; i++)
@@ -60,7 +60,7 @@ bool test_new_game_hr(){
   bool result = true;
   set_up();
   for (int i= 0 ; i < NB_PIECES; i++){
-    game g = new_game_rh(NB_PIECES, pieces);
+    game g = new_game_hr(NB_PIECES, pieces);
     result = result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces");
     result = result && equals(pieces[i], game_piece(g, i+1));
   }
