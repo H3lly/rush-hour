@@ -18,13 +18,16 @@ bool test_equality_bool(bool expected, bool value, char * msg) {
         fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
     return expected == value;
 }
-/*
+bool equals(cpiece p1, cpiece p2) {
+    return (get_x(p1) == get_x(p2))&&(get_y(p1) == get_y(p2))&&(get_width(p1) == get_width(p2))&&(get_height(p1) == get_height(p2));
+}
+
 bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     if (!equals(expected, value)){
-        fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
+        fprintf(stderr, "ERR: Pieces are different. %s\n", msg);
     }
     return equals(expected, value);
-}*/
+}
     
 //création d'un tableau de pièces
 piece pieces[NB_PIECES];
@@ -43,6 +46,7 @@ void tear_down() {
 . . . 1 2 2
 . . . 1 . .
  */
+
 game set_game() {
     pieces[0] = new_piece_rh(3, 3, true, true);
     pieces[1] = new_piece_rh(3, 0, true, false);
@@ -51,22 +55,19 @@ game set_game() {
     return new_game_hr(NB_PIECES, pieces);
 }
 
-bool equals(cpiece p1, cpiece p2) {
-    return (get_x(p1) == get_x(p2))&&(get_y(p1) == get_y(p2))&&(get_width(p1) == get_width(p2))&&(get_height(p1) == get_height(p2));
-}
 
 bool test_new_game_hr() {
     bool result = true;
     game g = set_game();
     result = result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces");
-    //test_play_move();
     for (int i = 0; i < NB_PIECES; i++) {
         result = result && equals(pieces[i], game_piece(g, i + 1));
     }
+    delete_game(g);
     return result;
 }
 // test play move etnre g (jeu dans lequel seul 0 peut bouger) et gtest(jeu de base)
-/*
+
 bool test_play_move(){
     bool result = true;
     int nbmove = 1;
@@ -78,12 +79,29 @@ bool test_play_move(){
     play_move(g, 2, LEFT, 1);
     play_move(g, 3, DOWN, 2);
     result = result && test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves");
-    result = result && test_equality_piece(p_test, game_piece(g, 0), "play_move de 0");
+    result = result && !test_equality_piece(p_test, game_piece(g, 0), "play_move de 0");
     for (int i = 1; i < game_nb_pieces(g); ++i){
         result = result && test_equality_piece(game_piece(gtest, i), game_piece(g, i), "play_move");
     }
+    tear_down();
+    delete_game(g);
     return result;
-}*/
+}
+
+bool test_copy_game(){
+    bool result = true;
+    game g = set_game();
+    play_move(g, 0, LEFT, 1);
+    game gtest = new_game_hr(NB_PIECES,pieces);
+    copy_game(g, gtest);
+    result = result && test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece copy");
+    for (int i = 0; i < game_nb_pieces(g); ++i){
+        result = result && test_equality_piece(game_piece(gtest, i), game_piece(g, i), "play_move");
+    }
+    delete_game(g);
+    delete_game(gtest);
+    return result;
+}
 
 /*
 int main (int argc, char *argv[])
