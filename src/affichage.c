@@ -18,17 +18,13 @@ int main (void){
     liste[7]=new_piece_rh(5, 2, true, false);
     game g = new_game_hr(8, liste);
     grid grid = new_grid(g);
-    add_piece(grid, 0);
-    add_piece(grid, 1);
-    add_piece(grid, 2);
-    add_piece(grid, 3);
-    add_piece(grid, 4);
-    add_piece(grid, 5);
-    add_piece(grid, 6);
-    add_piece(grid, 7);
-    //ne marche pas comme on veut
-    //à finir la prochaine fois
+    set_pieces(grid);
     show_grid(grid);
+    
+    /*while(!(game_over_hr(g))){
+        
+    }*/
+    if(game_over_hr(g)) printf("game is over");
     return EXIT_SUCCESS;
 }
 

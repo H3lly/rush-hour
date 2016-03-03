@@ -24,9 +24,9 @@ grid new_grid(game g){
 }
 
 void show_grid(grid grid){
-	for(int i=5;i>=0;i--){
-		for(int j=0; j<6;j++){
-			char c = grid->tab[i][j];
+	for(int abs=5;abs>=0;abs--){
+		for(int ord=0; ord<6;ord++){
+			char c = grid->tab[ord][abs];
 			printf("%c ", c);
 		}
 		printf("\n");
@@ -48,35 +48,23 @@ void add_piece(grid grid, int piece_num){
     int car = piece_num+48;
     grid->tab[x][y]=car;
     if(is_horizontal(p)){
-        grid->tab[x][y+1]=car;
+        grid->tab[x+1][y]=car;
         if(get_width(p)==3){
-            grid->tab[x][y+2]==car;
+            grid->tab[x+2][y]==car;
         }
     }
     else{
-        grid->tab[x+1][y]=car;
+        grid->tab[x][y+1]=car;
         if(get_height(p)==3){
-            grid->tab[x+2][y]=car;
+            grid->tab[x][y+2]=car;
         }
     }
 }
-    
-    /*int max = get_height(p);
-    int min = get_width(p);
-    if(get_width(p)>get_height(p)){
-        max = get_width(p);
-        min = get_height(p);
-    }
-    for(int i=0;i<max;i++){
-        grid->tab[min][i]=piece_num+48;
-        show_grid(grid);
-        printf("\n");
-    }*/
 
 void set_pieces(grid grid){
     game g = get_game(grid);
     for (int i=0; i<game_nb_pieces(g);i++){
-        set_piece(grid, i);
+        add_piece(grid, i);
     }
 }
 /*
