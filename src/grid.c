@@ -8,13 +8,15 @@
 struct grid_s {
         char tab[6][6];
         game g;
+        //marche pas
+        //faire un pointeur sur g ???
 };
 
 //faireu n pointeur constant
 
 grid new_grid(game g){
 	grid grid = malloc(sizeof(struct grid_s));
-        grid->g=g;
+        copy_game(g, grid->g);
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
 			grid -> tab[i][j]='.';
@@ -45,19 +47,38 @@ void add_piece(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
     int y = get_y(p);
-    move_part(grid,x,y,piece_num);
+    set_cell_int(grid,x,y,piece_num);
     if(is_horizontal(p)){
-        move_part(grid,x+1,y,piece_num);
+        set_cell_int(grid,x+1,y,piece_num);
         if(get_width(p)==3){
-            move_part(grid,x+2,y,piece_num);
+            set_cell_int(grid,x+2,y,piece_num);
         }
     }
     else{
-        move_part(grid,x,y+1,piece_num);
+        set_cell_int(grid,x,y+1,piece_num);
         if(get_height(p)==3){
-            move_part(grid,x,y+2,piece_num);
+            set_cell_int(grid,x,y+2,piece_num);
         }
     }
+}
+
+void delete_piece_grid(grid grid, int piece_num){
+    cpiece p = game_piece(get_game(grid), piece_num);
+    int x = get_x(p);
+    int y = get_y(p);
+    set_cell_char(grid,x,y,'.');
+    if(is_horizontal(p)){
+        set_cell_char(grid,x+1,y,'.');
+        if(get_width(p)==3){
+            set_cell_char(grid,x+2,y,'.');
+        }
+    }
+    else{
+        set_cell_char(grid,x,y+1,'.');
+        if(get_height(p)==3){
+            set_cell_char(grid,x,y+2,'.');
+        }
+    }   
 }
 
 void set_pieces(grid grid){
@@ -67,24 +88,32 @@ void set_pieces(grid grid){
     }
 }
 
-void move_part(grid grid, int x, int y, int val){
+void set_cell_int(grid grid, int x, int y, int val){
     grid->tab[x][y]=val+48;
 }
 
-//void deplacement(grid grid, dir d, int distance, int piece_num){
-////    switch(d){
-////        game g = get_game(grid);
-////        case UP:
-////            //bouger 7 vers le haut
-////            if(play_move(g,piece_num, dir UP,distance)){
-////                
-////            }
-////            break;
-////        case DOWN:
-////            break;
-////        case LEFT:
-////            break;
-////        case RIGHT:
-////            break;
-////    }
-////}
+void set_cell_char(grid grid, int x, int y, char c){
+    grid->tab[x][y]=c;
+}
+
+void deplacement(grid grid, dir d, int distance, int piece_num){
+    switch(d){
+        printf("hey");
+        game g = grid->g;
+        case UP:
+            printf("yolo");
+            if(play_move(g, 7, UP, 1)){
+                //delete_piece_grid(grid, piece_num);
+                //add_piece(grid, piece_num);
+                //show_grid(grid);
+                //printf("Nombre de mouvements : %d", game_nb_moves(g));
+            }
+            break;
+        case DOWN:
+            break;
+        case LEFT:
+            break;
+        case RIGHT:
+            break;
+    }
+}

@@ -16,15 +16,19 @@ int main (void){
     liste[5]=new_piece_rh(3, 1, true, false);
     liste[6]=new_piece_rh(4, 0, false, false);
     liste[7]=new_piece_rh(5, 2, true, false);
-    game g = new_game_hr(8, liste);
-    grid grid = new_grid(g);
-    set_pieces(grid);
-    show_grid(grid);
-    
-    /*while(!(game_over_hr(g))){
-        
-    }*/
-    if(game_over_hr(g)) printf("game is over");
+//    game game = new_game_hr(8, liste);
+//    grid grid = new_grid(game);
+//    
+//    
+//    set_pieces(grid);
+//    show_grid(grid);
+//    
+//    /*while(!(game_over_hr(g))){
+//        
+//    }*/
+//    deplacement(grid, UP, 1, 7);
+//    //ne marche pas, peut-être faut-il faire un pointeur vers game ?
+//    if(game_over_hr(game)) printf("game is over");
     return EXIT_SUCCESS;
 }
 
