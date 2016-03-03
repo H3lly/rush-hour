@@ -10,58 +10,61 @@ struct grille_s {
 
 
 grille new_grille(){
-	grille g = malloc(sizeof(struct grille_s));
+	grille grid = malloc(sizeof(struct grille_s));
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
-			g -> tab[i][j]='.';
+			grid -> tab[i][j]='.';
 		}
 	}
-	return g;
+	return grid;
 }
 
-void afficher_grille(grille g){
+void afficher_grille(grille grid){
 	for(int i=5;i>=0;i--){
 		for(int j=5; j>=0;j--){
-			char c = g->tab[i][j];
+			char c = grid->tab[i][j];
 			printf("%c ", c);
 		}
 		printf("\n");
 	}
 }
 
-void delete_grille(grille g){
-    free(g);
+void delete_grille(grille grid){
+    free(grid);
 }
 
-void init_pieces(grille g){
-    g->tab[3][5]='0';
-    g->tab[3][4]='0';
-    g->tab[2][5]='1';
-    g->tab[2][4]='1';
-    g->tab[0][5]='2';
-    g->tab[1][5]='2';
-    g->tab[1][4]='3';
-    g->tab[1][3]='3';
-    g->tab[2][3]='4';
-    g->tab[3][3]='4';
-    g->tab[4][3]='4';
-    g->tab[1][2]='5';
-    g->tab[2][2]='5';
-    g->tab[0][1]='6';
-    g->tab[1][1]='6';
-    g->tab[2][1]='6';
-    g->tab[2][0]='7';
-    g->tab[3][0]='7';
-}
+
 
 /*
-void deplacement(grille g, dir d){
+void deplacement(game g, dir d, int distance){
     switch(d){
         case UP:
             if(game_piece(g,7))
     }
 }
 */
+
+void init_pieces(grille grid){
+    grid->tab[3][5]='0';
+    grid->tab[3][4]='0';
+    grid->tab[2][5]='1';
+    grid->tab[2][4]='1';
+    grid->tab[0][5]='2';
+    grid->tab[1][5]='2';
+    grid->tab[1][4]='3';
+    grid->tab[1][3]='3';
+    grid->tab[2][3]='4';
+    grid->tab[3][3]='4';
+    grid->tab[4][3]='4';
+    grid->tab[1][2]='5';
+    grid->tab[2][2]='5';
+    grid->tab[0][1]='6';
+    grid->tab[1][1]='6';
+    grid->tab[2][1]='6';
+    grid->tab[2][0]='7';
+    grid->tab[3][0]='7';
+}
+
 int main (void){
 	grille grid = new_grille();
 	init_pieces(grid);
@@ -72,7 +75,7 @@ int main (void){
 
 /* 
  * void show_case(grille g, int abs, int ord, int number){
-    g->tab[abs][ord] = number;
+    grid->tab[abs][ord] = number;
 }
 
 piece show_piece_petit_horizontal(grille g, piece p, int number){
