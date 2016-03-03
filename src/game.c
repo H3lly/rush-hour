@@ -35,7 +35,7 @@ int game_nb_pieces(cgame g) {
 }
 
 cpiece game_piece(cgame g, int piece_num) {
-    return g->liste_piece[piece_num - 1];
+    return g->liste_piece[piece_num];
 }
 
 bool game_over_hr(cgame g) {
