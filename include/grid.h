@@ -8,7 +8,7 @@
 typedef struct grid_s* grid;
 
 
-grille new_grille();
+grid new_grille();
 void afficher_grille(grid g);
 
 #endif

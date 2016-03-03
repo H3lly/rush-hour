@@ -6,12 +6,10 @@
 #include "grid.h"
 
 
-
-void init_pieces(grid grid){
-    grid->tab[3][5]='0';
-    grid->tab[3][4]='0';
-    grid->tab[2][5]='1';
-    grid->tab[2][4]='1';
+void init_pieces(game g){ 
+    set_piece(g, 0);
+ //   grid->tab[2][5]='1';
+/*    grid->tab[2][4]='1';
     grid->tab[0][5]='2';
     grid->tab[1][5]='2';
     grid->tab[1][4]='3';
@@ -25,7 +23,7 @@ void init_pieces(grid grid){
     grid->tab[1][1]='6';
     grid->tab[2][1]='6';
     grid->tab[2][0]='7';
-    grid->tab[3][0]='7';
+    grid->tab[3][0]='7';*/
 }
 
 

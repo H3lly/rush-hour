@@ -3,8 +3,9 @@
 
 #include "game.h"
 #include "piece.h"
+#include "grid.h"
 
-struct grille_s {
+struct grid_s {
         char tab[6][6];
 };
 
@@ -12,7 +13,7 @@ struct grille_s {
 //séparer la bibliothèque dans le make 
 
 grid new_grille(){
-	grid grid = malloc(sizeof(struct grille_s));
+	grid grid = malloc(sizeof(struct grid_s));
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
 			grid -> tab[i][j]='.';
@@ -34,7 +35,20 @@ void afficher_grille(grid grid){
 void delete_grille(grid grid){
     free(grid);
 }
-
+//demander au prof
+void set_piece(game g, grid grid, int piece_num){
+    piece p = game_piece(g, piece_num);
+    int max = get_height(p);
+    int min = get_width(p);
+    if(get_width(p)>get_height(p)){
+        int max = get_width(p);
+        int min = get_height(p);
+    }
+    for(int i=0;i<=max;i++){
+        grid->tab[min][i]=piece_num;
+    }
+    
+}
 /*
 void deplacement(game g, dir d, int distance){
     switch(d){
