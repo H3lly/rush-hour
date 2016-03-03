@@ -20,6 +20,7 @@ int main (void){
     grid grid = new_grille(g);
     set_piece(grid, 0);
     set_piece(grid, 1);
+    set_piece(grid, 2);
     //ne marche pas comme on veut
     //à finir la prochaine fois
     afficher_grille(grid);
