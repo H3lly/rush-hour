@@ -2,11 +2,13 @@
 #include <stdlib.h>
 
 #include "game.h"
+#include "grid.h"
 
 struct game_s {
     int nb_pieces;
     int nb_moves;
     piece *liste_piece;
+    grid grid;
 };
 
 typedef const struct game_s* cgame;
