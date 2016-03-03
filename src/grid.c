@@ -45,18 +45,17 @@ void add_piece(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
     int y = get_y(p);
-    int car = piece_num+48;
-    grid->tab[x][y]=car;
+    move_part(grid,x,y,piece_num);
     if(is_horizontal(p)){
-        grid->tab[x+1][y]=car;
+        move_part(grid,x+1,y,piece_num);
         if(get_width(p)==3){
-            grid->tab[x+2][y]==car;
+            move_part(grid,x+2,y,piece_num);
         }
     }
     else{
-        grid->tab[x][y+1]=car;
+        move_part(grid,x,y+1,piece_num);
         if(get_height(p)==3){
-            grid->tab[x][y+2]=car;
+            move_part(grid,x,y+2,piece_num);
         }
     }
 }
@@ -67,9 +66,25 @@ void set_pieces(grid grid){
         add_piece(grid, i);
     }
 }
-/*
-void deplacement(game g, dir d, int distance){
-    switch(d){
-        case UP:
-            if(game_piece(g,7))    
-}*/
+
+void move_part(grid grid, int x, int y, int val){
+    grid->tab[x][y]=val+48;
+}
+
+//void deplacement(grid grid, dir d, int distance, int piece_num){
+////    switch(d){
+////        game g = get_game(grid);
+////        case UP:
+////            //bouger 7 vers le haut
+////            if(play_move(g,piece_num, dir UP,distance)){
+////                
+////            }
+////            break;
+////        case DOWN:
+////            break;
+////        case LEFT:
+////            break;
+////        case RIGHT:
+////            break;
+////    }
+////}
