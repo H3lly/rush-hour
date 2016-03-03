@@ -7,13 +7,15 @@
 
 struct grid_s {
         char tab[6][6];
+        game g;
 };
 
 //faireu n pointeur constant
 //séparer la bibliothèque dans le make 
 
-grid new_grille(){
+grid new_grille(game g){
 	grid grid = malloc(sizeof(struct grid_s));
+        grid->g=g;
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
 			grid -> tab[i][j]='.';
@@ -24,7 +26,7 @@ grid new_grille(){
 
 void afficher_grille(grid grid){
 	for(int i=5;i>=0;i--){
-		for(int j=5; j>=0;j--){
+		for(int j=0; j<6;j++){
 			char c = grid->tab[i][j];
 			printf("%c ", c);
 		}
@@ -35,19 +37,28 @@ void afficher_grille(grid grid){
 void delete_grille(grid grid){
     free(grid);
 }
+
+game get_game(grid grid){
+    return grid->g;
+}
 //demander au prof
-void set_piece(game g, grid grid, int piece_num){
-    piece p = game_piece(g, piece_num);
+void set_piece(grid grid, int piece_num){
+    cpiece p = game_piece(get_game(grid), piece_num);
     int max = get_height(p);
     int min = get_width(p);
     if(get_width(p)>get_height(p)){
-        int max = get_width(p);
-        int min = get_height(p);
+        max = get_width(p);
+        min = get_height(p);
     }
-    for(int i=0;i<=max;i++){
-        grid->tab[min][i]=piece_num;
+    for(int i=0;i<max;i++){
+        grid->tab[min][i]='A';
     }
-    
+}
+
+void set_pieces(grid grid){
+    for (int i=0; i<game_nb_pieces(get_game(grid));i++){
+        set_piece(grid, i);
+    }
 }
 /*
 void deplacement(game g, dir d, int distance){

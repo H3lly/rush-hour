@@ -8,7 +8,6 @@ struct game_s {
     int nb_pieces;
     int nb_moves;
     piece *liste_piece;
-    grid grid;
 };
 
 typedef const struct game_s* cgame;
@@ -18,7 +17,6 @@ game new_game_hr(int nb_pieces, piece *pieces) {
     g->nb_moves = 0;
     g->nb_pieces = nb_pieces;
     g->liste_piece = pieces;
-    g->grid=new_grille();
     return g;
 }
 
@@ -30,7 +28,6 @@ void copy_game(cgame src, game dst) {
     dst->nb_pieces = src->nb_pieces;
     dst->nb_moves = src->nb_moves;
     dst->liste_piece = src->liste_piece;
-    dst->grid = src->grid;
 }
 
 int game_nb_pieces(cgame g) {

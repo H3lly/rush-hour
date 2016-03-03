@@ -6,32 +6,24 @@
 #include "grid.h"
 
 
-void init_pieces(game g){ 
-    set_piece(g, 0);
- //   grid->tab[2][5]='1';
-/*    grid->tab[2][4]='1';
-    grid->tab[0][5]='2';
-    grid->tab[1][5]='2';
-    grid->tab[1][4]='3';
-    grid->tab[1][3]='3';
-    grid->tab[2][3]='4';
-    grid->tab[3][3]='4';
-    grid->tab[4][3]='4';
-    grid->tab[1][2]='5';
-    grid->tab[2][2]='5';
-    grid->tab[0][1]='6';
-    grid->tab[1][1]='6';
-    grid->tab[2][1]='6';
-    grid->tab[2][0]='7';
-    grid->tab[3][0]='7';*/
-}
-
-
 int main (void){
-	grid grid = new_grille();
-	init_pieces(grid);
-	afficher_grille(grid);
-	return EXIT_SUCCESS;
+    piece liste [8];
+    liste[0]=new_piece_rh(0, 3, true, true);
+    liste[1]=new_piece_rh(0, 2, true, true);
+    liste[2]=new_piece_rh(0, 0, true, false);
+    liste[3]=new_piece_rh(1, 1, true, true);
+    liste[4]=new_piece_rh(2, 2, false, false);
+    liste[5]=new_piece_rh(3, 1, true, false);
+    liste[6]=new_piece_rh(4, 0, false, false);
+    liste[7]=new_piece_rh(5, 2, true, false);
+    game g = new_game_hr(8, liste);
+    grid grid = new_grille(g);
+    set_piece(grid, 0);
+    set_piece(grid, 1);
+    //ne marche pas comme on veut
+    //à finir la prochaine fois
+    afficher_grille(grid);
+    return EXIT_SUCCESS;
 }
 
 
