@@ -18,7 +18,14 @@ bool test_equality_bool(bool expected, bool value, char * msg) {
         fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
     return expected == value;
 }
-
+/*
+bool test_equality_piece(cpiece expected, cpiece value, char * msg){
+    if (!equals(expected, value)){
+        fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
+    }
+    return equals(expected, value);
+}*/
+    
 //création d'un tableau de pièces
 piece pieces[NB_PIECES];
 
@@ -58,19 +65,27 @@ bool test_new_game_hr() {
     }
     return result;
 }
+// test play move etnre g (jeu dans lequel seul 0 peut bouger) et gtest(jeu de base)
 /*
 bool test_play_move(){
     bool result = true;
-    int nbmove = 1
-    game g = set_game()
+    int nbmove = 1;
+    game g = set_game();
+    cpiece p_test = new_piece_rh(2, 3, true, true);
+    game gtest = set_game();
     play_move(g, 0, LEFT, 1);
     play_move(g, 1, DOWN, 1);
     play_move(g, 2, LEFT, 1);
     play_move(g, 3, DOWN, 2);
-    result = result && 
-}
+    result = result && test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves");
+    result = result && test_equality_piece(p_test, game_piece(g, 0), "play_move de 0");
+    for (int i = 1; i < game_nb_pieces(g); ++i){
+        result = result && test_equality_piece(game_piece(gtest, i), game_piece(g, i), "play_move");
+    }
+    return result;
+}*/
 
-
+/*
 int main (int argc, char *argv[])
 {
   bool result= true;
