@@ -5,25 +5,15 @@
 
 #define NB_PIECES 4
 
-bool test_equality_int(int expected, int value, char * msg);
-bool test_equality_bool(bool expected, bool value, char * msg);
-void set_up();
-void tear_down();
-void set_game();
-bool test_new_game_hr();
-
-/**
- * On teste si value == expected
- */
+ //On teste si value == expected
 bool test_equality_int(int expected, int value, char * msg) {
     if (expected != value)
         fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
     return expected == value;
 }
 
-/**
- * On teste si value == expected
- */
+
+//On teste si value == expected
 bool test_equality_bool(bool expected, bool value, char * msg) {
     if (expected != value)
         fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
@@ -74,7 +64,8 @@ bool test_new_game_hr() {
     return result;
 }
 
-bool test_game_over_hr(){
+//test si le jeu est fini
+bool test_game_over_hr(game g){
   return game_over_hr(g);
 }
 
