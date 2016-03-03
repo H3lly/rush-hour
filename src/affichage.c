@@ -12,7 +12,6 @@ struct grille_s {
 //séparer la bibliothèque dans le make 
 
 grille new_grille(){
-<<<<<<< HEAD
 	grille grid = malloc(sizeof(struct grille_s));
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
@@ -20,17 +19,6 @@ grille new_grille(){
 		}
 	}
 	return grid;
-=======
-	grille g = malloc(sizeof(struct grille_s));
-	for(int i=5;i>=0;i--){
-		for(int j=5;j>=0;j--){
-			g -> tab[i][j]='X';
-		}
-	}
-        g->tab[3][0]='0';
-        g->tab[3][1]='0';
-	return g;
->>>>>>> e9eee9da5ef56b995f42639e8b4a97c86f74be20
 }
 
 void afficher_grille(grille grid){
@@ -47,32 +35,12 @@ void delete_grille(grille grid){
     free(grid);
 }
 
-<<<<<<< HEAD
-
-
 /*
 void deplacement(game g, dir d, int distance){
     switch(d){
         case UP:
-            if(game_piece(g,7))
-=======
-void init_pieces(){
-    
-}
-
-
-
-
-void deplacement(grille g, dir d){
-    if(d!=UP){
-        printf("nope");
->>>>>>> e9eee9da5ef56b995f42639e8b4a97c86f74be20
-    }
-    
-    
-}
-<<<<<<< HEAD
-*/
+            if(game_piece(g,7))    
+}*/
 
 void init_pieces(grille grid){
     grid->tab[3][5]='0';
@@ -94,8 +62,7 @@ void init_pieces(grille grid){
     grid->tab[2][0]='7';
     grid->tab[3][0]='7';
 }
-=======
->>>>>>> e9eee9da5ef56b995f42639e8b4a97c86f74be20
+
 
 int main (void){
 	grille grid = new_grille();
@@ -104,10 +71,10 @@ int main (void){
 	return EXIT_SUCCESS;
 }
 
-/*
+
 
 /* 
- * void show_case(grille g, int abs, int ord, int number){
+void show_case(grille g, int abs, int ord, int number){
     grid->tab[abs][ord] = number;
 }
 
@@ -144,8 +111,6 @@ piece show_piece(grille g, piece p, int number){
 		show_piece_small_vertical(g, p, number);
         }
 	show_piece_big_vertical(g, p, number);
-<<<<<<< HEAD
-*/
-=======
-}*/
->>>>>>> e9eee9da5ef56b995f42639e8b4a97c86f74be20
+
+ }
+ */
