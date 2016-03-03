@@ -11,7 +11,7 @@ typedef struct grid_s* grid;
 grid new_grid();
 void show_grid(grid g);
 void delete_grid(grid g);
-void set_piece(grid g, int nb_piece);
+void add_piece(grid g, int nb_piece);
 void set_pieces(grid g);
 game get_game(grid g);
 

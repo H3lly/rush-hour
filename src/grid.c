@@ -41,18 +41,37 @@ game get_game(grid grid){
     return grid->g;
 }
 //demander au prof
-void set_piece(grid grid, int piece_num){
+void add_piece(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
-    int max = get_height(p);
+    int x = get_x(p);
+    int y = get_y(p);
+    int car = piece_num+48;
+    grid->tab[x][y]=car;
+    if(is_horizontal(p)){
+        grid->tab[x][y+1]=car;
+        if(get_width(p)==3){
+            grid->tab[x][y+2]==car;
+        }
+    }
+    else{
+        grid->tab[x+1][y]=car;
+        if(get_height(p)==3){
+            grid->tab[x+2][y]=car;
+        }
+    }
+}
+    
+    /*int max = get_height(p);
     int min = get_width(p);
     if(get_width(p)>get_height(p)){
         max = get_width(p);
         min = get_height(p);
     }
     for(int i=0;i<max;i++){
-        grid->tab[min][i]='A';
-    }
-}
+        grid->tab[min][i]=piece_num+48;
+        show_grid(grid);
+        printf("\n");
+    }*/
 
 void set_pieces(grid grid){
     game g = get_game(grid);
