@@ -1,48 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "affichage.h"
+#include "game.h"
+#include "piece.h"
+#include "grid.h"
 
 
-struct grille_s {
-        char tab[6][6];
-};
 
-//faireu n pointeur constant
-//séparer la bibliothèque dans le make 
-
-grille new_grille(){
-	grille grid = malloc(sizeof(struct grille_s));
-	for(int i=0;i<6;i++){
-		for(int j=0;j<6;j++){
-			grid -> tab[i][j]='.';
-		}
-	}
-	return grid;
-}
-
-void afficher_grille(grille grid){
-	for(int i=5;i>=0;i--){
-		for(int j=5; j>=0;j--){
-			char c = grid->tab[i][j];
-			printf("%c ", c);
-		}
-		printf("\n");
-	}
-}
-
-void delete_grille(grille grid){
-    free(grid);
-}
-
-/*
-void deplacement(game g, dir d, int distance){
-    switch(d){
-        case UP:
-            if(game_piece(g,7))    
-}*/
-
-void init_pieces(grille grid){
+void init_pieces(grid grid){
     grid->tab[3][5]='0';
     grid->tab[3][4]='0';
     grid->tab[2][5]='1';
@@ -65,7 +30,7 @@ void init_pieces(grille grid){
 
 
 int main (void){
-	grille grid = new_grille();
+	grid grid = new_grille();
 	init_pieces(grid);
 	afficher_grille(grid);
 	return EXIT_SUCCESS;
