@@ -17,13 +17,13 @@ int main (void){
     liste[6]=new_piece_rh(4, 0, false, false);
     liste[7]=new_piece_rh(5, 2, true, false);
     game g = new_game_hr(8, liste);
-    grid grid = new_grille(g);
+    grid grid = new_grid(g);
     set_piece(grid, 0);
     set_piece(grid, 1);
     set_piece(grid, 2);
     //ne marche pas comme on veut
     //à finir la prochaine fois
-    afficher_grille(grid);
+    show_grid(grid);
     return EXIT_SUCCESS;
 }
 

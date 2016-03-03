@@ -11,9 +11,8 @@ struct grid_s {
 };
 
 //faireu n pointeur constant
-//séparer la bibliothèque dans le make 
 
-grid new_grille(game g){
+grid new_grid(game g){
 	grid grid = malloc(sizeof(struct grid_s));
         grid->g=g;
 	for(int i=0;i<6;i++){
@@ -24,7 +23,7 @@ grid new_grille(game g){
 	return grid;
 }
 
-void afficher_grille(grid grid){
+void show_grid(grid grid){
 	for(int i=5;i>=0;i--){
 		for(int j=0; j<6;j++){
 			char c = grid->tab[i][j];
@@ -34,7 +33,7 @@ void afficher_grille(grid grid){
 	}
 }
 
-void delete_grille(grid grid){
+void delete_grid(grid grid){
     free(grid);
 }
 
@@ -56,7 +55,8 @@ void set_piece(grid grid, int piece_num){
 }
 
 void set_pieces(grid grid){
-    for (int i=0; i<game_nb_pieces(get_game(grid));i++){
+    game g = get_game(grid);
+    for (int i=0; i<game_nb_pieces(g);i++){
         set_piece(grid, i);
     }
 }

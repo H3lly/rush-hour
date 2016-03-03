@@ -8,9 +8,9 @@
 typedef struct grid_s* grid;
 
 
-grid new_grille();
-void afficher_grille(grid g);
-void delete_grille(grid g);
+grid new_grid();
+void show_grid(grid g);
+void delete_grid(grid g);
 void set_piece(grid g, int nb_piece);
 void set_pieces(grid g);
 game get_game(grid g);
