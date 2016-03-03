@@ -9,12 +9,15 @@ all:
 	ar cr lib/libgame.a game.o piece.o
 
 game_test1:
+	make
 	gcc game.o piece.o game_test1.o -o game_test1
 
 test_piece1:
+	make
 	gcc game.o piece.o test_piece1.o -o test_piece1
 
 affichage:
+	make
 	gcc game.o piece.o grid.o  affichage.o -o affichage
 
 clean:
