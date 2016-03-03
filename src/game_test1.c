@@ -58,14 +58,16 @@ bool test_new_game_hr() {
     }
     return result;
 }
-
 /*
 bool test_play_move(){
     bool result = true;
-    set_up()
-    game g = new_game_hr(NB_PIECES, pieces);
+    int nbmove = 1
+    game g = set_game()
     play_move(g, 0, LEFT, 1);
     play_move(g, 1, DOWN, 1);
+    play_move(g, 2, LEFT, 1);
+    play_move(g, 3, DOWN, 2);
+    result = result && 
 }
 
 
