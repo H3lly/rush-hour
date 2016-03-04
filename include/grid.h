@@ -15,7 +15,7 @@ void delete_grid(grid g);
 void add_piece(grid g, int piece_num);
 void delete_piece_grid(grid grid, int piece_num);
 void set_cell_int(grid grid, int x, int y, int val);
-void set_cell_char(grid grid, int x, int y, char c);
+void set_cell_empty(grid grid, int x, int y);
 
 void set_pieces(grid g);
 game get_game(grid g);

@@ -20,12 +20,14 @@ int main (void){
     grid grid = new_grid(game);    
     set_pieces(grid);
     show_grid(grid);    
-//    /*while(!(game_over_hr(game))){
-//        
-//    }*/
-    deplacement(grid, UP, 1, 7);
-//    //ne marche pas, peut-être faut-il faire un pointeur vers game ?
-//    if(game_over_hr(game)) printf("game is over");
+//    while(!(game_over_hr(game))){
+//      //boucle de jeu    
+//    }
+    deplacement(grid, UP, 2, 7);
+    //marche partiellement
+    //delete ne supprime pas vraiment toutes les pieces du tableau :B
+    //à faire plus tard !!
+    if(game_over_hr(game)) printf("game is over");
     return EXIT_SUCCESS;
 }
 

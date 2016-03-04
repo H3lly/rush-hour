@@ -1,4 +1,4 @@
-CFLAGS = -Wall -std=c99
+CFLAGS = -Wall -g -std=c99
 INCLUDE = -I include/
 
 all:
