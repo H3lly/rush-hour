@@ -14,9 +14,9 @@ struct grid_s {
 
 //faireu n pointeur constant
 
-grid new_grid(game g){
+grid new_grid(game game){
 	grid grid = malloc(sizeof(struct grid_s));
-        copy_game(g, grid->g);
+        grid->g = game;
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
 			grid -> tab[i][j]='.';
@@ -97,9 +97,8 @@ void set_cell_char(grid grid, int x, int y, char c){
 }
 
 void deplacement(grid grid, dir d, int distance, int piece_num){
+    game g = grid->g;
     switch(d){
-        printf("hey");
-        game g = grid->g;
         case UP:
             printf("yolo");
             if(play_move(g, 7, UP, 1)){
