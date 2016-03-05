@@ -5,7 +5,6 @@
 #include "piece.h"
 #include "grid.h"
 
-
 int main (void){
     piece liste [8];
     liste[0]=new_piece_rh(0, 3, true, true);
