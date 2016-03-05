@@ -29,8 +29,7 @@ int main (void){
     deplacement(grid, RIGHT, 1, 0);
     deplacement(grid, LEFT, 2, 0);
     deplacement(grid, UP, 2, 6);
-    deplacement(grid, DOWN, 1, 5);
-    deplacement(grid, DOWN, 3, 6);
+    deplacement(grid, UP, 3, 5);
     deplacement(grid, RIGHT, 4, 0);
     if(game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;

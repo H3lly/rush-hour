@@ -71,17 +71,21 @@ dir opposite(dir d){
 
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
-    piece p = g->liste_piece[piece_num];    
-    move_piece(p, d, distance);
-    for (int i = 0; i < game_nb_pieces(g); ++i) {
-        if(p==game_piece(g,i)) i++;
-        if (intersect(p, game_piece(g, i)) || out_of_grid(p)) {
-            move_piece(p, opposite(d), distance);
-            printf("Mouvement impossible : intersection ou out of grid.\n\n");
-            return false;
+    piece p = g->liste_piece[piece_num];
+    while (distance != 0) {
+        move_piece(p, d, 1);
+        distance--;
+        for (int i = 0; i < game_nb_pieces(g); ++i) {
+            if (p == g->liste_piece[i]) i++;
+            if (intersect(p, game_piece(g, i)) || out_of_grid(p)) {
+                if (intersect(p, game_piece(g, i))) printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
+                if (out_of_grid(p)) printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
+                move_piece(p, opposite(d), 1);
+                return false;
+            }
         }
+        g->nb_moves += 1;
     }
-    g->nb_moves += distance;
     return true;
 }
 
