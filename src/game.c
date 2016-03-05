@@ -60,24 +60,26 @@ bool out_of_grid(cpiece p){
     return (ord<0||ord>3);
 }
 
+
+dir opposite(dir d){
+    dir opposite;
+    if(d==UP) opposite = DOWN;
+    else if(d==DOWN) opposite = UP;
+    else if(d==LEFT) opposite = RIGHT;
+    else opposite = LEFT;
+    return opposite;
+}
+
+
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
     piece p = g->liste_piece[piece_num];    
-    dir opposite;
-    if(d==UP)
-        opposite = DOWN;
-    else if(d==DOWN)
-        opposite = UP;
-    else if(d==LEFT)
-        opposite = RIGHT;
-    else
-        opposite = LEFT;
-    
+
     move_piece(p, d, distance);
     printf("yolo %d\n", intersect(p, game_piece(g,4)));
     for (int i = 0; i < game_nb_pieces(g) && !(equals(p, (game_piece(g, i)))); ++i) {
         if (intersect(p, game_piece(g, i)) || out_of_grid(p)) {
-            move_piece(p, opposite, distance);
+            move_piece(p, opposite(d), distance);
             printf("Mouvement impossible.\n\n");
             return false;
         }
