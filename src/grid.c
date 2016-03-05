@@ -9,7 +9,6 @@ struct grid_s {
         char tab[6][6];
         game g;
 };
-
 //faire un pointeur constant plus tard
 
 grid new_grid(game game){
