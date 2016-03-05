@@ -87,7 +87,7 @@ bool intersect(cpiece a, cpiece b) {
         if (b->estHorizontal) {
             return (ay == by || (ay + 1) == by)&&(ax == bx || ax == (bx + 1) || ax == (bx + 2)); //a small, b tall, a ver, b hor
         }
-        return (ax == by)&&(ay == by || ay == (by + 1) || ay == (by + 2) || (ay + 1) == by); //a small, b tall, a ver, b ver
+/* ICI*/        return (ax == by)&&(ay == by || ay == (by + 1) || ay == (by + 2) || (ay + 1) == by); //a small, b tall, a ver, b ver
     }
 
     if (b->small) {
