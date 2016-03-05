@@ -5,6 +5,9 @@
 #include "piece.h"
 #include "grid.h"
 
+
+
+
 struct grid_s {
         char tab[6][6];
         game g;
