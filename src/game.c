@@ -62,56 +62,7 @@ bool out_of_grid(cpiece p){
 
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
-    piece p = g->liste_piece[piece_num];
-//    switch (d) {
-//        case UP:
-//            move_piece(p, UP, distance);
-//            for (int i = 0; i < game_nb_pieces(g) && !(equals(p, (game_piece(g, i)))); ++i) {
-//                if ( intersect(p, game_piece(g, i)) || out_of_grid(p)){
-//                    move_piece(p, DOWN, distance);
-//                    printf("Mouvement impossible.\n\n");
-//                    return false;
-//                }
-//            }
-//            g->nb_moves += distance;
-//            return true;
-//        case DOWN:
-//            move_piece(p, DOWN, distance);
-//            for (int i = 0; i < g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-//                if ( intersect(p, game_piece(g, i)) || out_of_grid(p)){
-//                    move_piece(p, UP, distance);
-//                    printf("Mouvement impossible.\n\n");
-//                    return false;
-//                }
-//            }
-//            g->nb_moves += distance;
-//            return true;
-//        case LEFT:
-//            move_piece(p, LEFT, distance);
-//            for (int i = 0; i < g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-//                if ( intersect(p, game_piece(g, i)) || out_of_grid(p)){
-//                    move_piece(p, RIGHT, distance);
-//                    printf("Mouvement impossible.\n\n");
-//                    return false;
-//                }
-//            }
-//            g->nb_moves += distance;
-//            return true;
-//        case RIGHT:
-//            move_piece(p, RIGHT, distance);
-//            for (int i = 0; i<g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-//                if ( intersect(p, game_piece(g, i)) || out_of_grid(p)){
-//                    move_piece(p, LEFT, distance);
-//                    printf("Mouvement impossible.\n\n");
-//                    return false;
-//                }
-//            }
-//            g->nb_moves += distance;
-//            return true;
-//    }
-//    printf("Mouvement impossible.\n\n");
-//    return false;
-    
+    piece p = g->liste_piece[piece_num];    
     dir opposite;
     if(d==UP)
         opposite = DOWN;
