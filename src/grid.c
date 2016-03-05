@@ -62,30 +62,27 @@ void add_piece(grid grid, int piece_num){
     }
 }
 
-char get_cell(grid grid, int x, int y){
-    return grid->tab[x][y];
-}
-
 void delete_piece_grid(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
     int y = get_y(p);
-    int cpt = 0;
-    printf("cpt: %d|Avant set : %d\n",cpt,
     set_cell_empty(grid,x,y);
-    
     if(is_horizontal(p)){
-        set_cell_empty(grid,x+1,y);     //small horizontal
+        set_cell_empty(grid,x+1,y);
         if(get_width(p)==3){
-            set_cell_empty(grid,x+2,y); //tall horizontal
+            set_cell_empty(grid,x+2,y);
         }
     }
     else{
-        set_cell_empty(grid,x,y+1);     //small vertical
+        set_cell_empty(grid,x,y+1);
         if(get_height(p)==3){
-            set_cell_empty(grid,x,y+2); //tall vertical
+            set_cell_empty(grid,x,y+2);
         }
-    }   
+    }
+}
+
+char get_cell(grid grid, int x, int y){
+    return grid->tab[x][y];
 }
 
 void set_pieces(grid grid){
@@ -107,11 +104,14 @@ void deplacement(grid grid, dir d, int distance, int piece_num){
     game g = grid->g;
     switch(d){
         case UP:
+            delete_piece_grid(grid, piece_num);
             if(play_move(g, piece_num, UP, distance)){
-                delete_piece_grid(grid, piece_num); //ne marche pas pour une raison obscure
-                add_piece(grid, piece_num);     //marche
+                printf("yolo c:\n");
+                add_piece(grid, piece_num);
                 show_grid(grid);
             }
+            else
+                add_piece(grid, piece_num);
             break;
         case DOWN:
             break;

@@ -23,9 +23,6 @@ int main (void){
 //      //boucle de jeu    
 //    }
     deplacement(grid, UP, 2, 7);
-    //marche partiellement
-    //delete ne supprime pas vraiment toutes les pieces du tableau :B
-    //à faire plus tard !!
     if(game_over_hr(game)) printf("game is over");
     return EXIT_SUCCESS;
 }
