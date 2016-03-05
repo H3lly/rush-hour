@@ -23,7 +23,11 @@ int main (void){
 //      //boucle de jeu    
 //    }
     deplacement(grid, UP, 2, 7);
-    if(game_over_hr(game)) printf("game is over");
+    deplacement(grid, UP, 1, 7);
+    deplacement(grid, UP, 1, 6);
+    deplacement(grid, UP, 1, 4);
+    deplacement(grid, RIGHT, 2, 0);
+    if(game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }
 

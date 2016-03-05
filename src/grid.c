@@ -102,22 +102,10 @@ void set_cell_empty(grid grid, int x, int y){
 
 void deplacement(grid grid, dir d, int distance, int piece_num){
     game g = grid->g;
-    switch(d){
-        case UP:
-            delete_piece_grid(grid, piece_num);
-            if(play_move(g, piece_num, UP, distance)){
-                printf("yolo c:\n");
-                add_piece(grid, piece_num);
-                show_grid(grid);
-            }
-            else
-                add_piece(grid, piece_num);
-            break;
-        case DOWN:
-            break;
-        case LEFT:
-            break;
-        case RIGHT:
-            break;
-    }
+    delete_piece_grid(grid, piece_num);
+    if(play_move(g, piece_num, d, distance))
+        add_piece(grid, piece_num);
+    else
+        add_piece(grid, piece_num);
+    show_grid(grid);
 }
