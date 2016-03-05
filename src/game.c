@@ -55,7 +55,7 @@ bool out_of_grid(cpiece p){
 
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
-    piece p = game_piece(g, piece_num);
+    piece p = g->liste_piece[piece_num];
     switch (d) {
         case UP:
             move_piece(p, UP, distance);
