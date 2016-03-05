@@ -59,9 +59,6 @@ void move_piece(piece p, dir d, int distance) {
 //returns if there two pieces are superposed. Tests all cases. (can (probably) be optimized)
 
 bool intersect(cpiece a, cpiece b) {
-    if(equals(a,b)) return false;
-    //devrait retourner vrai puisque que une piece se croise avec elle même
-    //mais plus pratique si on lui fait retourner faux
     int ax = a->abs;
     int ay = a->ord;
     int bx = b->abs;
