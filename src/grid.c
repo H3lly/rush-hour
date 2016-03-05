@@ -36,6 +36,7 @@ void show_grid(grid grid){
 }
 
 void delete_grid(grid grid){
+    delete_game(get_game(grid));
     free(grid);
 }
 
@@ -66,7 +67,10 @@ void delete_piece_grid(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
     int y = get_y(p);
+    int cpt = 0;
+    //printf("Avant set : %d"
     set_cell_empty(grid,x,y);
+    
     if(is_horizontal(p)){
         set_cell_empty(grid,x+1,y);     //small horizontal
         if(get_width(p)==3){
