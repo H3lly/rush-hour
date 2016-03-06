@@ -20,15 +20,15 @@ bool test_equality_bool(bool expected, bool value, char * msg) {
 }
 
 //On test l'égalité entre 2 pieces
-bool equals(cpiece p1, cpiece p2) {
+bool equals_piece(cpiece p1, cpiece p2) {
     return (get_x(p1) == get_x(p2))&&(get_y(p1) == get_y(p2))&&(get_width(p1) == get_width(p2))&&(get_height(p1) == get_height(p2));
 }
 
 bool test_equality_piece(cpiece expected, cpiece value, char * msg){
-    if (!equals(expected, value)){
+    if (!equals_piece(expected, value)){
         fprintf(stderr, "ERR: Pieces are different. %s\n", msg);
     }
-    return equals(expected, value);
+    return equals_piece(expected, value);
 }
     
 //création d'un tableau de pièces
@@ -63,7 +63,7 @@ bool test_new_game_hr() {
     game g = set_game();
     result = result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces");
     for (int i = 0; i < NB_PIECES; i++) {
-        result = result && equals(pieces[i], game_piece(g, i + 1));
+        result = result && equals_piece(pieces[i], game_piece(g, i + 1));
     }
     delete_game(g);
     return result;
@@ -115,14 +115,20 @@ int main (int argc, char *argv[])
   result = result && test_equality_bool(true, test_copy_game(), "copy_game");
   result = result && test_equality_bool(true, test_play_move(), "play_move");
   play_move(g, 0, LEFT, 2);
+  printf("1\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : premier play_move 0");
   play_move(g, 1, UP, 4);
+  printf("2\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 1");
   play_move(g, 2, LEFT, 1);
+  printf("3\n");
+  //plante ici
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2");
   play_move(g, 3, DOWN, 3);
+  printf("4\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 3");
   play_move(g, 0, RIGHT, 3);
+  printf("5\n");
   result = result && test_equality_bool(true, game_over_hr(g), "game_over_hr : deuxième play_move 0");
 
   if (result) {
