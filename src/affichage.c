@@ -75,7 +75,7 @@ int main(void) {
 //                ungetc(c, stdin);
             }
         }
-        test=false;zg
+        test=false;
         printf("De combien de cases ?\n");
         while(!test){
             if (scanf("%d", &distance)==1){
