@@ -109,16 +109,21 @@ bool test_copy_game(){
 int main (int argc, char *argv[])
 {
   bool result= true;
+  printf("YOLO?\n");
 
   game g = set_game();
   result = result && test_equality_bool(true, test_new_game_hr(), "new_game_hr");
+  printf("1\n");
   result = result && test_equality_bool(true, test_copy_game(), "copy_game");
+  printf("2\n");
   result = result && test_equality_bool(true, test_play_move(), "play_move");
   play_move(g, 0, LEFT, 2);
+  printf("3\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : premier play_move 0");
   play_move(g, 1, UP, 4);
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 1");
   play_move(g, 2, LEFT, 1);
+  printf("5\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2"); //plante ici
   play_move(g, 3, DOWN, 3);
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 3");
