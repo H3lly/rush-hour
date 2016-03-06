@@ -112,7 +112,8 @@ int main (int argc, char *argv[])
   printf("YOLO?\n");
 
   game g = set_game();
-  result = result && test_equality_bool(true, test_new_game_hr(), "new_game_hr");
+  printf("0\n");
+  result = result && test_equality_bool(true, test_new_game_hr(), "new_game_hr");   //retourne l'erreur "ERR: value expected 1 ; value computed 0. new_game_hr"
   printf("1\n");
   result = result && test_equality_bool(true, test_copy_game(), "copy_game");
   printf("2\n");
@@ -124,7 +125,7 @@ int main (int argc, char *argv[])
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 1");
   play_move(g, 2, LEFT, 1);
   printf("5\n");
-  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2"); //plante ici
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2"); //SEGFAULT
   play_move(g, 3, DOWN, 3);
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 3");
   play_move(g, 0, RIGHT, 3);
