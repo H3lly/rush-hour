@@ -59,8 +59,10 @@ bool out_of_grid(cpiece p) {
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
     piece p = g->liste_piece[piece_num];
-    if(!movement_is_allowed(p, d))
+    if(!movement_is_allowed(p, d)){
         printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n");
+        return false;
+    }
     int distance_parcourue =0;
     while (distance != 0) {
         move_piece(p, d, 1);
