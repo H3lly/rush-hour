@@ -58,8 +58,8 @@ void move_piece(piece p, dir d, int distance) {
 
 //returns if there two pieces are superposed. Tests all cases. (can (probably) be optimized)
 
-bool intersect(cpiece a, cpiece b) {
-    if(a==b) return true;
+bool intersect2(cpiece a, cpiece b) {
+    if (a == b) return true;
     //évite un calcul inutil
     int ax = a->abs;
     int ay = a->ord;
@@ -87,7 +87,7 @@ bool intersect(cpiece a, cpiece b) {
         if (b->estHorizontal) {
             return (ay == by || (ay + 1) == by)&&(ax == bx || ax == (bx + 1) || ax == (bx + 2)); //a small, b tall, a ver, b hor
         }
-/* ICI*/        return (ax == by)&&(ay == by || ay == (by + 1) || ay == (by + 2) || (ay + 1) == by); //a small, b tall, a ver, b ver
+        /* ICI*/ return (ax == by)&&(ay == by || ay == (by + 1) || ay == (by + 2) || (ay + 1) == by); //a small, b tall, a ver, b ver
     }
 
     if (b->small) {
@@ -113,6 +113,34 @@ bool intersect(cpiece a, cpiece b) {
         return (by == ay || by == (ay + 1) || by == (ay + 2))&&(bx == ax || (bx + 1) == ax || (bx + 2) == ax); //a tall, b tall, a ver, b hor
     }
     return (ax == bx)&&((by + 2) == ay || (by + 1) == ay || by == ay || by == (ay + 1) || by == (ay + 2)); //a tall, b tall, a ver, b ver
+}
+
+bool intersect(cpiece a, cpiece b) {
+    int amax = get_width(a);
+    if(get_height(a)>amax) amax=get_height(a);
+    int ta[amax];
+    int bmax = get_width(b);
+    if(get_height(b)>bmax) bmax=get_height(b);
+    int tb[bmax];
+    for (int i=0;i<amax;i++){
+        if(get_width(a)>get_height(a))
+            ta[i]=10*(get_x(a)+i)+get_y(a);
+        else
+            ta[i]=10*get_x(a)+get_y(a)+i;
+    }
+    for (int i=0;i<bmax;i++){
+        if(get_width(b)>get_height(b))
+            tb[i]=10*(get_x(b)+i)+get_y(b);
+        else
+            tb[i]=10*get_x(b)+get_y(b)+i;
+    }
+    for (int i=0;i<(sizeof(ta)/sizeof(ta[0]));i++){
+        for (int j=0;j<(sizeof(tb)/sizeof(tb[0]));j++) {
+            if (ta[i]==tb[j])
+                return true;
+        }
+    }
+    return false;
 }
 
 int get_x(cpiece p) {
