@@ -18,29 +18,34 @@ int main (void){
     game game = new_game_hr(8, liste);    
     grid grid = new_grid(game);    
     set_pieces(grid);
-    show_grid(grid);    
-//    while(!(game_over_hr(game))){
-//      //boucle de jeu    
-//    }
-    deplacement(grid, 7, UP, 2);
-    deplacement(grid, 6, UP, 3);
-    deplacement(grid, 5, UP, 3);
-    deplacement(grid, 3, RIGHT, 3);
-    deplacement(grid, 4, UP, 1);
-    deplacement(grid, 1, RIGHT, 4);
-    deplacement(grid, 4, DOWN, 3);
-    deplacement(grid, 0, RIGHT, 1);
-    deplacement(grid, 2, UP, 4);
-    deplacement(grid, 0, LEFT, 1);
-    deplacement(grid, 4, UP, 3);
-    deplacement(grid, 1, LEFT, 4);
-    deplacement(grid, 3, LEFT, 4);
-    deplacement(grid, 4, DOWN, 3);
-    deplacement(grid, 6, DOWN, 3);
-    deplacement(grid, 0, RIGHT, 4);
-    //deplacement(grid, DOWN, 3, 4);
-    deplacement(grid, RIGHT, 4, 0);
-    if(game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
+    show_grid(grid);
+    
+    int piece_num;
+    dir d;
+    int int_d;
+    int distance;
+    int test=true;
+    while(!(game_over_hr(game))){
+        printf("Veuillez saisir le numéro de la pièce à déplacer :\n");
+        piece_num = scanf("%d", &piece_num);
+        printf("Quelle direction ? (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
+        int_d = scanf("%d", &int_d);
+        while (!test) {
+            test=true;
+            if(int_d==1) d=UP;
+            else if (int_d==2) d=DOWN;
+            else if (int_d==3) d=LEFT;
+            else if (int_d==4) d=RIGHT;
+            else{
+                printf("Entrée invalide, veuilez saisir un entier entre 1 et 4. (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
+                test=false;
+            }
+        }
+        printf("De combien de cases ?\n");
+        distance = scanf("%d", &distance);
+        deplacement(grid, piece_num, d, distance);
+    }
+    if (game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }
 
