@@ -4,6 +4,7 @@
 #include "game.h"
 #include "piece.h"
 #include "grid.h"
+#include "useful_functions.h"
 
 struct grid_s {
         char matrice[6][6];

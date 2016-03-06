@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "piece.h"
+#include "useful_functions.h"
 
 struct piece_s {
     int abs;
@@ -9,8 +10,7 @@ struct piece_s {
     bool estHorizontal;
 };
 
-//constructor
-
+//Constructeur
 piece new_piece_rh(int x, int y, bool small, bool horizontal) {
     piece p = malloc(sizeof (struct piece_s));
     p -> abs = x;
@@ -20,14 +20,12 @@ piece new_piece_rh(int x, int y, bool small, bool horizontal) {
     return p;
 }
 
-//free the piece's allocated memoire 
-
+//Libère la mémoire allouée par la pièce
 void delete_piece(piece p) {
     free(p);
 }
 
-//create a copy of a piece p
-
+//Crée une copie de la pièce
 void copy_piece(cpiece src, piece dst) {
     dst -> abs = src -> abs;
     dst -> ord = src -> ord;
@@ -35,10 +33,9 @@ void copy_piece(cpiece src, piece dst) {
     dst -> estHorizontal = src -> estHorizontal;
 }
 
-//moves the piece in the direction d if the movement is allowed
-
+//bouge la pièce p dans la direction d si le mouvement est autorisé
 void move_piece(piece p, dir d, int distance) {
-    if (!(((d == UP || d == DOWN)&&(p->estHorizontal)) || ((d == LEFT || d == RIGHT)&&(!(p->estHorizontal))))) {
+    if (movement_is_allowed(p,d)) {
         switch (d) {
             case UP:
                 p -> ord += distance;
@@ -54,6 +51,8 @@ void move_piece(piece p, dir d, int distance) {
                 break;
         }
     }
+    else
+        printf("La pièce n'a pas étée bougée.\n");
 }
 
 //Retourne true si les pièces a et b se croisent, retourne false sinon.
