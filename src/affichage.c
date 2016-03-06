@@ -26,10 +26,23 @@ int main(void) {
     dir d;
     int num;
     int distance;
-    int test = false;
+    int test;
     while (!(game_over_hr(game))) {
+        piece_num=-1;
+        d=-1;
+        distance=-1;
+        test = false;
+        
         printf("Veuillez saisir le numéro de la pièce à déplacer :\n");
-        scanf("%d", &piece_num);
+        while(!test){
+            scanf("%d", &piece_num);
+            if(piece_num>=0&&piece_num<game_nb_pieces(game))
+                test=true;
+            else
+                printf("Entrée invalide: veuillez saisir un entier 0 et %d.\n", game_nb_pieces(game)-1);
+        }
+        test=false;
+        
         printf("Quelle direction ? (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
         while (!test) {
             scanf("%d", &num);
@@ -46,16 +59,19 @@ int main(void) {
                 d = RIGHT;
                 test = true;
             } else {
-                printf("Entrée invalide, veuilez saisir un entier entre 1 et 4. (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
+                printf("Entrée invalide: veuillez saisir un entier entre 1 et 4. (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
             }
         }
-
+        test=false;
         printf("De combien de cases ?\n");
-        scanf("%d", &distance);
-        //printf("Piece_num = %d, d=%s, distance=%d\n", piece_num, afficher_direction(d), distance);
+        while(!test){
+            scanf("%d", &distance);
+            if(distance>0)
+                test=true;
+            else
+                printf("Entrée invalide: veuillez saisir un entier superieur à 0.\n");
+        }
         move(grid, piece_num, d, distance);
-        return 1;
-        //move(grid, 0, UP, 2);
     }
 
     if (game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
