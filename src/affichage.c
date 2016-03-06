@@ -43,52 +43,8 @@ int main (void){
         }
         printf("De combien de cases ?\n");
         distance = scanf("%d", &distance);
-        deplacement(grid, piece_num, d, distance);
+        move(grid, piece_num, d, distance);
     }
     if (game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }
-
-
-
-/* 
-void show_case(grille g, int abs, int ord, int number){
-    grid->tab[abs][ord] = number;
-}
-
-piece show_piece_petit_horizontal(grille g, piece p, int number){
-	show_case(g, p->abs, p->ord, number);
-	show_case(g, (p->abs)+1,p->ord, number);
-}
-
-piece show_piece_big_horizontal(grille g, piece p, int number){
-	show_case(g, p->abs, p->ord, number);
-	show_case(g, (p->abs)+1,p->ord, number);
-	show_case(g, (p->abs)+2,p->ord, number);
-}
-
-piece show_piece_small_vertical(grille g, piece p, int number){
-	show_case(g, p->abs, p->ord, number);
-	show_case(g, p->abs,(p->ord)+1, number);
-}
-
-piece show_piece_big_vertical(grille g, piece p, int number){
-	show_case(g, p->abs, p->ord, number);
-	show_case(g, p->abs,(p->ord)+1, number);
-	show_case(g, p->abs,(p->ord)+2, number);
-}
-
-piece show_piece(grille g, piece p, int number){
-	if (p->estHorizontal){
-		if (p->small){
-			show_piece_petit_horizontal(g, p, number);
-                }
-		show_piece_big_horizontal(g, p, number);
-	}
-	if(p->small){
-		show_piece_small_vertical(g, p, number);
-        }
-	show_piece_big_vertical(g, p, number);
-
- }
- */

@@ -6,7 +6,7 @@
 #include "grid.h"
 
 struct grid_s {
-        char tab[6][6];
+        char matrice[6][6];
         game g;
 };
 //faire un pointeur constant plus tard
@@ -16,7 +16,7 @@ grid new_grid(game game){
         grid->g = game;
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
-			grid -> tab[i][j]='.';
+			grid -> matrice[i][j]='.';
 		}
 	}
 	return grid;
@@ -25,7 +25,7 @@ grid new_grid(game game){
 void show_grid(grid grid){
 	for(int abs=5;abs>=0;abs--){
 		for(int ord=0; ord<6;ord++){
-			char c = grid->tab[ord][abs];
+			char c = grid->matrice[ord][abs];
 			printf("%c ", c);
 		}
 		printf("\n");
@@ -82,7 +82,7 @@ void delete_piece_grid(grid grid, int piece_num){
 }
 
 char get_cell(grid grid, int x, int y){
-    return grid->tab[x][y];
+    return grid->matrice[x][y];
 }
 
 void set_pieces(grid grid){
@@ -93,14 +93,14 @@ void set_pieces(grid grid){
 }
 
 void set_cell_int(grid grid, int x, int y, int val){
-    grid->tab[x][y]=val+48;
+    grid->matrice[x][y]=val+48;
 }
 
 void set_cell_empty(grid grid, int x, int y){
-    grid->tab[x][y]='.';
+    grid->matrice[x][y]='.';
 }
 
-void deplacement(grid grid, int piece_num, dir d, int distance){
+void move(grid grid, int piece_num, dir d, int distance){
     game g = grid->g;
     delete_piece_grid(grid, piece_num);
     if(play_move(g, piece_num, d, distance))

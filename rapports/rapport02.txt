@@ -9,7 +9,7 @@ Camille :
     J'ai aidé Ny Andry à faire une partie du game_test1.c, j'ai corrigé et fini les fichiers game.c et piece.c, j'ai créé et commencé avec Luc les fichiers affichage.c, grid.c et grid.h.
     J'ai continuer seule la rédaction des fichiers affichage.c, grid.c et grid.h, et j'ai modifié le Makefile afin qu'il soit plus lisible de lire les erreurs/warning sur le terminal s'il y en a, et qu'il compile ce que l'on veut correctement.
     J'ai eu une segmentation fault dans le fichier grid.c du au fait que j'avais initialisé une variable dans un switch mais hors des cases, ce qui faisait que le compilateur ignorait tout simplement la ligne.
-    J'ai otpimisé la fonction intersect en utilisant des tableaux plutot que de faire au cas par cas, diminuant la taille de la fonction par 3.
+    J'ai otpimisé la fonction intersect en utilisant des tableaux plutot que de faire au cas par cas, diminuant la taille de la fonction par 3. J'ai debugé un peu le game_test mais je n'ai pas réussi à trouver l'erreur.
     //J'ai fini la rédaction des fichiers affichage.c, grid.c et grid.h.
 
 
