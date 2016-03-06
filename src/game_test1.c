@@ -76,14 +76,14 @@ bool test_play_move(){
     game g = set_game();
     cpiece p_test = new_piece_rh(2, 3, true, true);
     game gtest = set_game();
-    play_move(g, 0, LEFT, 1);
-    play_move(g, 1, DOWN, 1);
-    play_move(g, 2, LEFT, 1);
-    play_move(g, 3, DOWN, 2);
+    play_move(g, 0, LEFT, 1);           // déplacement vers la gauche de 0
+    play_move(g, 1, DOWN, 1);           // sortie de la grille de 1 : déplacement impossible
+    play_move(g, 2, LEFT, 1);           // intersection de 2 et 1 : déplacement impossible
+    play_move(g, 3, DOWN, 2);           // intersection de 3 et 2 : déplacement impossible
     result = result && test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves");
-    result = result && !test_equality_piece(p_test, game_piece(g, 0), "play_move de 0");
+    result = result && !test_equality_piece(p_test, game_piece(g, 0), "play_move de 0");                // seule piece ayant fait un déplacement
     for (int i = 1; i < game_nb_pieces(g); ++i){
-        result = result && test_equality_piece(game_piece(gtest, i), game_piece(g, i), "play_move");
+        result = result && test_equality_piece(game_piece(gtest, i), game_piece(g, i), "play_move");    // déplacements impossible : pieces identiques à la configuration de départ
     }
     tear_down();
     delete_game(g);
@@ -105,15 +105,25 @@ bool test_copy_game(){
     return result;
 }
 
-/*
+
 int main (int argc, char *argv[])
 {
   bool result= true;
 
-  result = result && test_equality_bool(true, test_new_piece(), "new_game_hr");
-  result = result && test_equality_bool(true, test_intersect(), "intersect");
-  result = result && test_equality_bool(true, test_move(), "move");
-  result = result && test_equality_bool(true, test_copy(), "copy");
+  game g = set_game();
+  result = result && test_equality_bool(true, test_new_game_hr(), "new_game_hr");
+  result = result && test_equality_bool(true, test_copy_game(), "copy_game");
+  result = result && test_equality_bool(true, test_play_move(), "play_move");
+  play_move(g, 0, LEFT, 2);
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : premier play_move 0");
+  play_move(g, 1, UP, 4);
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 1");
+  play_move(g, 2, LEFT, 1);
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2");
+  play_move(g, 3, DOWN, 3);
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 3");
+  play_move(g, 0, RIGHT, 3);
+  result = result && test_equality_bool(true, game_over_hr(g), "game_over_hr : deuxième play_move 0");
 
   if (result) {
     printf("Ca marche c: !\n");
@@ -122,6 +132,3 @@ int main (int argc, char *argv[])
   else
     return EXIT_FAILURE;
 }
-
- */
-//tester new game
