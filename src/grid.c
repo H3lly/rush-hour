@@ -23,6 +23,7 @@ grid new_grid(game game){
 	return grid;
 }
 
+//affiche graphiquement la grille sur le terminal
 void show_grid(grid grid){
 	for(int abs=5;abs>=0;abs--){
 		for(int ord=0; ord<6;ord++){
@@ -35,15 +36,18 @@ void show_grid(grid grid){
         
 }
 
+//libère la mémoire allouée pour la grille
 void delete_grid(grid grid){
     delete_game(get_game(grid));
     free(grid);
 }
 
+//retourne le jeu associé à la grille (pas très intelligent, à modifier de facon à ce que la grille soit liée à un jeu plutot que l'inverse)
 game get_game(grid grid){
     return grid->g;
 }
-//demander au prof
+
+//ajouter graphiquement une piece sur la grille
 void add_piece(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
@@ -63,6 +67,7 @@ void add_piece(grid grid, int piece_num){
     }
 }
 
+//efface graphiquement une piece sur la grille
 void delete_piece_grid(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
@@ -82,10 +87,7 @@ void delete_piece_grid(grid grid, int piece_num){
     }
 }
 
-char get_cell(grid grid, int x, int y){
-    return grid->matrice[x][y];
-}
-
+//mets les pieces du tableau sur la grille
 void set_pieces(grid grid){
     game g = get_game(grid);
     for (int i=0; i<game_nb_pieces(g);i++){
@@ -93,14 +95,17 @@ void set_pieces(grid grid){
     }
 }
 
+//initialise graphiquement la case avec un int
 void set_cell_int(grid grid, int x, int y, int val){
     grid->matrice[x][y]=val+48;
 }
 
+//reinitialise graphiquement la case
 void set_cell_empty(grid grid, int x, int y){
     grid->matrice[x][y]='.';
 }
 
+//effectue le deplacement graphique de la piece
 void move(grid grid, int piece_num, dir d, int distance){
     game g = grid->g;
     delete_piece_grid(grid, piece_num);

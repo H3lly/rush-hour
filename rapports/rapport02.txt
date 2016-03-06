@@ -11,7 +11,7 @@ Camille :
     J'ai eu une segmentation fault dans le fichier grid.c du au fait que j'avais initialisé une variable dans un switch mais hors des cases, ce qui faisait que le compilateur ignorait tout simplement la ligne.
     J'ai otpimisé la fonction intersect en utilisant des tableaux plutot que de faire au cas par cas, diminuant la taille de la fonction par 3. J'ai debugé un peu le game_test mais je n'ai pas réussi à trouver l'erreur.
     Création d'une librairie useful_functions pour éviter la duplication de code.
-    //J'ai fini la rédaction des fichiers affichage.c, grid.c et grid.h.
+    J'ai fini la rédaction des fichiers affichage.c, grid.c et grid.h et de mettre les commentaires. Le fichier game_test1.c n'a pas pu être terminé avant le premier rendu du projet.
 
 
 Ny Andry et Alexandre :

@@ -33,6 +33,7 @@ int main(void) {
         test = false;
         
         printf("Veuillez saisir le numéro de la pièce à déplacer :\n");
+        //commenter plus tard ces fonctions
         while(!test){
             if (scanf("%d", &piece_num) == 1) {
                 if(piece_num>=0&&piece_num<game_nb_pieces(game))
@@ -69,10 +70,6 @@ int main(void) {
             else{
                 printf("Entrée invalide: veuillez saisir un entier entre 1 et 4. (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
                 while(fgetc(stdin)!='\n');
-//                do {
-//                    c = getchar();
-//                } while (!isdigit(c));
-//                ungetc(c, stdin);
             }
         }
         test=false;
