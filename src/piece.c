@@ -56,9 +56,10 @@ void move_piece(piece p, dir d, int distance) {
     }
 }
 
-//returns if there two pieces are superposed. Tests all cases. (can (probably) be optimized)
-
+//Retourne true si les pièces a et b se croisent, retourne false sinon.
+//Créé deux tableaux de taille de la taille de a et de b, et les comparent
 bool intersect(cpiece a, cpiece b) {
+    if (a==b) return true;    //si c'est la même référence c'est la même piece 
     int amax = get_width(a);
     if(get_height(a)>amax) amax=get_height(a);
     int ta[amax];
@@ -67,7 +68,7 @@ bool intersect(cpiece a, cpiece b) {
     int tb[bmax];
     for (int i=0;i<amax;i++){
         if(get_width(a)>get_height(a))
-            ta[i]=10*(get_x(a)+i)+get_y(a);
+            ta[i]=10*(get_x(a)+i)+get_y(a);     //utilisation de la dizaine pour l'absicce et de l'unité pour l'ordonnée
         else
             ta[i]=10*get_x(a)+get_y(a)+i;
     }
