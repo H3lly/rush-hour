@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "game.h"
 #include "piece.h"
+#include "useful_functions.h"
 
 #define NB_PIECES 4
 
@@ -19,16 +20,11 @@ bool test_equality_bool(bool expected, bool value, char * msg) {
     return expected == value;
 }
 
-//On test l'égalité entre 2 pieces
-bool equals_piece(cpiece p1, cpiece p2) {
-    return (get_x(p1) == get_x(p2))&&(get_y(p1) == get_y(p2))&&(get_width(p1) == get_width(p2))&&(get_height(p1) == get_height(p2));
-}
-
 bool test_equality_piece(cpiece expected, cpiece value, char * msg){
-    if (!equals_piece(expected, value)){
+    if (!equals(expected, value)){
         fprintf(stderr, "ERR: Pieces are different. %s\n", msg);
     }
-    return equals_piece(expected, value);
+    return equals(expected, value);
 }
     
 //création d'un tableau de pièces
@@ -63,7 +59,7 @@ bool test_new_game_hr() {
     game g = set_game();
     result = result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces");
     for (int i = 0; i < NB_PIECES; i++) {
-        result = result && equals_piece(pieces[i], game_piece(g, i + 1));
+        result = result && equals(pieces[i], game_piece(g, i + 1));
     }
     delete_game(g);
     return result;
