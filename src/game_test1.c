@@ -108,7 +108,7 @@ bool test_copy_game(){
 
 int main (int argc, char *argv[])
 {
-  bool result= true;
+  bool result=true;
   printf("YOLO?\n");
 
   game g = set_game();
