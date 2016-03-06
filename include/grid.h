@@ -10,7 +10,7 @@ typedef struct grid_s* grid;
 
 grid new_grid(game g);
 char get_cell(grid grid, int x, int y);
-void deplacement(grid grid, dir d, int piece_num, int distance);
+void deplacement(grid grid, int piece_num, dir d, int distance);
 void show_grid(grid g);
 void delete_grid(grid g);
 void add_piece(grid g, int piece_num);

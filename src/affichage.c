@@ -22,14 +22,23 @@ int main (void){
 //    while(!(game_over_hr(game))){
 //      //boucle de jeu    
 //    }
-    deplacement(grid, UP, 2, 7);
-    deplacement(grid, UP, 1, 7);
-    deplacement(grid, UP, 1, 6);
-    deplacement(grid, UP, 1, 4);
-    deplacement(grid, RIGHT, 1, 0);
-    deplacement(grid, LEFT, 2, 0);
-    deplacement(grid, UP, 2, 6);
-    deplacement(grid, UP, 3, 5);
+    deplacement(grid, 7, UP, 2);
+    deplacement(grid, 6, UP, 3);
+    deplacement(grid, 5, UP, 3);
+    deplacement(grid, 3, RIGHT, 3);
+    deplacement(grid, 4, UP, 1);
+    deplacement(grid, 1, RIGHT, 4);
+    deplacement(grid, 4, DOWN, 3);
+    deplacement(grid, 0, RIGHT, 1);
+    deplacement(grid, 2, UP, 4);
+    deplacement(grid, 0, LEFT, 1);
+    deplacement(grid, 4, UP, 3);
+    deplacement(grid, 1, LEFT, 4);
+    deplacement(grid, 3, LEFT, 4);
+    deplacement(grid, 4, DOWN, 3);
+    deplacement(grid, 6, DOWN, 3);
+    deplacement(grid, 0, RIGHT, 4);
+    //deplacement(grid, DOWN, 3, 4);
     deplacement(grid, RIGHT, 4, 0);
     if(game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;

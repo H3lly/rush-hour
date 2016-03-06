@@ -100,7 +100,7 @@ void set_cell_empty(grid grid, int x, int y){
     grid->tab[x][y]='.';
 }
 
-void deplacement(grid grid, dir d, int distance, int piece_num){
+void deplacement(grid grid, int piece_num, dir d, int distance){
     game g = grid->g;
     delete_piece_grid(grid, piece_num);
     if(play_move(g, piece_num, d, distance))
