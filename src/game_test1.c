@@ -115,20 +115,14 @@ int main (int argc, char *argv[])
   result = result && test_equality_bool(true, test_copy_game(), "copy_game");
   result = result && test_equality_bool(true, test_play_move(), "play_move");
   play_move(g, 0, LEFT, 2);
-  printf("1\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : premier play_move 0");
   play_move(g, 1, UP, 4);
-  printf("2\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 1");
   play_move(g, 2, LEFT, 1);
-  printf("3\n");
-  //plante ici
-  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2");
+  result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 2"); //plante ici
   play_move(g, 3, DOWN, 3);
-  printf("4\n");
   result = result && test_equality_bool(true, !game_over_hr(g), "game_over_hr : play_move 3");
   play_move(g, 0, RIGHT, 3);
-  printf("5\n");
   result = result && test_equality_bool(true, game_over_hr(g), "game_over_hr : deuxième play_move 0");
 
   if (result) {
