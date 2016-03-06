@@ -9,7 +9,6 @@ struct grid_s {
         char tab[6][6];
         game g;
 };
-
 //faire un pointeur constant plus tard
 
 grid new_grid(game game){
@@ -36,6 +35,7 @@ void show_grid(grid grid){
 }
 
 void delete_grid(grid grid){
+    delete_game(get_game(grid));
     free(grid);
 }
 
@@ -68,17 +68,21 @@ void delete_piece_grid(grid grid, int piece_num){
     int y = get_y(p);
     set_cell_empty(grid,x,y);
     if(is_horizontal(p)){
-        set_cell_empty(grid,x+1,y);     //small horizontal
+        set_cell_empty(grid,x+1,y);
         if(get_width(p)==3){
-            set_cell_empty(grid,x+2,y); //tall horizontal
+            set_cell_empty(grid,x+2,y);
         }
     }
     else{
-        set_cell_empty(grid,x,y+1);     //small vertical
+        set_cell_empty(grid,x,y+1);
         if(get_height(p)==3){
-            set_cell_empty(grid,x,y+2); //tall vertical
+            set_cell_empty(grid,x,y+2);
         }
-    }   
+    }
+}
+
+char get_cell(grid grid, int x, int y){
+    return grid->tab[x][y];
 }
 
 void set_pieces(grid grid){
@@ -96,21 +100,12 @@ void set_cell_empty(grid grid, int x, int y){
     grid->tab[x][y]='.';
 }
 
-void deplacement(grid grid, dir d, int distance, int piece_num){
+void deplacement(grid grid, int piece_num, dir d, int distance){
     game g = grid->g;
-    switch(d){
-        case UP:
-            if(play_move(g, piece_num, UP, distance)){
-                delete_piece_grid(grid, piece_num); //ne marche pas pour une raison obscure
-                add_piece(grid, piece_num);     //marche
-                show_grid(grid);
-            }
-            break;
-        case DOWN:
-            break;
-        case LEFT:
-            break;
-        case RIGHT:
-            break;
-    }
+    delete_piece_grid(grid, piece_num);
+    if(play_move(g, piece_num, d, distance))
+        add_piece(grid, piece_num);
+    else
+        add_piece(grid, piece_num);
+    show_grid(grid);
 }

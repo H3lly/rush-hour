@@ -50,55 +50,43 @@ bool equals(cpiece p1, cpiece p2) {
 bool out_of_grid(cpiece p){
     int abs = get_x(p);
     int ord = get_y(p);
-    return (abs<0||abs>5||ord<0||ord>5);
+    if(is_horizontal(p)){
+        if(get_width(p)==2)
+            return (abs<0||abs>4);
+        return (abs<0||abs>3);
+    }
+    if(get_height(p)==2)
+        return(ord<0||ord>4);
+    return (ord<0||ord>3);
 }
+dir opposite(dir d){
+    dir opposite;
+    if(d==UP) opposite = DOWN;
+    else if(d==DOWN) opposite = UP;
+    else if(d==LEFT) opposite = RIGHT;
+    else opposite = LEFT;
+    return opposite;
+}
+
 
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
-    piece p = game_piece(g, piece_num);
-    switch (d) {
-        case UP:
-            move_piece(p, UP, distance);
-            for (int i = 0; i < g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-                if ( intersect(game_piece(g, piece_num), game_piece(g, i)) || out_of_grid(game_piece(g,i))){
-                    move_piece(p, DOWN, distance);
-                    return false;
-                }
+    piece p = g->liste_piece[piece_num];
+    while (distance != 0) {
+        move_piece(p, d, 1);
+        distance--;
+        for (int i = 0; i < game_nb_pieces(g); ++i) {
+            if (p == g->liste_piece[i]) i++;
+            if (intersect(p, game_piece(g, i)) || out_of_grid(p)) {
+                if (intersect(p, game_piece(g, i))) printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
+                if (out_of_grid(p)) printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
+                move_piece(p, opposite(d), 1);
+                return false;
             }
-            g->nb_moves += distance;
-            return true;
-        case DOWN:
-            move_piece(p, DOWN, distance);
-            for (int i = 0; i < g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-                if ( intersect(game_piece(g, piece_num), game_piece(g, i)) || out_of_grid(game_piece(g,i))){
-                    move_piece(p, UP, distance);
-                    return false;
-                }
-            }
-            g->nb_moves += distance;
-            return true;
-        case LEFT:
-            move_piece(p, LEFT, distance);
-            for (int i = 0; i < g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-                if ( intersect(game_piece(g, piece_num), game_piece(g, i)) || out_of_grid(game_piece(g,i))){
-                    move_piece(p, RIGHT, distance);
-                    return false;
-                }
-            }
-            g->nb_moves += distance;
-            return true;
-        case RIGHT:
-            move_piece(p, RIGHT, distance);
-            for (int i = 0; i<g->nb_pieces && !(equals(p, (game_piece(g, i)))); ++i) {
-                if ( intersect(game_piece(g, piece_num), game_piece(g, i)) || out_of_grid(game_piece(g,i))){
-                    move_piece(p, LEFT, distance);
-                    return false;
-                }
-            }
-            g->nb_moves += distance;
-            return true;
+        }
+        g->nb_moves += 1;
     }
-    return false; 
+    return true;
 }
 
 //retourne le nombre de mouvements effectués
