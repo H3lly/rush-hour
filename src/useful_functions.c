@@ -7,6 +7,9 @@
 #include "useful_functions.h"
 
 //retourne le nom del a direction sous la forme d'une chaine de caractère (pour les test par exemple)
+bool is_small(cpiece p){
+    return get_height(p)==2||get_width(p)==2;
+}
 char* afficher_direction(dir d) {
     if (d == UP)
         return "UP";
