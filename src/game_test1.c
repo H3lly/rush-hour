@@ -97,23 +97,19 @@ bool test_game_over_rh(){
     result=test_equality_bool(false, game_over_hr(g), "game_over_hr 1 in test_game_over_rh") && result;
     play_move(g, 2, LEFT, 1);
     result=test_equality_bool(false, game_over_hr(g), "game_over_hr 2 in test_game_over_rh") && result;
-    printf("x=%d y=%d\n", get_x(game_piece(g, 3)), get_y(game_piece(g, 3)));
     play_move(g, 3, DOWN, 3);
-    printf("x=%d y=%d\n", get_x(game_piece(g, 3)), get_y(game_piece(g, 3)));
     result=test_equality_bool(false, game_over_hr(g), "game_over_hr 3 in test_game_over_rh") && result;
-    printf("x=%d y=%d\n", get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
     play_move(g, 0, RIGHT, 3);
-    printf("x=%d y=%d\n", get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_rh") && result;
     delete_game(g);
     return result;
 }
 int main(int argc, char *argv[]){
     bool result=true;
-    //result=result && test_equality_bool(true, test_new_game_hr(), "test_new_game_hr in main");
-    //result=result && test_equality_bool(true, test_copy_game(), "test_copy_game in main");
-    result=result && test_equality_bool(true, test_play_move(), "test_play_move in main");
-    //result=result && test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main");
+    result=test_equality_bool(true, test_new_game_hr(), "test_new_game_hr in main") && result;
+    result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
+    result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
+    result=test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main") && result;
 
     if (result){
         printf("Ca marche c: !\n");
