@@ -59,7 +59,7 @@ bool test_new_game_hr() {
     game g = set_game();
     result = result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces");
     for (int i = 0; i < NB_PIECES; i++) {
-        result = result && equals(pieces[i], game_piece(g, i + 1));
+        result = result && equals(pieces[i], game_piece(g, i));
     }
     delete_game(g);
     return result;
