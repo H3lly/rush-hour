@@ -70,7 +70,11 @@ bool play_move(game g, int piece_num, dir d, int distance) {
         distance--;
         distance_parcourue++;
         for (int i = 0; i < game_nb_pieces(g); ++i) {
-            if (p == g->liste_piece[i]) i++;
+            if (p == g->liste_piece[i]){
+                i++;
+                if(i>=game_nb_pieces(g))
+                    return true;
+            }
             if (intersect(p, game_piece(g, i))) {
                 printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
                 move_piece(p, d, -1);
