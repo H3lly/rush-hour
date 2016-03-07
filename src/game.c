@@ -21,6 +21,8 @@ game new_game_hr(int nb_pieces, piece *pieces) {
 }
 
 void delete_game(game g) {
+    for (int i = 0 ; i < g->nb_pieces; i++)
+        delete_piece(g->liste_piece[i]);
     free(g);
 }
 
@@ -60,7 +62,7 @@ bool out_of_grid(cpiece p) {
 bool play_move(game g, int piece_num, dir d, int distance) {
     piece p = g->liste_piece[piece_num];
     if(!movement_is_allowed(p, d)){
-        //printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n");
+        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
         return false;
     }
     int distance_parcourue =0;
@@ -76,14 +78,14 @@ bool play_move(game g, int piece_num, dir d, int distance) {
                     return true;
             }
             if (intersect(p, game_piece(g, i))) {
-                //printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
-                move_piece(p, d, -1);
+                printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
+                move_piece(p, d, distance_parcourue*-1);
                 g->nb_moves -= distance_parcourue;
                 return false;
             }
             if (out_of_grid(p)) {
-                //printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
-                move_piece(p, d, -1);
+                printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
+                move_piece(p, d, distance_parcourue*-1);
                 g->nb_moves -= distance_parcourue;
                 return false;
             }

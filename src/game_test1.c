@@ -56,16 +56,16 @@ bool test_play_move(){
     int nbmove=1;
     game g=set_game();
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move in test_play_move 1") && result; // déplacement possible
+    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
     result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move in test_play_move 2") && result; // sortie de la grille de 1 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de 1 : déplacement impossible
     result=test_equality_int(get_x(game_piece(g, 1)), 3, "get_x 2 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 1)), 0, "get_y 2 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move in test_play_move 3") && result; // intersection de 2 et 1 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // intersection de 2 et 1 : déplacement impossible
     result=test_equality_int(get_x(game_piece(g, 2)), 4, "get_x 3 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 2)), 1, "get_y 3 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move in test_play_move 4") && result; //intersection de 3 et 2 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move") && result; //intersection de 3 et 2 : déplacement impossible
     result=test_equality_int(get_x(game_piece(g, 3)), 3, "get_x 4 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 3)), 5, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result;
@@ -80,7 +80,7 @@ bool test_copy_game(){
     game gtest=new_game_hr(0, empty_list);
     copy_game(g, gtest);
     play_move(g, 0, LEFT, 1);
-    result=result && test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game");
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result;
     for (int i=0; i < game_nb_pieces(g); ++i){
         result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result;
     }
