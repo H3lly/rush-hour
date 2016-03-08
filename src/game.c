@@ -3,11 +3,13 @@
 
 #include "game.h"
 #include "useful_functions.h"
+//#include "grid.h"
 
 struct game_s {
     int nb_pieces;
     int nb_moves;
     piece *liste_piece;
+    //grille grid;
 };
 
 typedef const struct game_s* cgame;
