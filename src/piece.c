@@ -30,6 +30,7 @@ void copy_piece(cpiece src, piece dst) {
     dst -> estHorizontal = src -> estHorizontal;
 }
 
+//ne bougera que d'une case dans tous les cas
 void move_piece(piece p, dir d, int distance) {
     if (movement_is_allowed(p, d)) {
         switch (d) {
