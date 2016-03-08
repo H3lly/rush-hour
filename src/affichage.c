@@ -6,6 +6,13 @@
 #include "grid.h"   //inutile mais au cas ou
 #include "useful_functions.h"
 
+
+
+
+
+
+
+
 int main(void) {
     piece liste [8];
     liste[0] = new_piece_rh(0, 3, true, true);

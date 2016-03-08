@@ -17,6 +17,8 @@ void delete_piece_grid(grid grid, int piece_num);
 void set_cell_int(grid grid, int x, int y, int val);
 void set_cell_empty(grid grid, int x, int y);
 
+
+
 void set_pieces(grid grid);
 game get_game(grid grid);
 
