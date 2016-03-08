@@ -41,6 +41,7 @@ game set_game(){
     pieces[3]=new_piece_rh(5, 3, false, false);
     return new_game_hr(NB_PIECES, pieces);
 }
+
 bool test_new_game_hr(){
     bool result=true;
     game g=set_game();
