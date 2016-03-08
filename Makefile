@@ -26,7 +26,7 @@ game_test2:
 
 test_piece1:
 	@make --silent sub
-	@gcc useful_functions.o game.o piece.o test_piece2.o -o $@-exe
+	@gcc useful_functions.o game.o piece.o test_piece1.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
