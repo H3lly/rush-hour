@@ -19,7 +19,7 @@ lib:
 
 game_test1:
 	@make --silent sub
-	@gcc useful_functions.o game.o piece.o game_test1.o -o $@-exe
+	@gcc useful_functions.o game.o piece.o game_test1.o grid.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
