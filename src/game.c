@@ -5,7 +5,18 @@
 #include "useful_functions.h"
 //#include "grid.h"
 
+/*
 struct game_s {
+    int nb_pieces;
+    int nb_moves;
+    piece *liste_piece;
+    //grille grid;
+};
+*/
+
+struct game_s {
+    int width;
+    int height;
     int nb_pieces;
     int nb_moves;
     piece *liste_piece;
@@ -14,6 +25,7 @@ struct game_s {
 
 typedef const struct game_s* cgame;
 
+/*
 game new_game_hr(int nb_pieces, piece *pieces) {
     game g = malloc(sizeof (struct game_s));
     g->nb_moves = 0;
@@ -21,6 +33,7 @@ game new_game_hr(int nb_pieces, piece *pieces) {
     g->liste_piece = pieces;
     return g;
 }
+*/
 
 void delete_game(game g) {
     for (int i = 0 ; i < g->nb_pieces; i++)
@@ -28,10 +41,12 @@ void delete_game(game g) {
     free(g);
 }
 
-void copy_game(cgame src, game dst) {
+void copy_game(cgame src, game dst) {                       //MODIFICATIONS V2
     dst->nb_pieces = src->nb_pieces;
     dst->nb_moves = src->nb_moves;
     dst->liste_piece = src->liste_piece;
+    dst->width = src->width;
+    dst->height = src->height;
 }
 
 int game_nb_pieces(cgame g) {
@@ -47,17 +62,17 @@ bool game_over_hr(cgame g) {
 }
 //vérifie que la pièce ne dépace pas de la grille
 
-bool out_of_grid(cpiece p) {
+bool out_of_grid(cpiece p, cgame g) {                       //MODIFICATIONS V2
     int abs = get_x(p);
     int ord = get_y(p);
     if (is_horizontal(p)) {
         if (get_width(p) == 2)
-            return (abs < 0 || abs > 4);
-        return (abs < 0 || abs > 3);
+            return (abs < 0 || abs > game_width(g)-2);      //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
+        return (abs < 0 || abs > game_width(g)-3);
     }
     if (get_height(p) == 2)
-        return (ord < 0 || ord > 4);
-    return (ord < 0 || ord > 3);
+        return (ord < 0 || ord > game_height(g)-2);
+    return (ord < 0 || ord > game_height(g)-3);
 }
 
 //ajouter vérification pour pas depasser les bords
@@ -85,7 +100,7 @@ bool play_move(game g, int piece_num, dir d, int distance) {
                 g->nb_moves -= distance_parcourue;
                 return false;
             }
-            if (out_of_grid(p)) {
+            if (out_of_grid(p, g)) {                                //MODIFICATIONS : ajout de g
                 //printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
                 move_piece(p, d, distance_parcourue*-1);
                 g->nb_moves -= distance_parcourue;
@@ -100,4 +115,49 @@ bool play_move(game g, int piece_num, dir d, int distance) {
 
 int game_nb_moves(cgame g) {
     return g->nb_moves;
+}
+
+///////////// version 2 /////////////////
+
+
+
+game new_game (int width, int height, int nb_pieces, piece *pieces){
+    game g = malloc(sizeof (struct game_s));
+    g->width = width;
+    g->height = height;
+    g->nb_pieces = nb_pieces;
+    g->nb_moves = 0;
+    g->liste_piece = pieces;
+    return g;
+}
+
+
+/**
+ *@brief return the width of the grid
+ */
+int game_width(cgame g){
+    return g->width;
+}
+
+/**
+ *@brief return the height of the grid
+ */
+int game_height(cgame g){
+    return g->height;
+}
+
+/**
+ * @brief return the number of then piece located on this square (-1 if no piece is present)
+ * @param game
+ * @param x-coor of the square
+ * @param y-coor of the square
+ */
+int game_square_piece (game g, int x, int y){
+    for (int i = 0; i < g->nb_pieces; i++){
+        piece p = g->liste_piece[i];
+        if (get_x(p) == x && get_y(p) == y){
+            return i;
+        }
+    }
+    return -1;
 }
