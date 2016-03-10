@@ -3,7 +3,6 @@
 #include "game.h"
 #include "piece.h"
 #include "useful_functions.h"
-#include "grid.h"
 
 #define NB_PIECES 4
 bool test_equality_int(int expected, int value, char * msg){
@@ -13,7 +12,7 @@ bool test_equality_int(int expected, int value, char * msg){
 }
 bool test_equality_bool(bool expected, bool value, char * msg){
     if (expected != value)
-        fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
+        fprintf(stderr, "ERR: value expected %s ; value computed %s | Error from : %s\n", (expected ? "true" : "false"), (value ? "true" : "false"), msg);
     return expected == value;
 }
 bool test_equality_piece(cpiece expected, cpiece value, char * msg){
@@ -41,7 +40,6 @@ game set_game(){
     pieces[3]=new_piece_rh(5, 3, false, false);
     return new_game_hr(NB_PIECES, pieces);
 }
-
 bool test_new_game_hr(){
     bool result=true;
     game g=set_game();
@@ -57,27 +55,21 @@ bool test_play_move(){
     bool result=true;
     int nbmove=1;
     game g=set_game();
-    new_grid(g);
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
     result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
-    show_grid(g);
     result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de 1 : déplacement impossible
-    show_grid(g);
     result=test_equality_int(get_x(game_piece(g, 1)), 3, "get_x 2 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 1)), 0, "get_y 2 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // intersection de 2 et 1 : déplacement impossible
-    show_grid(g);
     result=test_equality_int(get_x(game_piece(g, 2)), 4, "get_x 3 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 2)), 1, "get_y 3 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move") && result; //intersection de 3 et 2 : déplacement impossible
-    show_grid(g);
-    result=test_equality_int(get_x(game_piece(g, 3)), 3, "get_x 4 in test_play_move") && result;
-    result=test_equality_int(get_y(game_piece(g, 3)), 5, "get_y 4 in test_play_move") && result;
+    result=test_equality_int(get_x(game_piece(g, 3)), 5, "get_x 4 in test_play_move") && result;
+    result=test_equality_int(get_y(game_piece(g, 3)), 3, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result;
     result=!equals(p_test, game_piece(g, 0)) && result; // seule piece ayant fait un déplacement
-    show_grid(g);
     delete_game(g);
     return result;
 }

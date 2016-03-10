@@ -20,6 +20,7 @@ grid new_grid(game game){
 			grid -> matrice[i][j]='.';
 		}
 	}
+        set_pieces(grid);
 	return grid;
 }
 
@@ -89,8 +90,7 @@ void delete_piece_grid(grid grid, int piece_num){
 
 //mets les pieces du tableau sur la grille
 void set_pieces(grid grid){
-    game g = get_game(grid);
-    for (int i=0; i<game_nb_pieces(g);i++){
+    for (int i=0; i<game_nb_pieces(grid->g);i++){
         add_piece(grid, i);
     }
 }
