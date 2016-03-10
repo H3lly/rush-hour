@@ -65,14 +65,10 @@ bool game_over_hr(cgame g) {
 bool out_of_grid(cpiece p, cgame g) {                       //MODIFICATIONS V2
     int abs = get_x(p);
     int ord = get_y(p);
-    if (is_horizontal(p)) {
-        if (get_width(p) == 2)
-            return (abs < 0 || abs > game_width(g)-2);      //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
-        return (abs < 0 || abs > game_width(g)-3);
+    if (can_move_x(p)) {
+        return (abs < 0 || abs > game_width(g)-get_width(p));      //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
     }
-    if (get_height(p) == 2)
-        return (ord < 0 || ord > game_height(g)-2);
-    return (ord < 0 || ord > game_height(g)-3);
+    return (ord < 0 || ord > game_height(g)-get_height(p));
 }
 
 //ajouter vérification pour pas depasser les bords
@@ -155,8 +151,10 @@ int game_height(cgame g){
 int game_square_piece (game g, int x, int y){
     for (int i = 0; i < g->nb_pieces; i++){
         piece p = g->liste_piece[i];
-        if (get_x(p) == x && get_y(p) == y){
-            return i;
+        if (get_x(p) <= x && get_y(p) <= y){
+            if (get_x(p)+get_width(p)-1 >= x && get_y(p)+get_height(p)-1 >= y){         // [x,y] compris entre coordonnée bottom/left et top/right de la piece
+                return i;
+            }
         }
     }
     return -1;
