@@ -4,7 +4,7 @@
 #include "piece.h"
 #include "useful_functions.h"
 
-#define NB_PIECES 4
+#define NB_PIECES 10
 bool test_equality_int(int expected, int value, char * msg){
     if (expected != value)
         fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
@@ -25,20 +25,26 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
 //création d'un tableau de pièces
 piece pieces[NB_PIECES];
 /* config de test
-. . . . . .
-. . . . . .
-0 0 . . . .
-3 3 . . 2 2
-3 3 . 1 2 2
-3 3 . 1 . .
+1 0 0 2
+1 0 0 2
+3 5 5 4
+3 6 7 4
+8 . . 9
  */
 
 game set_game(){
-    pieces[0]=new_piece(3, 3, 2, 1, true, false);
-    pieces[1]=new_piece_rh(3, 0, true, false);
-    pieces[2]=new_piece_rh(4, 1, true, true);
-    pieces[3]=new_piece_rh(5, 3, false, false);
-    return new_game_hr(NB_PIECES, pieces);
+    pieces[0]=new_piece(1, 1, 2, 2, false, false); //la piece étant coincée, elle ne peut pas bouger-
+    pieces[1]=new_piece(0, 1, 1, 2, false, false);
+    pieces[2]=new_piece(3, 1, 1, 2, false, false);
+    pieces[3]=new_piece(0, 3, 1, 2, false, false);
+    pieces[4]=new_piece(4, 3, 1, 2, false, false);
+    pieces[5]=new_piece(1, 2, 2, 1, false, false);
+    pieces[6]=new_piece(1, 3, 1, 1, false, true);
+    pieces[7]=new_piece(2, 3, 1, 1, false, true);
+    pieces[8]=new_piece(0, 4, 1, 1, true, false);
+    pieces[9]=new_piece(3, 4, 1, 1, true, false);
+    
+    return new_game(NB_PIECES, pieces);
 }
 bool test_new_game_hr(){
     bool result=true;
@@ -50,12 +56,12 @@ bool test_new_game_hr(){
     delete_game(g);
     return result;
 }
-// test play move etnre g (jeu dans lequel seul 0 peut bouger) et gtest(jeu de base)
+// test play move entre g (jeu dans lequel seul 0 peut bouger) et gtest (jeu de base)
 bool test_play_move(){
     bool result=true;
     int nbmove=1;
     game g=set_game();
-    piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
+    piece p_test=new_piece(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), get_height(game_piece(g, 0)), get_width(game_piece(g, 0)), can_move_x(game_piece(g, 0)), can_move_y(game_piece(g, 0)));
     result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
     result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move") && result;
@@ -77,7 +83,7 @@ bool test_copy_game(){
     bool result=true;
     game g=set_game();
     piece empty_list[0];
-    game gtest=new_game_hr(0, empty_list);
+    game gtest=new_game(6, 6, 0, empty_list); // la taille 6x6 a été choisie arbitrairement, je ne sais pas si c'est ce qu'il fallait faire -Luc
     copy_game(g, gtest);
     play_move(g, 0, LEFT, 1);
     result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result;
