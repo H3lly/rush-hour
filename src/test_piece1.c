@@ -67,8 +67,8 @@ bool test_new_piece() {                               // MODIFICATIONS
    return result;
 }
 
-/* 
-bool test_intersect() {                             // A faire quand intersect de piece.c sera fini
+
+bool test_intersect() {                             // MODIFICATIONS des pieces qui s'intersectent.
   bool result = true;
   set_up();
   for (int i=0; i < NB_PIECES; i++)
@@ -76,8 +76,8 @@ bool test_intersect() {                             // A faire quand intersect d
       result = result && test_equality_bool(i==j, intersect(pieces[i], pieces[j]),"intersect");
     }
 
-  piece pb_piece1 = new_piece(3, 3, false, false);
-  piece pb_piece2 = new_piece(3, 1, false, false);
+  piece pb_piece1 = new_piece(3, 3, 1, 1, false, false);
+  piece pb_piece2 = new_piece(3, 1, 3, 3, false, false);
   result = result && test_equality_bool(true, intersect(pieces[0], pb_piece1),"intersect pb1");
   result = result && test_equality_bool(true, intersect(pb_piece2, pb_piece1),"intersect pb2");
   delete_piece(pb_piece1);
@@ -85,7 +85,7 @@ bool test_intersect() {                             // A faire quand intersect d
   tear_down();
   return result;
 }
-*/
+
 
 bool test_move() {                                        // MODIFICATIONS dans les for : is_horizontal devient can_move_x et !is_horizontal devient can_move_y
   bool result = true;
@@ -150,7 +150,7 @@ int main (int argc, char *argv[])
   bool result= true;
 
   result = test_equality_bool(true, test_new_piece(), "new_piece") && result;
-  //result = result && test_equality_bool(true, test_intersect(), "intersect");
+  result = test_equality_bool(true, test_intersect(), "intersect") && result;
   result = test_equality_bool(true, test_move(), "move") && result;
   result = test_equality_bool(true, test_copy(), "copy") && result;
 
