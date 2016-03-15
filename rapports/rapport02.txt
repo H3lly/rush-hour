@@ -16,7 +16,7 @@ Camille :
 
 
 Ny Andry et Alexandre :
-	Aide à la recherche pour la résolution du Segfault dans le game_test1.c du rush-hour.
-	Modifications des fichiers game.c et piece.c pour la nouvelle version du jeu l'Âne Rouge et ajouts de commentaires. Il manque juste la fonction intersect dont Camille s'occupera.
-	Modifications du fichier useful_functions.c pour la rendre compatible avec les fichiers game.c et piece.c.
-	Modifications du fichier test_piece1.c qui devient test_piece2.c.
+    Aide à la recherche pour la résolution du Segfault dans le game_test1.c du rush-hour.
+    Modifications des fichiers game.c et piece.c pour la nouvelle version du jeu l'Âne Rouge et ajouts de commentaires. Il manque juste la fonction intersect dont Camille s'occupera.
+    Modifications du fichier useful_functions.c pour la rendre compatible avec les fichiers game.c et piece.c.
+    Modifications du fichier test_piece1.c qui devient test_piece2.c.
