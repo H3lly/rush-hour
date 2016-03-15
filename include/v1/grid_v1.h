@@ -7,7 +7,7 @@
 typedef struct grid_s* grid;
 
 
-grid new_grid();
+grid new_grid(game game);
 char get_cell(grid grid, int x, int y);
 void move(grid grid, int piece_num, dir d, int distance);
 void show_grid(grid grid);
