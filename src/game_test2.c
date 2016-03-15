@@ -25,16 +25,16 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
 //création d'un tableau de pièces
 piece pieces[NB_PIECES];
 /* config de test
-. . . . . 3
-. . . . . 3
-. . . 0 0 3
 . . . . . .
-. . . 1 2 2
-. . . 1 . .
+. . . . . .
+0 0 . . . .
+3 3 . . 2 2
+3 3 . 1 2 2
+3 3 . 1 . .
  */
 
 game set_game(){
-    pieces[0]=new_piece_rh(3, 3, true, true);
+    pieces[0]=new_piece(3, 3, 2, 1, true, false);
     pieces[1]=new_piece_rh(3, 0, true, false);
     pieces[2]=new_piece_rh(4, 1, true, true);
     pieces[3]=new_piece_rh(5, 3, false, false);

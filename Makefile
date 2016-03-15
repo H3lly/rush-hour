@@ -8,7 +8,7 @@ all:
 sub:
 	@echo Make start.
 	@echo
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/grid.c src/game_test2.c src/piece.c src/test_piece1.c src/affichage.c $(INCLUDE) -c
+	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/grid.c src/game_test2.c src/piece.c src/test_piece2.c src/affichage.c $(INCLUDE) -c
 	@echo Make end.
 
 lib:

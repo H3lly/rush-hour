@@ -3,62 +3,53 @@
 #include "piece.h"
 #include "useful_functions.h"
 
-/*
-struct piece_s {
-    int abs;
-    int ord;
-    bool small; //if true, size=2, else size=3
-    bool estHorizontal;
-};
-*/
-struct piece_s {
+struct piece_s{
     int abs;
     int ord;
     int width;
     int height;
-    bool move_x;
-    bool move_y;
+    bool horizontal;
+    bool vertical;
 };
-/*
-piece new_piece_rh(int x, int y, bool small, bool horizontal) {
-    piece p = malloc(sizeof (struct piece_s));
-    p -> abs = x;
-    p -> ord = y;
-    p -> small = small;
-    p -> estHorizontal = horizontal;
+ 
+ piece new_piece(int x, int y, int width, int height, bool horizontal, bool vertical){
+    piece p=malloc(sizeof (struct piece_s));
+    p->abs=x;
+    p->ord=y;
+    p->width=width;
+    p->height=height;
+    p->horizontal=horizontal;
+    p->vertical=vertical;
     return p;
 }
-
-*/
 
 void delete_piece(piece p){
     free(p);
 }
-
-void copy_piece(cpiece src, piece dst) {
-    dst -> abs = src -> abs;
-    dst -> ord = src -> ord;
-    dst -> width = src -> width;
-    dst -> height = src -> height;
-    dst -> move_x = src -> move_x;
-    dst -> move_y = src -> move_y;
+void copy_piece(cpiece src, piece dst){
+    dst -> abs=src -> abs;
+    dst -> ord=src -> ord;
+    dst -> width=src -> width;
+    dst -> height=src -> height;
+    dst -> horizontal=src -> horizontal;
+    dst -> vertical=src -> vertical;
 }
 
 //ne bougera que d'une case dans tous les cas
-void move_piece(piece p, dir d, int distance) {
-    if (movement_is_allowed(p, d)) {
-        switch (d) {
+void move_piece(piece p, dir d, int distance){
+    if (movement_is_allowed(p, d)){
+        switch (d){
             case UP:
-                p -> ord += distance;
+                p -> ord+=distance;
                 break;
             case DOWN:
-                p -> ord -= distance;
+                p -> ord-=distance;
                 break;
             case RIGHT:
-                p -> abs += distance;
+                p -> abs+=distance;
                 break;
             case LEFT:
-                p -> abs -= distance;
+                p -> abs-=distance;
                 break;
         }
     }
@@ -66,69 +57,50 @@ void move_piece(piece p, dir d, int distance) {
 
 //Retourne true si les pièces a et b se croisent, retourne false sinon.
 //Créé deux tableaux de taille de la taille de a et de b, et les comparent
-bool intersect(cpiece a, cpiece b) {
+//ne marche que si les pièces ont une longueur et une largeur strictement inferieur à 10
+//pas très optimisé, peut être fait avec un tableau a une dimension normalement
+bool intersect(cpiece a, cpiece b){
     if (a == b) return true; //si c'est la même référence c'est la même piece 
-    int amax = get_width(a);
-    if (get_height(a) > amax) amax = get_height(a);
-    int ta[amax];
-    int bmax = get_width(b);
-    if (get_height(b) > bmax) bmax = get_height(b);
-    int tb[bmax];
-    for (int i = 0; i < amax; i++) {
-        if (get_width(a) > get_height(a))
-            ta[i] = 10 * (get_x(a) + i) + get_y(a); //utilisation de la dizaine pour l'abscisse et de l'unité pour l'ordonnée
-        else
-            ta[i] = 10 * get_x(a) + get_y(a) + i;
+    int ta[get_width(a)][get_height(a)];
+    int tb[get_width(b)][get_height(b)];
+    for (int i=0; i < get_width(a); ++i){
+        for (int j=0; j < get_height(a); ++j)
+            ta[i][j]=10 * (get_x(a) + i) + get_y(a) + j;
     }
-    for (int i = 0; i < bmax; i++) {
-        if (get_width(b) > get_height(b))
-            tb[i] = 10 * (get_x(b) + i) + get_y(b);
-        else
-            tb[i] = 10 * get_x(b) + get_y(b) + i;
+    for (int i=0; i < get_width(b); ++i){
+        for (int j=0; j < get_height(b); ++j)
+            tb[i][j]=10 * (get_x(b) + i) + get_y(b) + j;
     }
-    for (int i = 0; i < (sizeof (ta) / sizeof (ta[0])); i++) {
-        for (int j = 0; j < (sizeof (tb) / sizeof (tb[0])); j++) {
-            if (ta[i] == tb[j])
-                return true;
+    for (int i=0; i < get_width(a);i++){
+        for (int j=0; j < get_height(a); j++){
+            for (int k=0; k < get_width(b); ++k){
+                for (int l=0; l < get_height(b);++l){
+                    if (ta[i][j] == tb[i][j])
+                        return true;
+                }
+            }
         }
     }
     return false;
 }
-
-int get_x(cpiece p) {
+int get_x(cpiece p){
     return p->abs;
 }
-
-int get_y(cpiece p) {
+int get_y(cpiece p){
     return p->ord;
 }
-
-int get_height(cpiece p) {                      //MODIFICATIONS
+int get_height(cpiece p){
     return p->height;
 }
-
-int get_width(cpiece p) {                       //MODIFICATIONS
+int get_width(cpiece p){
     return p->width;
 }
 
-/////////////////// VERSION 2 /////////////////////////////
-
-bool can_move_x(cpiece p){
-    return p->move_x;
+bool can_horizontal(cpiece p){
+    return p->horizontal;
 }
-bool can_move_y(cpiece p){
-    return p->move_y;
-}
-
-piece new_piece (int x, int y, int width, int height, bool move_x, bool move_y){
-    piece p = malloc(sizeof(struct piece_s));
-    p->abs = x;
-    p->ord = y;
-    p->width = width;
-    p->height = height;
-    p->move_x = move_x;
-    p->move_y = move_y;
-    return p;
+bool can_vertical(cpiece p){
+    return p->vertical;
 }
 
 

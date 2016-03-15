@@ -25,16 +25,6 @@ struct game_s {
 
 typedef const struct game_s* cgame;
 
-/*
-game new_game_hr(int nb_pieces, piece *pieces) {
-    game g = malloc(sizeof (struct game_s));
-    g->nb_moves = 0;
-    g->nb_pieces = nb_pieces;
-    g->liste_piece = pieces;
-    return g;
-}
-*/
-
 void delete_game(game g) {
     for (int i = 0 ; i < g->nb_pieces; i++)
         delete_piece(g->liste_piece[i]);
@@ -58,17 +48,14 @@ cpiece game_piece(cgame g, int piece_num) {
 }
 
 bool game_over_hr(cgame g) {
-    return (get_x(g->liste_piece[0]) == 4) && (get_y(g->liste_piece[0]) == 3);
+    return (get_x(g->liste_piece[0]) == g->width/2) && (get_y(g->liste_piece[0]) == 0);
 }
-//vérifie que la pièce ne dépace pas de la grille
-
-bool out_of_grid(cpiece p, cgame g) {                       //MODIFICATIONS V2
+//vérifie que la pièce ne se déplace pas hors de la grille
+bool out_of_grid(cpiece p, cgame g) {         
     int abs = get_x(p);
     int ord = get_y(p);
-    if (can_move_x(p)) {
-        return (abs < 0 || abs > game_width(g)-get_width(p));      //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
-    }
-    return (ord < 0 || ord > game_height(g)-get_height(p));
+    return (abs < 0 || abs+get_width(p) > game_width(g)||(ord < 0 || ord+get_height(p) > game_height(g)));      
+    //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
 }
 
 //ajouter vérification pour pas depasser les bords
@@ -107,15 +94,9 @@ bool play_move(game g, int piece_num, dir d, int distance) {
     return true;
 }
 
-//retourne le nombre de mouvements effectués
-
 int game_nb_moves(cgame g) {
     return g->nb_moves;
 }
-
-///////////// version 2 /////////////////
-
-
 
 game new_game (int width, int height, int nb_pieces, piece *pieces){
     game g = malloc(sizeof (struct game_s));
@@ -127,27 +108,15 @@ game new_game (int width, int height, int nb_pieces, piece *pieces){
     return g;
 }
 
-
-/**
- *@brief return the width of the grid
- */
 int game_width(cgame g){
     return g->width;
 }
 
-/**
- *@brief return the height of the grid
- */
 int game_height(cgame g){
     return g->height;
 }
 
-/**
- * @brief return the number of then piece located on this square (-1 if no piece is present)
- * @param game
- * @param x-coor of the square
- * @param y-coor of the square
- */
+
 int game_square_piece (game g, int x, int y){
     for (int i = 0; i < g->nb_pieces; i++){
         piece p = g->liste_piece[i];
