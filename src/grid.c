@@ -40,11 +40,6 @@ void delete_grid(grid grid){
     free(grid);
 }
 
-//retourne le jeu associé à la grille (pas très intelligent, à modifier de facon à ce que la grille soit liée à un jeu plutot que l'inverse)
-game get_game(grid grid){
-    return grid->g;
-}
-
 //ajouter graphiquement une piece sur la grille
 void add_piece(grid grid, cpiece p, int piece_num){
     for (int i=get_x(p) ; i<get_width(p);++i){
