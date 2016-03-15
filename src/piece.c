@@ -3,13 +3,23 @@
 #include "piece.h"
 #include "useful_functions.h"
 
+/*
 struct piece_s {
     int abs;
     int ord;
     bool small; //if true, size=2, else size=3
     bool estHorizontal;
 };
-
+*/
+struct piece_s {
+    int abs;
+    int ord;
+    int width;
+    int height;
+    bool move_x;
+    bool move_y;
+};
+/*
 piece new_piece_rh(int x, int y, bool small, bool horizontal) {
     piece p = malloc(sizeof (struct piece_s));
     p -> abs = x;
@@ -19,15 +29,19 @@ piece new_piece_rh(int x, int y, bool small, bool horizontal) {
     return p;
 }
 
-void delete_piece(piece p) {
+*/
+
+void delete_piece(piece p){
     free(p);
 }
 
 void copy_piece(cpiece src, piece dst) {
     dst -> abs = src -> abs;
     dst -> ord = src -> ord;
-    dst -> small = src -> small;
-    dst -> estHorizontal = src -> estHorizontal;
+    dst -> width = src -> width;
+    dst -> height = src -> height;
+    dst -> move_x = src -> move_x;
+    dst -> move_y = src -> move_y;
 }
 
 //ne bougera que d'une case dans tous les cas
@@ -89,26 +103,44 @@ int get_y(cpiece p) {
     return p->ord;
 }
 
-int get_height(cpiece p) {
-    if (!(p->estHorizontal)) {
-        if (p->small) {
-            return 2;
-        }
-        return 3;
-    }
-    return 1;
+int get_height(cpiece p) {                      //MODIFICATIONS
+    return p->height;
 }
 
-int get_width(cpiece p) {
-    if (p->estHorizontal) {
-        if (p->small) {
-            return 2;
-        }
-        return 3;
-    }
-    return 1;
+int get_width(cpiece p) {                       //MODIFICATIONS
+    return p->width;
 }
 
-bool is_horizontal(cpiece p) {
+/*
+bool is_horizontal(cpiece p) {                  //A supprimer pour v2?
     return p->estHorizontal;
 }
+*/
+
+/////////////////// VERSION 2 /////////////////////////////
+
+bool can_move_x(cpiece p){
+    return p->move_x;
+}
+bool can_move_y(cpiece p){
+    return p->move_y;
+}
+/**
+ * @brief Initialized piece structure
+ * @param x,y: coordinates of the bottom left corner of the piece
+ * @param move_x: indicates if the piece is allowed to move horizontally
+ * @param move_y: indicates if the piece is allowed to move vertically
+ * @return created piece at a given position
+ */
+piece new_piece (int x, int y, int width, int height, bool move_x, bool move_y){
+    piece p = malloc(sizeof(struct piece_s));
+    p->abs = x;
+    p->ord = y;
+    p->width = width;
+    p->height = height;
+    p->move_x = move_x;
+    p->move_y = move_y;
+    return p;
+}
+
+
