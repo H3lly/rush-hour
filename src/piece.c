@@ -8,18 +8,19 @@ struct piece_s{
     int ord;
     int width;
     int height;
-    bool horizontal;
-    bool vertical;
+    bool move_x;
+    bool move_y;
 };
  
- piece new_piece(int x, int y, int width, int height, bool horizontal, bool vertical){
+ piece new_piece(int x, int y, int width, int height, bool move_x, bool move_y){
     piece p=malloc(sizeof (struct piece_s));
     p->abs=x;
     p->ord=y;
     p->width=width;
     p->height=height;
-    p->horizontal=horizontal;
-    p->vertical=vertical;
+    p->move_x = move_x;
+    p->move_y = move_y;
+    
     return p;
 }
 
@@ -31,8 +32,8 @@ void copy_piece(cpiece src, piece dst){
     dst -> ord=src -> ord;
     dst -> width=src -> width;
     dst -> height=src -> height;
-    dst -> horizontal=src -> horizontal;
-    dst -> vertical=src -> vertical;
+    dst -> move_x=src -> move_x;
+    dst -> move_y=src -> move_y;
 }
 
 //ne bougera que d'une case dans tous les cas
@@ -96,11 +97,11 @@ int get_width(cpiece p){
     return p->width;
 }
 
-bool can_horizontal(cpiece p){
-    return p->horizontal;
-}
-bool can_vertical(cpiece p){
-    return p->vertical;
+bool can_move_x(cpiece p){
+    return p->move_x;
 }
 
+bool can_move_y(cpiece p){
+    return p->move_y;
+}
 

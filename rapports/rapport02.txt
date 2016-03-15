@@ -4,6 +4,9 @@ Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--
 
 
 Luc :
+    J'ai commencé à modifier le game_test2.c, afin que celui-ci soit adapté à la v2 de notre programme. En conséquence, j'ai aussi modifié des fichiers comme piece.c.
+    J'ai aidé Camille à modifier d'autres fichiers (listés ci-bas)
+    J'ai aussi corrigé les fautes des commentaires / rapports. 
 
 Camille :
     J'ai aidé Ny Andry à faire une partie du game_test1.c, j'ai corrigé et fini les fichiers game.c et piece.c, j'ai créé et commencé avec Luc les fichiers affichage.c, grid.c et grid.h.
