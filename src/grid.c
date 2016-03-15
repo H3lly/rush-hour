@@ -11,7 +11,6 @@ struct grid_s {
         game g;
 };
 //faire un pointeur constant plus tard
-
 grid new_grid(game game){
 	grid grid = malloc(sizeof(struct grid_s));
         grid->g = game;

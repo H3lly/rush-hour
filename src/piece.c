@@ -111,12 +111,6 @@ int get_width(cpiece p) {                       //MODIFICATIONS
     return p->width;
 }
 
-/*
-bool is_horizontal(cpiece p) {                  //A supprimer pour v2?
-    return p->estHorizontal;
-}
-*/
-
 /////////////////// VERSION 2 /////////////////////////////
 
 bool can_move_x(cpiece p){
@@ -125,13 +119,7 @@ bool can_move_x(cpiece p){
 bool can_move_y(cpiece p){
     return p->move_y;
 }
-/**
- * @brief Initialized piece structure
- * @param x,y: coordinates of the bottom left corner of the piece
- * @param move_x: indicates if the piece is allowed to move horizontally
- * @param move_y: indicates if the piece is allowed to move vertically
- * @return created piece at a given position
- */
+
 piece new_piece (int x, int y, int width, int height, bool move_x, bool move_y){
     piece p = malloc(sizeof(struct piece_s));
     p->abs = x;
