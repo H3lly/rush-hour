@@ -6,6 +6,19 @@
 
 #define NB_PIECES 7
 
+void show_grid(game g){
+    for (int ord=game_height(g)-1; ord >= 0; ord--){
+        for (int abs=0; abs < game_width(g); abs++){
+            if (game_square_piece(g, abs, ord) == -1)
+                printf(".  ");
+            else
+                printf("%d  ", game_square_piece(g, abs, ord));
+        }
+        printf("\n");
+    }
+    printf("\nNombre de mouvements : %d\n----------\n\n", game_nb_moves(g));
+}
+
 
 bool test_equality_int(int expected, int value, char * msg){
     if (expected != value)
@@ -65,13 +78,15 @@ bool test_play_move(){
     result=test_equality_int(get_x(game_piece(g, 5)), 1, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 5)), 0, "get_y 1 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de la pièce 6 : déplacement impossible
-    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move") && result; // on vérifie que la pièce n'a pas bougé
+    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 2 in test_play_move") && result;
+    show_grid(g);
     result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // pièce 2 complètement bloquée: déplacement impossible
-    result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move") && result; // idem
+    show_grid(g);
+    result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 2)), 3, "get_y 3 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // la pièce 6 peut se déplacer d'une case vers la gauche mais pas deux : déplacement impossible
-    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move") && result; // idem
+    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result; // on vérifie qu'une seule pièce a bougé
     result=!equals(p_test, game_piece(g, 5)) && result; // seule piece ayant fait un déplacement

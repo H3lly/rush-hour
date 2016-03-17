@@ -46,7 +46,10 @@ bool game_over_hr(cgame g){
 bool out_of_grid(cpiece p, cgame g){
     int abs=get_x(p);
     int ord=get_y(p);
+    //pourquoi le test marche que dans on modifie height alors que height à auccun rapport ?
+    //à vérifier
     return (abs < 0 || abs + get_width(p) > game_width(g) || (ord < 0 || ord + get_height(p) > game_height(g)));
+    //return (abs < 0 || abs + get_width(p) >= game_width(g) || (ord < 0 || ord + get_height(p) >= game_height(g)));
     //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
 }
 

@@ -5,7 +5,7 @@
 #include "piece.h"  //inutile mais au cas ou
 #include "useful_functions.h"
 
-//affiche graphiquement la grille sur le terminal
+//affiche graphiquement la grille sur le terminal (pour moins de 11 pièeces))
 void show_grid(game g){
     for (int ord=game_height(g)-1; ord >= 0; ord--){
         for (int abs=0; abs < game_width(g); abs++){
