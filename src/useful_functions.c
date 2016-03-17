@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "game.h"
-#include "grid.h"
 #include "piece.h"
 #include "useful_functions.h"
 
