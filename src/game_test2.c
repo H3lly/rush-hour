@@ -4,7 +4,9 @@
 #include "piece.h"
 #include "useful_functions.h"
 
-#define NB_PIECES 10
+#define NB_PIECES 7
+
+
 bool test_equality_int(int expected, int value, char * msg){
     if (expected != value)
         fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
@@ -27,9 +29,9 @@ piece pieces[NB_PIECES];
 /* config de test
 1 0 0 2
 1 0 0 2
-3 5 5 4
-3 6 7 4
-8 . . 9
+3 . . 4
+3 . . 4
+5 . . 6
  */
 
 game set_game(){
@@ -38,11 +40,8 @@ game set_game(){
     pieces[2]=new_piece(3, 3, 1, 2, false, false);
     pieces[3]=new_piece(0, 1, 1, 2, false, false);
     pieces[4]=new_piece(3, 1, 1, 2, false, false);
-    pieces[5]=new_piece(1, 2, 2, 1, false, false);
-    pieces[6]=new_piece(1, 1, 1, 1, false, true);
-    pieces[7]=new_piece(2, 1, 1, 1, false, true);
-    pieces[8]=new_piece(0, 0, 1, 1, true, false);
-    pieces[9]=new_piece(3, 0, 1, 1, true, false);
+    pieces[5]=new_piece(0, 0, 1, 1, true, false);
+    pieces[6]=new_piece(3, 0, 1, 1, true, false);
     
     return new_game(NB_PIECES, pieces);
 }
@@ -62,51 +61,42 @@ bool test_play_move(){
     int nbmove=1;
     game g=set_game();
     piece p_test=new_piece(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), get_height(game_piece(g, 0)), get_width(game_piece(g, 0)), can_move_x(game_piece(g, 0)), can_move_y(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 7, DOWN, 1), "play_move 1 in test_play_move") && result; // déplacement possible
-    result=test_equality_int(get_x(game_piece(g, 7)), 2, "get_x 1 in test_play_move") && result;
-    result=test_equality_int(get_y(game_piece(g, 7)), 0, "get_y 1 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 9, RIGHT, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de 9 : déplacement impossible
-    result=test_equality_int(get_x(game_piece(g, 9)), 3, "get_x 2 in test_play_move") && result; // on vérifie que la pièce n'a pas bougé
-    result=test_equality_int(get_y(game_piece(g, 9)), 0, "get_y 2 in test_play_move") && result;
+    result=test_equality_bool(true, play_move(g, 5, RIGHT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
+    result=test_equality_int(get_x(game_piece(g, 5)), 1, "get_x 1 in test_play_move") && result;
+    result=test_equality_int(get_y(game_piece(g, 5)), 0, "get_y 1 in test_play_move") && result;
+    result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de la pièce 6 : déplacement impossible
+    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move") && result; // on vérifie que la pièce n'a pas bougé
+    result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 2 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // pièce 2 complètement bloquée: déplacement impossible
     result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move") && result; // idem
     result=test_equality_int(get_y(game_piece(g, 2)), 3, "get_y 3 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 6, DOWN, 2), "play_move 4 in test_play_move") && result; // la pièce 6 peut se déplacer d'une case vers le bas mais pas deux : déplacement impossible
-    result=test_equality_int(get_x(game_piece(g, 6)), 1, "get_x 4 in test_play_move") && result; // idem
-    result=test_equality_int(get_y(game_piece(g, 6)), 1, "get_y 4 in test_play_move") && result;
+    result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // la pièce 6 peut se déplacer d'une case vers la gauche mais pas deux : déplacement impossible
+    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move") && result; // idem
+    result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result; // on vérifie qu'une seule pièce a bougé
-    result=!equals(p_test, game_piece(g, 7)) && result; // seule piece ayant fait un déplacement
+    result=!equals(p_test, game_piece(g, 5)) && result; // seule piece ayant fait un déplacement
     delete_game(g);
     return result;
 }
 bool test_copy_game(){
     bool result=true;
-    game g=set_game();
+    game g=set_game(); // on crée une grille comme dans la config de test
     piece empty_list[0];
-    game gtest=new_game(6, 6, 0, empty_list); // la taille 6x6 a été choisie arbitrairement, je ne sais pas si c'est ce qu'il fallait faire -Luc
-    copy_game(g, gtest);
-    play_move(g, 0, LEFT, 1);
-    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result;
+    game gtest=new_game(4, 5, 0, empty_list); // on crée une grille vide
+    copy_game(g, gtest); // on copie la grille de test dans la grille vide
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result; // on vérifie que les deux grilles ont bien le même nombre de pièces
     for (int i=0; i < game_nb_pieces(g); ++i){
-        result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result;
+        result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result; // on vérifie que les pièces sont les mêmes
     }
     delete_game(g);
     delete_game(gtest);
     return result;
 }
-bool test_game_over_rh(){
+bool test_game_over_hr(){
     bool result=true;
     game g=set_game();
-    play_move(g, 0, LEFT, 2);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 0 in test_game_over_rh") && result;
-    play_move(g, 1, UP, 4);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 1 in test_game_over_rh") && result;
-    play_move(g, 2, LEFT, 1);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 2 in test_game_over_rh") && result;
-    play_move(g, 3, DOWN, 3);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 3 in test_game_over_rh") && result;
-    play_move(g, 0, RIGHT, 3);
-    result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_rh") && result;
+    play_move(g, 0, DOWN, 3);
+    result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_hr") && result;
     delete_game(g);
     return result;
 }
