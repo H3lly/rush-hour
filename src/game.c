@@ -54,7 +54,7 @@ bool out_of_grid(cpiece p, cgame g){
 bool play_move(game g, int piece_num, dir d, int distance){
     piece p=g->piece_list[piece_num];
     if (!movement_is_allowed(p, d)){
-        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
+        printf("Mouvement impossible : La position de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
         return false;
     }
     int distance_parcourue=0;

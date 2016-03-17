@@ -28,16 +28,16 @@ int main(void) {
     8  .  .  9
     */
     piece liste [10];
-    liste[0] = new_piece(1, 3, 2, 2, false, false);
-    liste[1] = new_piece(0, 3, 1, 2, false, false);
-    liste[2] = new_piece(3, 3, 1, 2, false, false);
-    liste[3] = new_piece(0, 1, 1, 2, false, false);
-    liste[4] = new_piece(3, 1, 1, 2, false, false);
-    liste[5] = new_piece(1, 2, 2, 1, false, false);
-    liste[6] = new_piece(1, 1, 1, 1, false, true);
-    liste[7] = new_piece(2, 1, 1, 1, false, true);
-    liste[8] = new_piece(0, 0, 1, 1, true, false);
-    liste[9] = new_piece(3, 0, 1, 1, true, false);
+    liste[0] = new_piece(1, 3, 2, 2, true, true);
+    liste[1] = new_piece(0, 3, 1, 2, true, true);
+    liste[2] = new_piece(3, 3, 1, 2, true, true);
+    liste[3] = new_piece(0, 1, 1, 2, true, true);
+    liste[4] = new_piece(3, 1, 1, 2, true, true);
+    liste[5] = new_piece(1, 2, 2, 1, true, true);
+    liste[6] = new_piece(1, 1, 1, 1, true, true);
+    liste[7] = new_piece(2, 1, 1, 1, true, true);
+    liste[8] = new_piece(0, 0, 1, 1, true, true);
+    liste[9] = new_piece(3, 0, 1, 1, true, true);
     
     game game = new_game(4, 5, 10, liste);
     show_grid(game);
