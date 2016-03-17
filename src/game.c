@@ -40,7 +40,7 @@ cpiece game_piece(cgame g, int piece_num){
     return g->piece_list[piece_num];
 }
 bool game_over_hr(cgame g){
-    return (get_x(g->piece_list[0]) == g->width / 2) && (get_y(g->piece_list[0]) == 0);
+    return (get_x(g->piece_list[0]) == (g->width/2)-1) && (get_y(g->piece_list[0]) == 0);
 }
 //vérifie que la pièce ne se déplace pas hors de la grille
 bool out_of_grid(cpiece p, cgame g){
