@@ -18,22 +18,25 @@ lib:
 	@ar cr lib/libgame.a game.o piece.o
 
 game_test2:
-	@make --silent sub
+	@echo Make game_test2.
+	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/game_test2.c src/piece.c $(INCLUDE) -c
 	@gcc useful_functions.o game.o piece.o game_test2.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
 
 test_piece2:
-	@make --silent sub
+	@echo Make test_piece2.
+	@gcc $(CFLAGS) src/useful_functions.c src/piece.c src/test_piece2.c $(INCLUDE) -c
 	@gcc useful_functions.o game.o piece.o test_piece2.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
 
 affichage:
-	@make --silent sub
-	@gcc useful_functions.o game.o piece.o  affichage.o -o $@-exe
+	@echo Make affichage.
+	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/piece.c src/affichage.c $(INCLUDE) -c
+	@gcc useful_functions.o game.o piece.o affichage.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo 
 	@echo Executable $@-exe generated.

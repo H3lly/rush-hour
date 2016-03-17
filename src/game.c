@@ -97,8 +97,10 @@ int game_height(cgame g){
 int game_square_piece(game g, int x, int y){
     for (int i=0; i < g->nb_pieces; i++){
         piece p=g->piece_list[i];
-        if (get_x(p) <= x && get_y(p) <= y){
-            if (get_x(p) + get_width(p) - 1 >= x && get_y(p) + get_height(p) - 1 >= y){ // [x,y] compris entre coordonnée bottom/left et top/right de la piece
+        int xp = get_x(p);
+        int yp = get_y(p);
+        if (xp <= x && yp <= y){ //si x et y 
+            if (xp + get_width(p)-1 >= x && yp + get_height(p) - 1 >= y){ // [x,y] compris entre coordonnée bottom/left et top/right de la piece
                 return i;
             }
         }

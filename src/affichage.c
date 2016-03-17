@@ -7,7 +7,7 @@
 
 //affiche graphiquement la grille sur le terminal
 void show_grid(game g){
-    for (int ord=game_height(g); ord >= 0; ord--){
+    for (int ord=game_height(g)-1; ord >= 0; ord--){
         for (int abs=0; abs < game_width(g); abs++){
             if (game_square_piece(g, abs, ord) == -1)
                 printf(".  ");
