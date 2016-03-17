@@ -95,7 +95,7 @@ bool test_copy_game(){
 bool test_game_over_hr(){
     bool result=true;
     game g=set_game();
-    play_move(g, 0, DOWN, 3);
+    play_move(g, 0, DOWN, 3); //on mène la pièce vers la sortie
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_hr") && result;
     delete_game(g);
     return result;
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_new_game_hr(), "test_new_game_hr in main") && result;
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
-    result=test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main") && result;
+    result=test_equality_bool(true, test_game_over_hr(), "test_game_over_hr in main") && result;
 
     if (result){
         printf("Ca marche c: !\n");
