@@ -43,12 +43,12 @@ game set_game(){
     pieces[5]=new_piece(0, 0, 1, 1, true, false);
     pieces[6]=new_piece(3, 0, 1, 1, true, false);
     
-    return new_game(NB_PIECES, pieces);
+    return new_game(4, 5, NB_PIECES, pieces);
 }
-bool test_new_game_hr(){
+bool test_new_game(){
     bool result=true;
     game g=set_game();
-    result=result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game_hr");
+    result=result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game");
     for (int i=0; i < NB_PIECES; i++){
         result=result && equals(pieces[i], game_piece(g, i));
     }
@@ -92,20 +92,20 @@ bool test_copy_game(){
     delete_game(gtest);
     return result;
 }
-bool test_game_over_hr(){
+bool test_game_over(){
     bool result=true;
     game g=set_game();
     play_move(g, 0, DOWN, 3); //on mène la pièce vers la sortie
-    result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_hr") && result;
+    result=test_equality_bool(true, game_over_hr(g), "game_over in test_game_over") && result;
     delete_game(g);
     return result;
 }
 int main(int argc, char *argv[]){
     bool result=true;
-    result=test_equality_bool(true, test_new_game_hr(), "test_new_game_hr in main") && result;
+    result=test_equality_bool(true, test_new_game(), "test_new_game in main") && result;
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
-    result=test_equality_bool(true, test_game_over_hr(), "test_game_over_hr in main") && result;
+    result=test_equality_bool(true, test_game_over(), "test_game_over in main") && result;
 
     if (result){
         printf("Ca marche c: !\n");
