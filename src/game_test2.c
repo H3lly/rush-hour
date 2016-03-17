@@ -35,7 +35,7 @@ piece pieces[NB_PIECES];
  */
 
 game set_game(){
-    pieces[0]=new_piece(1, 3, 2, 2, true, true); //la piece étant coincée, elle ne peut pas bouger-
+    pieces[0]=new_piece(1, 3, 2, 2, true, true);
     pieces[1]=new_piece(0, 3, 1, 2, true, true);
     pieces[2]=new_piece(3, 3, 1, 2, true, true);
     pieces[3]=new_piece(0, 1, 1, 2, true, true);
