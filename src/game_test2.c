@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_new_game_hr(), "test_new_game_hr in main") && result;
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
-    result=test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main") && result;
+    result=test_equality_bool(true, test_game_over_hr(), "test_game_over_hr in main") && result;
 
     if (result){
         printf("Ca marche c: !\n");
