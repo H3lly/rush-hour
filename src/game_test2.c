@@ -95,7 +95,7 @@ bool test_copy_game(){
 bool test_game_over_hr(){
     bool result=true;
     game g=set_game();
-    play_move(g, 0, DOWN, 3);
+    play_move(g, 0, DOWN, 3); //on mène la pièce vers la sortie
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_hr") && result;
     delete_game(g);
     return result;
