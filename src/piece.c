@@ -11,19 +11,17 @@ struct piece_s{
     bool move_x;
     bool move_y;
 };
- 
- piece new_piece(int x, int y, int width, int height, bool move_x, bool move_y){
+piece new_piece(int x, int y, int width, int height, bool move_x, bool move_y){
     piece p=malloc(sizeof (struct piece_s));
     p->abs=x;
-    p->ord=y;
-    p->width=width;
+    p-> ord=y;
+    p-> width=width;
     p->height=height;
-    p->move_x = move_x;
-    p->move_y = move_y;
-    
+    p-> move_x=move_x;
+    p->move_y=move_y;
+
     return p;
 }
-
 void delete_piece(piece p){
     free(p);
 }
@@ -72,10 +70,10 @@ bool intersect(cpiece a, cpiece b){
         for (int j=0; j < get_height(b); ++j)
             tb[i][j]=10 * (get_x(b) + i) + get_y(b) + j;
     }
-    for (int i=0; i < get_width(a);i++){
+    for (int i=0; i < get_width(a); i++){
         for (int j=0; j < get_height(a); j++){
             for (int k=0; k < get_width(b); ++k){
-                for (int l=0; l < get_height(b);++l){
+                for (int l=0; l < get_height(b); ++l){
                     if (ta[i][j] == tb[i][j])
                         return true;
                 }
@@ -96,11 +94,9 @@ int get_height(cpiece p){
 int get_width(cpiece p){
     return p->width;
 }
-
 bool can_move_x(cpiece p){
     return p->move_x;
 }
-
 bool can_move_y(cpiece p){
     return p->move_y;
 }

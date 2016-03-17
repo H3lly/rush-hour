@@ -8,7 +8,7 @@ all:
 sub:
 	@echo Make start.
 	@echo
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/grid.c src/game_test2.c src/piece.c src/test_piece2.c src/affichage.c $(INCLUDE) -c
+	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/game_test2.c src/piece.c src/test_piece2.c src/affichage.c $(INCLUDE) -c
 	@echo Make end.
 
 lib:
@@ -19,21 +19,21 @@ lib:
 
 game_test2:
 	@make --silent sub
-	@gcc useful_functions.o game.o piece.o game_test2.o grid.o -o $@-exe
+	@gcc useful_functions.o game.o piece.o game_test2.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
 
-test_piece1:
+test_piece2:
 	@make --silent sub
-	@gcc useful_functions.o game.o piece.o test_piece1.o -o $@-exe
+	@gcc useful_functions.o game.o piece.o test_piece2.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo
 	@echo Executable $@-exe generated.
 
 affichage:
 	@make --silent sub
-	@gcc useful_functions.o game.o piece.o grid.o  affichage.o -o $@-exe
+	@gcc useful_functions.o game.o piece.o  affichage.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo 
 	@echo Executable $@-exe generated.
@@ -43,5 +43,5 @@ clean:
 	@make --silent clean-all-but-exe
 
 clean-all-but-exe:
-	@rm -f useful_functions.o game.o grid.o piece.o test_piece1.o test_piece1 lib/libgame.a affichage.o game_test2.o -d lib
+	@rm -f useful_functions.o game.o piece.o test_piece2.o test_piece2 lib/libgame.a affichage.o game_test2.o -d lib
 	@echo Files cleaned.
