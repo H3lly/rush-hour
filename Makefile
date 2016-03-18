@@ -33,8 +33,8 @@ test_piece1:
 	
 rush-hour:
 	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)piece.c $(SRCV1)affichage.c $(INCLUDEV1) -c
-	@gcc useful_functions.o game.o piece.o affichage.o -o $@-exe
+	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)piece.c $(SRCV1)grid.c $(SRCV1)affichage_rush-hour.c $(INCLUDEV1) -c
+	@gcc useful_functions.o game.o grid.o piece.o affichage_rush-hour.o -o $@-exe
 	@make --silent clean-all-but-exe
 	@echo 
 	@echo Executable $@-exe generated.
