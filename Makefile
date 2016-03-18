@@ -15,49 +15,49 @@ all:
 # --------- RUSH-HOUR -----------
 #
 
-game_test1:
+test_game1:
 	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)game_test1.c $(SRCV1)piece.c $(INCLUDEV1) -c
-	@gcc useful_functions.o game.o piece.o game_test1.o -o $@-exe
-	@make --silent clean-all-but-exe
+	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)test_game1.c $(SRCV1)piece.c $(INCLUDEV1) -c
+	@gcc useful_functions.o game.o piece.o test_game1.o -o $@
+	@make --silent clean-outfile
 	@echo
-	@echo Executable $@-exe generated.
+	@echo Executable $@ generated.
 	
 test_piece1:
 	@echo Make $@.
 	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)piece.c $(SRCV1)test_piece1.c $(INCLUDE) -c
-	@gcc useful_functions.o game.o piece.o test_piece1.o -o $@-exe
-	@make --silent clean-all-but-exe
+	@gcc useful_functions.o game.o piece.o test_piece1.o -o $@
+	@make --silent clean-outfile
 	@echo
-	@echo Executable $@-exe generated.
+	@echo Executable $@ generated.
 	
 rush-hour:
 	@echo Make $@.
 	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)piece.c $(SRCV1)grid.c $(SRCV1)affichage_rush-hour.c $(INCLUDEV1) -c
-	@gcc useful_functions.o game.o grid.o piece.o affichage_rush-hour.o -o $@-exe
-	@make --silent clean-all-but-exe
+	@gcc useful_functions.o game.o grid.o piece.o affichage_rush-hour.o -o $@
+	@make --silent clean-outfile
 	@echo 
-	@echo Executable $@-exe generated.
+	@echo Executable $@ generated.
 	
 #
 # --------- ÂNE ROUGE ----------
 #
 
-game_test2:
-	@echo Make game_test2.
-	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)game.c $(SRCV2)game_test2.c $(SRCV2)piece.c $(INCLUDEV2) -c
-	@gcc useful_functions.o game.o piece.o game_test2.o -o $@-exe
-	@make --silent clean-all-but-exe
+test_game2:
+	@echo Make $@.
+	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)game.c $(SRCV2)test_game2.c $(SRCV2)piece.c $(INCLUDEV2) -c
+	@gcc useful_functions.o game.o piece.o test_game2.o -o $@
+	@make --silent clean-outfile
 	@echo
-	@echo Executable $@-exe generated.
+	@echo Executable $@ generated.
 
 test_piece2:
 	@echo Make test_piece2.
 	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)piece.c $(SRCV2)test_piece2.c $(INCLUDE) -c
-	@gcc useful_functions.o game.o piece.o test_piece2.o -o $@-exe
-	@make --silent clean-all-but-exe
+	@gcc useful_functions.o game.o piece.o test_piece2.o -o $@
+	@make --silent clean-outfile
 	@echo
-	@echo Executable $@-exe generated.
+	@echo Executable $@ generated.
 
 lib:
 	@rm -f lib/libgame.a
@@ -66,9 +66,10 @@ lib:
 	@ar cr lib/libgame.a game.o piece.o
 
 clean:
-	@rm -f *-exe
-	@make --silent clean-all-but-exe
+	@rm -f  test_piece1 test_piece2 test_game1 test_game2 rush-hour ane-rouge
+	@make --silent clean-outfile
 
-clean-all-but-exe:
-	@rm -f useful_functions.o game.o piece.o test_piece2.o test_piece1.o test_piece1 test_piece2 lib/libgame.a affichage.o game_test2.o -d lib
+clean-outfile:
+	@rm -f *.o -d lib
 	@echo Files cleaned.
+#useful_functions.o game.o piece.o test_piece2.o test_piece1.o test_piece1 test_piece2 lib/libgame.a affichage_rush-hour.o affichage_ane-rouge.o game_test2.o 
