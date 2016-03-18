@@ -17,7 +17,7 @@ all:
 
 test_game1:
 	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)test_game1.c $(SRCV1)piece.c $(INCLUDEV1) -c
+	@gcc $(CFLAGS) $(SRCV1)useful_functions1.c $(SRCV1)game.c $(SRCV1)test_game1.c $(SRCV1)piece.c $(INCLUDEV1) -c
 	@gcc useful_functions.o game.o piece.o test_game1.o -o $@
 	@make --silent clean-outfile
 	@echo
@@ -36,7 +36,6 @@ rush-hour:
 	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)piece.c $(SRCV1)grid.c $(SRCV1)affichage_rush-hour.c $(INCLUDEV1) -c
 	@gcc useful_functions.o game.o grid.o piece.o affichage_rush-hour.o -o $@
 	@make --silent clean-outfile
-	@echo 
 	@echo Executable $@ generated.
 	
 #

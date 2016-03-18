@@ -4,7 +4,7 @@
 #include "game.h"   //inutile mais au cas ou
 #include "piece.h"  //inutile mais au cas ou
 #include "grid.h"
-#include "useful_functions.h"
+#include "useful_functions2.h"
 
 int main(void) {
     piece liste [8];
