@@ -3,7 +3,7 @@
 
 #include "game.h"
 #include "piece.h"
-#include "useful_functions1.h"
+#include "useful_functions.h"
 
 //retourne le nom del a direction sous la forme d'une chaine de caractère (pour les test par exemple)
 bool is_small(cpiece p){
@@ -28,6 +28,5 @@ bool equals(cpiece p1, cpiece p2) {
 
 //retourne true si le mouvement est conforme, retourne false sinon
 bool movement_is_allowed(piece p, dir d){
-    return ((d==LEFT || d==RIGHT)&&(is_horizontal(p)))
-            ||((d == UP || d == DOWN)&&(!(is_horizontal(p))));
+    return ((d==LEFT || d==RIGHT)&&(can_move_x(p))) || ((d == UP || d == DOWN)&&(can_move_y(p)));
 }
