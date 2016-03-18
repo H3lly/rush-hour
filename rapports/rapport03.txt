@@ -7,7 +7,7 @@ Luc :
     
 
 Camille :
-    J'ai refait la structure entière du projet, en mettant un dossier pour rush-hour et un dossier pour l'âne rouge, et j'ai modifié le makefile en conséquence.
+    J'ai refait la structure entière du projet, en faisant dans un premier temps un dossier pour rush-hour et un dossier pour l'âne rouge, mais j'ai revu et
     
 
 Ny Andry et Alexandre :

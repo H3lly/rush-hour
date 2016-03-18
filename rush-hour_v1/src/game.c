@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "game.h"
-#include "useful_functions.h"
+#include "useful_functions1.h"
 
 struct game_s {
     int nb_pieces;

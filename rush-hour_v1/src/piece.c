@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "piece.h"
-#include "useful_functions.h"
+#include "useful_functions1.h"
 
 struct piece_s {
     int abs;

@@ -52,7 +52,6 @@ bool out_of_grid(cpiece p, cgame g){
     //return (abs < 0 || abs + get_width(p) >= game_width(g) || (ord < 0 || ord + get_height(p) >= game_height(g)));
     //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
 }
-
 //ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance){
     piece p=g->piece_list[piece_num];
