@@ -1,0 +1,14 @@
+??/??/2016 :
+Groupe : IN400A1
+Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
+
+
+Luc :
+    
+
+Camille :
+    J'ai refait la structure entière du projet, en mettant un dossier pour rush-hour et un dossier pour l'âne rouge, et j'ai modifié le makefile en conséquence.
+    
+
+Ny Andry et Alexandre :
+    
