@@ -70,5 +70,5 @@ clean:
 	@make --silent clean-all-but-exe
 
 clean-all-but-exe:
-	@rm -f useful_functions.o game.o piece.o test_piece2.o test_piece2 lib/libgame.a affichage.o game_test2.o -d lib
+	@rm -f useful_functions.o game.o piece.o test_piece2.o test_piece1.o test_piece1 test_piece2 lib/libgame.a affichage.o game_test2.o -d lib
 	@echo Files cleaned.
