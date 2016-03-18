@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
-#include "useful_functions.h"
+#include "useful_functions2.h"
 
 struct game_s{
     int width;

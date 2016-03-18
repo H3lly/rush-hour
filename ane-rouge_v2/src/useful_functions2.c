@@ -3,7 +3,7 @@
 
 #include "game.h"
 #include "piece.h"
-#include "useful_functions.h"
+#include "useful_functions2.h"
 
 //retourne le nom del a direction sous la forme d'une chaine de caractère (pour les test par exemple)
 bool is_small(cpiece p){

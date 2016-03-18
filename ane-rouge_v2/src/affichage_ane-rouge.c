@@ -3,7 +3,7 @@
 
 #include "game.h"   //inutile mais au cas ou
 #include "piece.h"  //inutile mais au cas ou
-#include "useful_functions.h"
+#include "useful_functions2.h"
 
 //affiche graphiquement la grille sur le terminal (pour moins de 11 pièeces))
 void show_grid(game g){

@@ -7,7 +7,7 @@ SRCV2 = ane-rouge_v2/src/
 all:
 	@echo Make all start.
 	@echo
-	@make --silent test_game1 test_piece1 rush-hour #test_game2 test_piece2 ane-rouge
+	@make --silent test_game2 test_piece2 ane-rouge test_game1 test_piece1 rush-hour 
 	@echo 
 	@echo Make all end.
 
@@ -45,15 +45,20 @@ test_game2:
 	@gcc $(CFLAGS) $(SRCV2)useful_functions2.c $(SRCV2)game.c $(SRCV2)test_game2.c $(SRCV2)piece.c $(INCLUDEV2) -c
 	@gcc useful_functions2.o game.o piece.o test_game2.o -o $@
 	@make --silent clean-outfile
-	@echo
 	@echo Executable $@ generated.
-
+	
 test_piece2:
-	@echo Make test_piece2.
-	@gcc $(CFLAGS) $(SRCV2)useful_functions2.c $(SRCV2)piece.c $(SRCV2)test_piece2.c $(INCLUDE) -c
-	@gcc useful_functions2.o game.o piece.o test_piece2.o -o $@
+	@echo Make $@.
+	@gcc $(CFLAGS) $(SRCV2)useful_functions2.c $(SRCV2)piece.c $(SRCV2)test_piece2.c $(INCLUDEV2) -c
+	@gcc useful_functions2.o piece.o test_piece2.o -o $@
 	@make --silent clean-outfile
-	@echo
+	@echo Executable $@ generated.
+	
+ane-rouge:
+	@echo Make $@.
+	@gcc $(CFLAGS) $(SRCV2)useful_functions2.c $(SRCV2)game.c $(SRCV2)piece.c $(SRCV2)affichage_ane-rouge.c $(INCLUDEV2) -c
+	@gcc useful_functions2.o game.o piece.o affichage_ane-rouge.o -o $@
+	@make --silent clean-outfile
 	@echo Executable $@ generated.
 
 lib:
