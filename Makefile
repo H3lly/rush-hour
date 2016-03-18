@@ -8,8 +8,8 @@ all:
 	@echo Make all start.
 	@echo
 	@make --silent test_game1 test_piece1 rush-hour #test_game2 test_piece2 ane-rouge
+	@echo 
 	@echo Make all end.
-	@make --silent clean
 
 #
 # --------- RUSH-HOUR -----------
@@ -20,15 +20,13 @@ test_game1:
 	@gcc $(CFLAGS) $(SRCV1)useful_functions1.c $(SRCV1)game.c $(SRCV1)test_game1.c $(SRCV1)piece.c $(INCLUDEV1) -c
 	@gcc useful_functions1.o game.o piece.o test_game1.o -o $@
 	@make --silent clean-outfile
-	@echo
 	@echo Executable $@ generated.
 	
 test_piece1:
 	@echo Make $@.
 	@gcc $(CFLAGS) $(SRCV1)useful_functions1.c $(SRCV1)piece.c $(SRCV1)test_piece1.c $(INCLUDEV1) -c
-	@gcc useful_functions1.o game.o piece.o test_piece1.o -o $@
+	@gcc useful_functions1.o piece.o test_piece1.o -o $@
 	@make --silent clean-outfile
-	@echo
 	@echo Executable $@ generated.
 	
 rush-hour:
@@ -67,8 +65,9 @@ lib:
 clean:
 	@rm -f  test_piece1 test_piece2 test_game1 test_game2 rush-hour ane-rouge
 	@make --silent clean-outfile
+	@echo Executables cleaned.
 
 clean-outfile:
 	@rm -f *.o -d lib
-	@echo Files cleaned.
+	@echo Outfiles cleaned.
 #useful_functions.o game.o piece.o test_piece2.o test_piece1.o test_piece1 test_piece2 lib/libgame.a affichage_rush-hour.o affichage_ane-rouge.o game_test2.o 
