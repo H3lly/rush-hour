@@ -7,7 +7,7 @@
 struct game_s {
     int nb_pieces;
     int nb_moves;
-    piece *liste_piece;
+    piece *piece_list;
 };
 
 typedef const struct game_s* cgame;
@@ -16,20 +16,20 @@ game new_game_hr(int nb_pieces, piece *pieces) {
     game g = malloc(sizeof (struct game_s));
     g->nb_moves = 0;
     g->nb_pieces = nb_pieces;
-    g->liste_piece = pieces;
+    g->piece_list = pieces;
     return g;
 }
 
 void delete_game(game g) {
     for (int i = 0 ; i < g->nb_pieces; i++)
-        delete_piece(g->liste_piece[i]);
+        delete_piece(g->piece_list[i]);
     free(g);
 }
 
 void copy_game(cgame src, game dst) {
     dst->nb_pieces = src->nb_pieces;
     dst->nb_moves = src->nb_moves;
-    dst->liste_piece = src->liste_piece;
+    dst->piece_list = src->piece_list;
 }
 
 int game_nb_pieces(cgame g) {
@@ -37,13 +37,12 @@ int game_nb_pieces(cgame g) {
 }
 
 cpiece game_piece(cgame g, int piece_num) {
-    return g->liste_piece[piece_num];
+    return g->piece_list[piece_num];
 }
 
 bool game_over_hr(cgame g) {
-    return (get_x(g->liste_piece[0]) == 4) && (get_y(g->liste_piece[0]) == 3);
+    return (get_x(g->piece_list[0]) == 4) && (get_y(g->piece_list[0]) == 3);
 }
-//vérifie que la pièce ne dépace pas de la grille
 
 bool out_of_grid(cpiece p) {
     int abs = get_x(p);
@@ -58,43 +57,40 @@ bool out_of_grid(cpiece p) {
     return (ord < 0 || ord > 3);
 }
 
-//ajouter vérification pour pas depasser les bords
 bool play_move(game g, int piece_num, dir d, int distance) {
-    piece p = g->liste_piece[piece_num];
+    piece p = g->piece_list[piece_num];
     if(!movement_is_allowed(p, d)){
-        //printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
+        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
         return false;
     }
-    int distance_parcourue =0;
+    int travel =0;
     while (distance != 0) {
         move_piece(p, d, 1);
         g->nb_moves += 1;
         distance--;
-        distance_parcourue++;
+        travel++;
         for (int i = 0; i < game_nb_pieces(g); ++i) {
-            if (p == g->liste_piece[i]){
+            if (p == g->piece_list[i]){
                 i++;
                 if(i>=game_nb_pieces(g))
                     break;
             }
             if (intersect(p, game_piece(g, i))) {
-                //printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
-                move_piece(p, d, distance_parcourue*-1);
-                g->nb_moves -= distance_parcourue;
+                printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
+                move_piece(p, d, travel*-1);
+                g->nb_moves -= travel;
                 return false;
             }
             if (out_of_grid(p)) {
-                //printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
-                move_piece(p, d, distance_parcourue*-1);
-                g->nb_moves -= distance_parcourue;
+                printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
+                move_piece(p, d, travel*-1);
+                g->nb_moves -= travel;
                 return false;
             }
         }
     }
     return true;
 }
-
-//retourne le nombre de mouvements effectués
 
 int game_nb_moves(cgame g) {
     return g->nb_moves;

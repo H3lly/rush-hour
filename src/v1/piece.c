@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "piece.h"
 #include "useful_functions.h"
 
 struct piece_s {
     int abs;
     int ord;
     bool small; //if true, size=2, else size=3
-    bool estHorizontal;
+    bool horizontal;
 };
 
 piece new_piece_rh(int x, int y, bool small, bool horizontal) {
@@ -15,7 +14,7 @@ piece new_piece_rh(int x, int y, bool small, bool horizontal) {
     p -> abs = x;
     p -> ord = y;
     p -> small = small;
-    p -> estHorizontal = horizontal;
+    p -> horizontal = horizontal;
     return p;
 }
 
@@ -27,10 +26,9 @@ void copy_piece(cpiece src, piece dst) {
     dst -> abs = src -> abs;
     dst -> ord = src -> ord;
     dst -> small = src -> small;
-    dst -> estHorizontal = src -> estHorizontal;
+    dst -> horizontal = src -> horizontal;
 }
 
-//ne bougera que d'une case dans tous les cas
 void move_piece(piece p, dir d, int distance) {
     if (movement_is_allowed(p, d)) {
         switch (d) {
@@ -50,10 +48,10 @@ void move_piece(piece p, dir d, int distance) {
     }
 }
 
-//Retourne true si les pièces a et b se croisent, retourne false sinon.
-//Créé deux tableaux de taille de la taille de a et de b, et les comparent
+
+//Make two arrays that list all the coordinates occupated by the pieces, compare them and return if they have common coordinates
 bool intersect(cpiece a, cpiece b) {
-    if (a == b) return true; //si c'est la même référence c'est la même piece 
+    if (a == b) return true; //if it's the same piece
     int amax = get_width(a);
     if (get_height(a) > amax) amax = get_height(a);
     int ta[amax];
@@ -62,7 +60,7 @@ bool intersect(cpiece a, cpiece b) {
     int tb[bmax];
     for (int i = 0; i < amax; i++) {
         if (get_width(a) > get_height(a))
-            ta[i] = 10 * (get_x(a) + i) + get_y(a); //utilisation de la dizaine pour l'abscisse et de l'unité pour l'ordonnée
+            ta[i] = 10 * (get_x(a) + i) + get_y(a); //the tens is the abscissa, the unit is the ordinate
         else
             ta[i] = 10 * get_x(a) + get_y(a) + i;
     }
@@ -90,7 +88,7 @@ int get_y(cpiece p) {
 }
 
 int get_height(cpiece p) {
-    if (!(p->estHorizontal)) {
+    if (!(p->horizontal)) {
         if (p->small) {
             return 2;
         }
@@ -100,7 +98,7 @@ int get_height(cpiece p) {
 }
 
 int get_width(cpiece p) {
-    if (p->estHorizontal) {
+    if (p->horizontal) {
         if (p->small) {
             return 2;
         }
@@ -110,5 +108,5 @@ int get_width(cpiece p) {
 }
 
 bool is_horizontal(cpiece p) {
-    return p->estHorizontal;
+    return p->horizontal;
 }

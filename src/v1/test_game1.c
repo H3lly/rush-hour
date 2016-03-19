@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "game.h"
-#include "piece.h"
+
 #include "useful_functions.h"
 
 #define NB_PIECES 4
@@ -22,9 +21,9 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     return equals(expected, value);
 }
 
-//création d'un tableau de pièces
+
 piece pieces[NB_PIECES];
-/* config de test
+/* test configuration
 . . . . . 3
 . . . . . 3
 . . . 0 0 3
@@ -50,43 +49,44 @@ bool test_new_game_hr(){
     delete_game(g);
     return result;
 }
-// test play move etnre g (jeu dans lequel seul 0 peut bouger) et gtest(jeu de base)
+
 bool test_play_move(){
     bool result=true;
     int nbmove=1;
     game g=set_game();
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
+    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move") && result; //possible movement
     result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de 1 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move") && result; // 1 is out of the grid
     result=test_equality_int(get_x(game_piece(g, 1)), 3, "get_x 2 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 1)), 0, "get_y 2 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // intersection de 2 et 1 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // intersection between 2 and 1
     result=test_equality_int(get_x(game_piece(g, 2)), 4, "get_x 3 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 2)), 1, "get_y 3 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move") && result; //intersection de 3 et 2 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move") && result; //intersection between 3 and 2 
     result=test_equality_int(get_x(game_piece(g, 3)), 5, "get_x 4 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 3)), 3, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result;
-    result=!equals(p_test, game_piece(g, 0)) && result; // seule piece ayant fait un déplacement
+    result=!equals(p_test, game_piece(g, 0)) && result; //this is the only piece that moved
     delete_piece(p_test);
     delete_game(g);
     return result;
 }
+
 bool test_copy_game(){
     bool result=true;
     game g=set_game();
     piece empty_list[0];
-    game gtest=new_game_hr(0, empty_list);
-    copy_game(g, gtest);
+    game g_test=new_game_hr(0, empty_list);
+    copy_game(g, g_test);
     play_move(g, 0, LEFT, 1);
-    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result;
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_test), "nb_piece in test_copy_game") && result;
     for (int i=0; i < game_nb_pieces(g); ++i){
-        result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result;
+        result=test_equality_piece(game_piece(g_test, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result;
     }
     delete_game(g);
-    delete_game(gtest);
+    delete_game(g_test);
     return result;
 }
 bool test_game_over_rh(){
@@ -113,10 +113,10 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main") && result;
 
     if (result){
-        printf("Ca marche c: !\n");
+        printf("It works c: !\n");
         return EXIT_SUCCESS;
     } else{
-        printf("Ton code c'est de la merde !\n");
+        printf("It doesn't work !\n");
         return EXIT_FAILURE;
     }
 }

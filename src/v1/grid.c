@@ -1,33 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "game.h"
-#include "piece.h"
 #include "grid.h"
 #include "useful_functions.h"
 
 struct grid_s {
-        char matrice[6][6];
+        char matrix[6][6];
         game g;
 };
-//faire un pointeur constant plus tard
+
 grid new_grid(game game){
 	grid grid = malloc(sizeof(struct grid_s));
         grid->g = game;
 	for(int i=0;i<6;i++){
 		for(int j=0;j<6;j++){
-			grid -> matrice[i][j]='.';
+			grid -> matrix[i][j]='.';
 		}
 	}
         set_pieces(grid);
 	return grid;
 }
 
-//affiche graphiquement la grille sur le terminal
+//show the grid on the terminal
 void show_grid(grid grid){
 	for(int abs=5;abs>=0;abs--){
 		for(int ord=0; ord<6;ord++){
-			char c = grid->matrice[ord][abs];
+			char c = grid->matrix[ord][abs];
 			printf("%c ", c);
 		}
 		printf("\n");
@@ -36,18 +34,18 @@ void show_grid(grid grid){
         
 }
 
-//libère la mémoire allouée pour la grille
+//free the allocated memory for the grid
 void delete_grid(grid grid){
     delete_game(get_game(grid));
     free(grid);
 }
 
-//retourne le jeu associé à la grille (pas très intelligent, à modifier de facon à ce que la grille soit liée à un jeu plutot que l'inverse)
+//returns the game
 game get_game(grid grid){
     return grid->g;
 }
 
-//ajouter graphiquement une piece sur la grille
+//add a piece on the grid
 void add_piece(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
@@ -67,7 +65,7 @@ void add_piece(grid grid, int piece_num){
     }
 }
 
-//efface graphiquement une piece sur la grille
+//delete a piece that is on the grid
 void delete_piece_grid(grid grid, int piece_num){
     cpiece p = game_piece(get_game(grid), piece_num);
     int x = get_x(p);
@@ -87,24 +85,24 @@ void delete_piece_grid(grid grid, int piece_num){
     }
 }
 
-//mets les pieces du tableau sur la grille
+//add all the grid's game's piece on the grid grid
 void set_pieces(grid grid){
     for (int i=0; i<game_nb_pieces(grid->g);i++){
         add_piece(grid, i);
     }
 }
 
-//initialise graphiquement la case avec un int
+//set the ascii value of int val in the matrix at x,y
 void set_cell_int(grid grid, int x, int y, int val){
-    grid->matrice[x][y]=val+48;
+    grid->matrix[x][y]=val+48;
 }
 
-//reinitialise graphiquement la case
+//set a dot in the matrix at x,y
 void set_cell_empty(grid grid, int x, int y){
-    grid->matrice[x][y]='.';
+    grid->matrix[x][y]='.';
 }
 
-//effectue le deplacement graphique de la piece
+//move the piece in the matrix
 void move(grid grid, int piece_num, dir d, int distance){
     game g = grid->g;
     delete_piece_grid(grid, piece_num);
