@@ -70,6 +70,7 @@ bool test_play_move(){
     result=test_equality_int(get_y(game_piece(g, 3)), 3, "get_y 4 in test_play_move") && result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result;
     result=!equals(p_test, game_piece(g, 0)) && result; // seule piece ayant fait un déplacement
+    delete_piece(p_test);
     delete_game(g);
     return result;
 }

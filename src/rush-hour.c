@@ -91,6 +91,9 @@ int main(void) {
         move(grid, piece_num, d, distance);
     }
 
-    if (game_over_hr(game)) printf("Game over. Score : %d", game_nb_moves(game));
+    if (game_over_hr(game)){
+        delete_grid(grid);
+        printf("Game over. Score : %d", game_nb_moves(game));
+    }
     return EXIT_SUCCESS;
 }
