@@ -35,23 +35,23 @@ int main(void) {
         printf("Veuillez saisir le numéro de la pièce à déplacer :\n");
         //commenter plus tard ces fonctions
         while(!test){
-            if (scanf("%d", &piece_num) == 1) {
-                if(piece_num>=0&&piece_num<game_nb_pieces(game))
+            if (scanf("%d", &piece_num) == 1) { // on récupère la valeur donnée en entrée par l'utilisateur et on vérifie si c'est un entier
+                if(piece_num>=0 && piece_num<game_nb_pieces(game)) // si la valeur entrée est un numéro valable de pièce
                   test=true;
                 else
-                    printf("Entrée invalide: veuillez saisir un entier 0 et %d.\n", game_nb_pieces(game)-1);
+                    printf("Entrée invalide: veuillez saisir un entier entre 0 et %d.\n", game_nb_pieces(game)-1);
             }
             else{
-                printf("Entrée invalide: veuillez saisir un entier 0 et %d.\n", game_nb_pieces(game)-1);
-                while(fgetc(stdin)!='\n');
+                printf("Entrée invalide: veuillez saisir un entier entre 0 et %d.\n", game_nb_pieces(game)-1);
+                while(fgetc(stdin)!='\n'); // par contre j'ai pas compris à quoi sert celle ligne
             }
         }
         test=false;
         
         printf("Quelle direction ? (1=UP, 2=DOWN, 3=LEFT, 4=RIGHT)\n");
         while (!test) {
-            if (scanf("%d", &num) == 1) {
-                if (num == 1) {
+            if (scanf("%d", &num) == 1) { // on récupère la valeur donnée en entrée par l'utilisateur et on vérifie si c'est un entier
+                if (num == 1) { // la valeur de direction doit être 1, 2, 3, ou 4 (je propose d'ailleurs de changer pour 2=DOWN, 4=LEFT, 6=RIGHT, 8=UP)
                     d = UP;
                     test = true;
                 } else if (num == 2) {
@@ -75,11 +75,11 @@ int main(void) {
         test=false;
         printf("De combien de cases ?\n");
         while(!test){
-            if (scanf("%d", &distance)==1){
-                if(distance>0)
+            if (scanf("%d", &distance)==1){ // on récupère la valeur donnée en entrée par l'utilisateur et on vérifie si c'est un entier
+                if(distance>0) // la distance doit être positive
                     test=true;
                 else
-                    printf("Entrée invalide: veuillez saisir un entier entre 0.\n");
+                    printf("Entrée invalide: veuillez saisir un entier supérieur à 0.\n");
             }
             else{
                 printf("Entrée invalide: veuillez saisir un entier superieur à 0.\n");
@@ -89,6 +89,6 @@ int main(void) {
         move(grid, piece_num, d, distance);
     }
 
-    if (game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
+    if (game_over_hr(game)) printf("Game over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }
