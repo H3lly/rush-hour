@@ -2,11 +2,11 @@
 Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
 
-Luc : J'ai fini le game_test2.c
+Luc : J'ai fini le game_test2.c.
 
 Camille :
     J'ai refait la structure entière du projet, en faisant dans un premier temps un dossier pour rush-hour et un dossier pour l'âne rouge.
-    Mais j'ai finallement opté pour deux dossier src/ et include/, comportant chacun un dossier v1/ et v2/.
+    Mais j'ai finalement opté pour deux dossiers src/ et include/, comportant chacun un dossier v1/ et v2/.
     J'ai essayé de faire en sorte de ne pas dupliquer le code, mais je ne pouvais pas fusionner les fichiers sources de la v1 et de la v2.
     
 
