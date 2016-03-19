@@ -2,7 +2,7 @@
 Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
 
-Luc : J'ai fini le game_test2.c. (qui a finalement été fusionné avec ane-rouge.c)
+Luc : J'ai fini le game_test2.c.
 
 Camille :
     J'ai refait la structure entière du projet, en faisant dans un premier temps un dossier pour rush-hour et un dossier pour l'âne rouge.
