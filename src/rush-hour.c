@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "game.h"   //inutile mais au cas ou
-#include "piece.h"  //inutile mais au cas ou
 #include "grid.h"
 #include "useful_functions.h"
 
@@ -43,7 +41,11 @@ int main(void) {
             }
             else{
                 printf("Entrée invalide: veuillez saisir un entier entre 0 et %d.\n", game_nb_pieces(game)-1);
-                while(fgetc(stdin)!='\n'); // par contre j'ai pas compris à quoi sert celle ligne
+                while(fgetc(stdin)!='\n');
+                //fflush(stdin); didn't work (I don't know why)
+                //if scanf works, it puts the input in the stdin buffer, convert it in an integer, removes it from the buffer and returns 1.
+                //but if it failed, the input will be left in the stdin buffer, so you need to "clean" the buffer,
+                //otherwise scanf will see that stdin isn't empty and won't ask for user input, will return 0, and loop again and again
             }
         }
         test=false;
