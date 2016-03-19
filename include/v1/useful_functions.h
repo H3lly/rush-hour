@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 #include "game.h"
-#include "grid.h"
 #include "piece.h"
 
 
