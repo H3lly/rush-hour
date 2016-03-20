@@ -1,25 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "game.h"   //inutile mais au cas ou
-#include "piece.h"  //inutile mais au cas ou
 #include "useful_functions.h"
 
-//affiche graphiquement la grille sur le terminal (pour moins de 11 pièces)
-void show_grid(game g){
-    for (int ord=game_height(g)-1; ord >= 0; ord--){
-        for (int abs=0; abs < game_width(g); abs++){
-            if (game_square_piece(g, abs, ord) == -1)
-                printf(".  ");
-            else
-                printf("%d  ", game_square_piece(g, abs, ord));
-        }
-        printf("\n");
-    }
-    printf("\nNombre de mouvements : %d\n----------\n\n", game_nb_moves(g));
-}
-
 int main(void) {
+    //actual configuration of the game
     /*
     1  0  0  2
     1  0  0  2

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "game.h"
+
 #include "useful_functions.h"
 
 struct game_s{
@@ -42,29 +42,15 @@ cpiece game_piece(cgame g, int piece_num){
 bool game_over_hr(cgame g){
     return (get_x(g->piece_list[0]) == (g->width/2)-1) && (get_y(g->piece_list[0]) == 0);
 }
-//vérifie que la pièce ne se déplace pas hors de la grille
-bool out_of_grid(cpiece p, cgame g){
-    int abs=get_x(p);
-    int ord=get_y(p);
-    //pourquoi le test marche que dans on modifie height alors que height à auccun rapport ?
-    //à vérifier
-    return (abs < 0 || abs + get_width(p) > game_width(g) || (ord < 0 || ord + get_height(p) > game_height(g)));
-    //return (abs < 0 || abs + get_width(p) >= game_width(g) || (ord < 0 || ord + get_height(p) >= game_height(g)));
-    //exemple : game_width(g) = 6 -> tableau de 0 à 5, get_width = 2 donc piece occupe case 4 et 5 (donc get_width(g)-2)
-}
-//ajouter vérification pour pas depasser les bords
+
 bool play_move(game g, int piece_num, dir d, int distance){
     piece p=g->piece_list[piece_num];
-    if (!movement_is_allowed(p, d)){
-        printf("Mouvement impossible : La position de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
-        return false;
-    }
-    int distance_parcourue=0;
+    int travel=0;
     while (distance != 0){
         move_piece(p, d, 1);
         g->nb_moves+=1;
         distance--;
-        distance_parcourue++;
+        travel++;
         for (int i=0; i < game_nb_pieces(g); ++i){
             if (p == g->piece_list[i]){
                 i++;
@@ -73,14 +59,14 @@ bool play_move(game g, int piece_num, dir d, int distance){
             }
             if (intersect(p, game_piece(g, i))){
                 printf("Mouvement impossible : La voiture %d empêche le déplacement de la voiture %d.\n\n", i, piece_num);
-                move_piece(p, d, distance_parcourue*-1);
-                g->nb_moves-=distance_parcourue;
+                move_piece(p, d, travel*-1);
+                g->nb_moves-=travel;
                 return false;
             }
             if (out_of_grid(p, g)){
                 printf("Mouvement impossible : La piece %d est au bord de la grille.\n\n", piece_num);
-                move_piece(p, d, distance_parcourue*-1);
-                g->nb_moves-=distance_parcourue;
+                move_piece(p, d, travel*-1);
+                g->nb_moves-=travel;
                 return false;
             }
         }

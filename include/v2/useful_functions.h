@@ -6,12 +6,17 @@
 #include "game.h"
 #include "piece.h"
 
-
-char* afficher_direction(dir direction);
+// @brief Returns true if the piece are the same, return false otherwise.
 bool equals(cpiece p1, cpiece p2);
-bool movement_is_allowed(piece p, dir d);
-bool is_small(cpiece p);
 
+// @brief Returns the number of cells of the piece p.
+int piece_area (cpiece p);
 
-#endif	/* USEFUL_FUNCTIONS_H */
+// @brief Check if the piece p is out of the grid of the game g.
+bool out_of_grid(cpiece p, cgame g);
+
+// @brief Show the grid of the game g on the shell
+void show_grid(game g);
+
+#endif
 

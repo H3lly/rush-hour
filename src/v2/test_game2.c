@@ -1,35 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "game.h"
-#include "piece.h"
+
 #include "useful_functions.h"
 
 #define NB_PIECES 7
 
-void show_grid(game g){
-    for (int ord=game_height(g)-1; ord >= 0; ord--){
-        for (int abs=0; abs < game_width(g); abs++){
-            if (game_square_piece(g, abs, ord) == -1)
-                printf(".  ");
-            else
-                printf("%d  ", game_square_piece(g, abs, ord));
-        }
-        printf("\n");
-    }
-    printf("\nNombre de mouvements : %d\n----------\n\n", game_nb_moves(g));
-}
-
-
+/* @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
+ * @return true if expected==value */
 bool test_equality_int(int expected, int value, char * msg){
     if (expected != value)
         fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
     return expected == value;
 }
+
+// @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
 bool test_equality_bool(bool expected, bool value, char * msg){
     if (expected != value)
         fprintf(stderr, "ERR: value expected %s ; value computed %s | Error from : %s\n", (expected ? "true" : "false"), (value ? "true" : "false"), msg);
     return expected == value;
 }
+
+// @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
 bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     if (!equals(expected, value)){
         fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
@@ -37,7 +28,6 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     return equals(expected, value);
 }
 
-//création d'un tableau de pièces
 piece pieces[NB_PIECES];
 /* config de test
 1 0 0 2
@@ -68,7 +58,7 @@ bool test_new_game(){
     delete_game(g);
     return result;
 }
-// test play move entre g (jeu dans lequel seul 0 peut bouger) et gtest (jeu de base)
+
 bool test_play_move(){
     bool result=true;
     int nbmove=1;
