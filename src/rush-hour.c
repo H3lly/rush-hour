@@ -3,8 +3,7 @@
 
 #include "piece.h"
 #include "game.h"
-#include "useful_functions.h"
-
+#include "test_functions.h"
 int main(void){
     //actual configuration of the game
     /*
@@ -14,8 +13,8 @@ int main(void){
      1 1 4 5 6 7
      2 3 3 5 6 .
      2 . . . 6 .
-    */
-    
+     */
+
     piece list [8];
     list[0]=new_piece_rh(0, 3, true, true);
     list[1]=new_piece_rh(0, 2, true, true);
@@ -26,6 +25,11 @@ int main(void){
     list[6]=new_piece_rh(4, 0, false, false);
     list[7]=new_piece_rh(5, 2, true, false);
     game game=new_game_hr(8, list);
+    printf("\e[2J\e[H");
+
+    //printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("Bienvenu(e) sur RushHour ! Le but de ce jeu est de déplacer la voiture 0 jusqu'au bord droit ! Bonne chance !\n\n");
+    show_grid(game);
 
     int piece_num;
     dir d;
@@ -92,6 +96,8 @@ int main(void){
             }
         }
         play_move(game, piece_num, d, distance);
+        //printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        printf("\e[2J\e[H");
         show_grid(game);
     }
     printf("Game over. Score : %d", game_nb_moves(game));

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "useful_functions.h"
+#include "test_functions.h"
 
 bool equals(cpiece p1, cpiece p2) {
     if(p1==p2) return true; //if it's the same reference it's the sam piece.

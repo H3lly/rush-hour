@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "piece.h"
-#include "useful_functions.h"
+#include "test_functions.h"
 
 #define NB_PIECES 4
 

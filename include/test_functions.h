@@ -1,5 +1,5 @@
-#ifndef USEFUL_FUNCTIONS_H
-#define	USEFUL_FUNCTIONS_H
+#ifndef TEST_FUNCTIONS_H
+#define	TEST_FUNCTIONS_H
 
 #include <stdbool.h>
 

@@ -14,17 +14,17 @@ all:
 
 test_game1:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/test_game1.c src/piece.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/test_functions.c src/game.c src/test_game1.c src/piece.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 test_piece1:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/piece.c src/useful_functions.c src/test_piece1.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/piece.c src/test_functions.c src/test_piece1.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 rush-hour:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/piece.c src/grid.c src/rush-hour.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/test_functions.c src/game.c src/piece.c src/rush-hour.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 #
@@ -33,17 +33,17 @@ rush-hour:
 
 test_game2:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/test_game2.c src/piece.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/test_functions.c src/game.c src/test_game2.c src/piece.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 test_piece2:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/piece.c src/test_piece2.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/test_functions.c src/piece.c src/test_piece2.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 ane-rouge:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/game.c src/piece.c src/ane-rouge.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/test_functions.c src/game.c src/piece.c src/ane-rouge.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 
 lib:

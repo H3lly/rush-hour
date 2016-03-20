@@ -3,7 +3,7 @@
 
 #include "piece.h"
 #include "game.h"
-#include "useful_functions.h"
+#include "test_functions.h"
 
 int main(void) {
     //actual configuration of the game
