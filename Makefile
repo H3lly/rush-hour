@@ -22,7 +22,6 @@ all:
 	@echo Make all end.
 
 
-#RUSH_HOUR
 test_game1:
 	@make --silent sub MAKEARG=$@
 	
@@ -32,7 +31,6 @@ test_piece1:
 rush-hour:
 	@make --silent sub MAKEARG=$@
 	
-#ANE-ROUGE
 test_game2:
 	@make --silent sub MAKEARG=$@
 	
