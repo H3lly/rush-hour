@@ -18,5 +18,8 @@ bool out_of_grid(cpiece p, cgame g);
 // @brief Show the grid of the game g on the shell
 void show_grid(game g);
 
+bool game_over_an(cgame g);
+bool movement_is_allowed(cpiece p, dir d);
+bool is_small(cpiece p);
 #endif
 

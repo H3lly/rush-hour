@@ -5,6 +5,7 @@
 
 int main(void) {
     //actual configuration of the game
+    
     /*
     1  0  0  2
     1  0  0  2
@@ -12,6 +13,7 @@ int main(void) {
     3  6  7  4
     8  .  .  9
     */
+    
     piece liste [10];
     liste[0] = new_piece(1, 3, 2, 2, true, true);
     liste[1] = new_piece(0, 3, 1, 2, true, true);
@@ -31,7 +33,7 @@ int main(void) {
     int num;
     int distance;
     int test;
-    while (!(game_over_hr(game))) {
+    while (!(game_over_an(game))) {
         piece_num=-1;
         d=-1;
         distance=-1;
@@ -85,8 +87,7 @@ int main(void) {
                     test=true;
                 else
                     printf("Entrée invalide: veuillez saisir un entier entre 0.\n");
-            }
-            else{
+            } else{
                 printf("Entrée invalide: veuillez saisir un entier superieur à 0.\n");
                 while(fgetc(stdin)!='\n');
             }
@@ -94,7 +95,6 @@ int main(void) {
         play_move(game, piece_num, d, distance);
         show_grid(game);
     }
-
-    if (game_over_hr(game)) printf("Game is over. Score : %d", game_nb_moves(game));
+    printf("Game is over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "game.h"
+#include "piece.h"
 #include "useful_functions.h"
 
 struct game_s{
@@ -11,7 +13,6 @@ struct game_s{
     piece *piece_list;
 };
 
-typedef const struct game_s* cgame;
 game new_game(int width, int height, int nb_pieces, piece *pieces){
     game g=malloc(sizeof (struct game_s));
     g->width=width;
@@ -21,6 +22,11 @@ game new_game(int width, int height, int nb_pieces, piece *pieces){
     g->piece_list=pieces;
     return g;
 }
+
+game new_game_hr(int nb_pieces, piece *pieces){
+    return new_game(6, 6, nb_pieces, pieces);
+}
+
 void delete_game(game g){
     for (int i=0; i < g->nb_pieces; i++)
         delete_piece(g->piece_list[i]);
@@ -40,11 +46,14 @@ cpiece game_piece(cgame g, int piece_num){
     return g->piece_list[piece_num];
 }
 bool game_over_hr(cgame g){
-    return (get_x(g->piece_list[0]) == (g->width/2)-1) && (get_y(g->piece_list[0]) == 0);
+    return (get_x(g->piece_list[0]) == 4) && (get_y(g->piece_list[0]) == 3);
 }
-
 bool play_move(game g, int piece_num, dir d, int distance){
     piece p=g->piece_list[piece_num];
+    if (!movement_is_allowed(p, d)){
+        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
+        return false;
+    }
     int travel=0;
     while (distance != 0){
         move_piece(p, d, 1);
@@ -84,10 +93,10 @@ int game_height(cgame g){
 }
 int game_square_piece(game g, int x, int y){
     for (int i=0; i < g->nb_pieces; i++){
-        piece p = g->piece_list[i];
+        piece p=g->piece_list[i];
         for (int w=0; w < get_width(p); ++w){
             for (int h=0; h < get_height(p); ++h){
-                if (get_x(p)+w == x && get_y(p)+h == y)
+                if (get_x(p) + w == x && get_y(p) + h == y)
                     return i;
             }
         }

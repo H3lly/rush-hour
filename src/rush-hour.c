@@ -1,9 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "grid.h"
 #include "useful_functions.h"
+
 int main(void){
+    //actual configuration of the game
+    /*
+     . . . . . .
+     . . 4 . . .
+     0 0 4 . . 7
+     1 1 4 5 6 7
+     2 3 3 5 6 .
+     2 . . . 6 .
+    */
+    
     piece list [8];
     list[0]=new_piece_rh(0, 3, true, true);
     list[1]=new_piece_rh(0, 2, true, true);
@@ -14,9 +24,6 @@ int main(void){
     list[6]=new_piece_rh(4, 0, false, false);
     list[7]=new_piece_rh(5, 2, true, false);
     game game=new_game_hr(8, list);
-    grid grid=new_grid(game);
-    set_pieces(grid);
-    show_grid(grid);
 
     int piece_num;
     dir d;
@@ -82,9 +89,9 @@ int main(void){
                 while (fgetc(stdin) != '\n');
             }
         }
-        move(grid, piece_num, d, distance);
+        play_move(game, piece_num, d, distance);
+        show_grid(game);
     }
-    delete_grid(grid);
     printf("Game over. Score : %d", game_nb_moves(game));
     return EXIT_SUCCESS;
 }

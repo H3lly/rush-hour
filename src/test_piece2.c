@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include "piece.h"
+
+#include "useful_functions.h"
 
 #define NB_PIECES 4
 

@@ -29,3 +29,14 @@ void show_grid(game g){
     }
     printf("\nNombre de mouvements : %d\n----------\n\n", game_nb_moves(g));
 }
+
+bool game_over_an(cgame g){
+    return (get_x(game_piece(g, 0)) == (game_width(g) / 2) - 1) && (get_y(game_piece(g, 0)) == 0);
+}
+bool movement_is_allowed (cpiece p, dir d){
+    return ((d==LEFT || d==RIGHT)&&(is_horizontal(p))) || ((d == UP || d == DOWN)&&(!(is_horizontal(p))));
+}
+//returns if the piece is small
+bool is_small(cpiece p){
+    return get_height(p)==2||get_width(p)==2;
+}
