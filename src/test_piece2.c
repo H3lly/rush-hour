@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 
+#include "game.h"
 #include "piece.h"
 #include "test_functions.h"
 

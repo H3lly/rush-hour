@@ -1,6 +1,11 @@
 CFLAGS = -Wall -g -std=c99
 INCLUDE = -I include/
 
+sub:
+	@echo Make $@.
+	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c $(INCLUDE) -o $(MAKEARG)
+	@echo Executable $@ generated.
+
 all:
 	@echo Make all start.
 	@echo
@@ -8,44 +13,29 @@ all:
 	@echo 
 	@echo Make all end.
 
-#
-# --------- RUSH-HOUR -----------
-#
 
+#RUSH_HOUR
 test_game1:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/test_functions.c src/game.c src/test_game1.c src/piece.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 test_piece1:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/piece.c src/test_functions.c src/test_piece1.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 rush-hour:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/test_functions.c src/game.c src/piece.c src/rush-hour.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
-#
-# --------- ÂNE ROUGE ----------
-#
-
+#ANE-ROUGE
 test_game2:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/test_functions.c src/game.c src/test_game2.c src/piece.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 test_piece2:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/test_functions.c src/piece.c src/test_piece2.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 ane-rouge:
-	@echo Make $@.
-	@gcc $(CFLAGS) src/test_functions.c src/game.c src/piece.c src/ane-rouge.c $(INCLUDE) -o $@
-	@echo Executable $@ generated.
-
+	@make --silent sub MAKEARG=$@
+	
+	
+#marche probablement plus
 lib:
 	@rm -f lib/libgame.a
 	@rm -d -f lib

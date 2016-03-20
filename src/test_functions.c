@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
+#include "game.h"
+#include "piece.h"
 #include "test_functions.h"
 
 bool equals(cpiece p1, cpiece p2) {

@@ -26,7 +26,7 @@ int main(void){
     list[7]=new_piece_rh(5, 2, true, false);
     game game=new_game_hr(8, list);
     printf("\e[2J\e[H");
-
+    
     //printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
     printf("Bienvenu(e) sur RushHour ! Le but de ce jeu est de déplacer la voiture 0 jusqu'au bord droit ! Bonne chance !\n\n");
     show_grid(game);
