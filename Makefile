@@ -19,7 +19,7 @@ test_game1:
 	
 test_piece1:
 	@echo Make $@.
-	@gcc $(CFLAGS) src/useful_functions.c src/piece.c src/test_piece1.c $(INCLUDE) -o $@
+	@gcc $(CFLAGS) src/piece.c src/useful_functions.c src/test_piece1.c $(INCLUDE) -o $@
 	@echo Executable $@ generated.
 	
 rush-hour:

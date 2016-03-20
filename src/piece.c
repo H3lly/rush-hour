@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "piece.h"
-#include "useful_functions.h"
 
 struct piece_s{
     int abs;
@@ -12,6 +11,19 @@ struct piece_s{
     bool move_x;
     bool move_y;
 };
+
+//à moi
+
+// @brief Returns the number of cells of the piece p.
+int piece_area (cpiece p){
+    return get_width(p)*get_height(p);
+}
+
+// @brief TO_DO
+bool movement_is_allowed (cpiece p, dir d){
+    return ((d==LEFT || d==RIGHT)&&(can_move_x(p))) || ((d == UP || d == DOWN)&&(can_move_y(p)));
+}
+
 piece new_piece_rh(int x, int y, bool small, bool horizontal){
     int width;
     int height;
@@ -77,7 +89,7 @@ void move_piece(piece p, dir d, int distance) {
 //##################################################### A MODIFIER ###############################################################
 bool intersect(cpiece a, cpiece b){
     //the tens is the abscissa, the unit is the ordinate
-    if (equals(a, b)) return true; //if it's the same piece
+    if (a==b) return true; //if it's the same piece
     int ta[piece_area(a)];
     int tb[piece_area(b)];
     int cpt=0;
@@ -116,6 +128,8 @@ bool can_move_x(cpiece p){
 bool can_move_y(cpiece p){
     return p->move_y;
 }
+
+//useless in v2
 bool is_horizontal(cpiece p) {
     return can_move_x(p);
 }

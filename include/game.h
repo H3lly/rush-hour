@@ -2,7 +2,6 @@
 #define _GAME_H_
 #include <stdbool.h>
 
-#include "useful_functions.h"
 #include "piece.h"
 
 /**

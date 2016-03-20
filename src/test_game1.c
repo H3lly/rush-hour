@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "game.h"
+#include "piece.h"
 #include "useful_functions.h"
 
 #define NB_PIECES 4

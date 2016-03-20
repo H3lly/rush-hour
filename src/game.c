@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "game.h"
 #include "piece.h"
-#include "useful_functions.h"
+#include "game.h"
 
 struct game_s{
     int width;
@@ -14,6 +13,7 @@ struct game_s{
 };
 
 game new_game(int width, int height, int nb_pieces, piece *pieces){
+    //VERIFIER LA LISTE DE PIECE
     game g=malloc(sizeof (struct game_s));
     g->width=width;
     g->height=height;
@@ -48,12 +48,16 @@ cpiece game_piece(cgame g, int piece_num){
 bool game_over_hr(cgame g){
     return (get_x(g->piece_list[0]) == 4) && (get_y(g->piece_list[0]) == 3);
 }
+// @brief Check if the piece p is out of the grid of the game g.
+bool out_of_grid(cpiece p, cgame g){
+    return (get_x(p) < 0 || get_x(p) + get_width(p) > game_width(g) || (get_y(p) < 0 || get_y(p) + get_height(p) > game_height(g)));
+}
 bool play_move(game g, int piece_num, dir d, int distance){
     piece p=g->piece_list[piece_num];
-    if (!movement_is_allowed(p, d)){
-        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
-        return false;
-    }
+//    if (!movement_is_allowed(p, d)){
+//        printf("Mouvement impossible : L'orientation de la pièce et la direciton de son déplacement sont incompatibles.\n\n");
+//        return false;
+//    }
     int travel=0;
     while (distance != 0){
         move_piece(p, d, 1);
