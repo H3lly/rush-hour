@@ -11,7 +11,7 @@ INCLUDE = -I include/
 
 sub:
 	@echo Make $(MAKEARG).
-	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c $(INCLUDE) -o $(MAKEARG)
+	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c -lm $(INCLUDE) -o $(MAKEARG)
 	@echo Executable $(MAKEARG) generated.
 
 all:
