@@ -5,9 +5,9 @@ INCLUDE = -I include/
 #	@echo Make $@
 #	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$@.c $(INCLUDE) -o $@
 #	@echo Executable $@ generated.
-#	"Make all" will do target "%:" AND target "all:" (but strangely works on the shell)
-#	Also, will do target "%:" all the time, even if you put "potato" or "dogs", will only says that src/dogs.c doesn't exists
-#	Left in commentary for the moment
+#	#"Make all" will do target "%:" AND target "all:" (but strangely works on the shell)
+#	#Also, will do target "%:" all the time, even if you put "potato" or "dogs", will only says that src/dogs.c doesn't exists
+#	#Left in commentary for the moment
 
 sub:
 	@echo Make $(MAKEARG).
