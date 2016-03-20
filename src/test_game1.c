@@ -6,23 +6,6 @@
 #include "test_functions.h"
 
 #define NB_PIECES 4
-bool test_equality_int(int expected, int value, char * msg){
-    if (expected != value)
-        fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
-    return expected == value;
-}
-bool test_equality_bool(bool expected, bool value, char * msg){
-    if (expected != value)
-        fprintf(stderr, "ERR: value expected %s ; value computed %s | Error from : %s\n", (expected ? "true" : "false"), (value ? "true" : "false"), msg);
-    return expected == value;
-}
-bool test_equality_piece(cpiece expected, cpiece value, char * msg){
-    if (!equals(expected, value)){
-        fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
-    }
-    return equals(expected, value);
-}
-
 
 piece pieces[NB_PIECES];
 /* test configuration

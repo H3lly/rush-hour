@@ -7,29 +7,6 @@
 
 #define NB_PIECES 7
 
-/* @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
- * @return true if expected==value */
-bool test_equality_int(int expected, int value, char * msg){
-    if (expected != value)
-        fprintf(stderr, "ERR: value expected %d ; value computed %d | Error from : %s\n", expected, value, msg);
-    return expected == value;
-}
-
-// @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
-bool test_equality_bool(bool expected, bool value, char * msg){
-    if (expected != value)
-        fprintf(stderr, "ERR: value expected %s ; value computed %s | Error from : %s\n", (expected ? "true" : "false"), (value ? "true" : "false"), msg);
-    return expected == value;
-}
-
-// @brief test if value is equal to expected; if not, displays an error message containing msg to standard error output 
-bool test_equality_piece(cpiece expected, cpiece value, char * msg){
-    if (!equals(expected, value)){
-        fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
-    }
-    return equals(expected, value);
-}
-
 piece pieces[NB_PIECES];
 /* config de test
 1 0 0 2
@@ -72,9 +49,7 @@ bool test_play_move(){
     result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de la pièce 6 : déplacement impossible
     result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 2 in test_play_move") && result;
-    show_grid(g);
     result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // pièce 2 complètement bloquée: déplacement impossible
-    show_grid(g);
     result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 2)), 3, "get_y 3 in test_play_move") && result;
     result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // la pièce 6 peut se déplacer d'une case vers la gauche mais pas deux : déplacement impossible
@@ -103,7 +78,7 @@ bool test_game_over(){
     bool result=true;
     game g=set_game();
     play_move(g, 0, DOWN, 3); //on mène la pièce vers la sortie
-    result=test_equality_bool(true, game_over_hr(g), "game_over in test_game_over") && result;
+    result=test_equality_bool(true, game_over_an(g), "game_over in test_game_over") && result;
     delete_game(g);
     return result;
 }

@@ -2,9 +2,9 @@ CFLAGS = -Wall -g -std=c99
 INCLUDE = -I include/
 
 sub:
-	@echo Make $@.
+	@echo Make $(MAKEARG).
 	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c $(INCLUDE) -o $(MAKEARG)
-	@echo Executable $@ generated.
+	@echo Executable $(MAKEARG) generated.
 
 all:
 	@echo Make all start.

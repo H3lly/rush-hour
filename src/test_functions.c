@@ -35,3 +35,22 @@ void show_grid(game g){
 bool game_over_an(cgame g){
     return (get_x(game_piece(g, 0)) == (game_width(g) / 2) - 1) && (get_y(game_piece(g, 0)) == 0);
 }
+
+bool test_equality_int(int expected, int value, char * msg){
+    if (expected != value)
+        fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
+    return expected == value;
+}
+
+bool test_equality_bool(bool expected, bool value, char * msg){
+    if (expected != value)
+        fprintf(stderr, "ERR: value expected %d ; value computed %d. %s\n", expected, value, msg);
+    return expected == value;
+}
+
+bool test_equality_piece(cpiece expected, cpiece value, char * msg){
+    if (!equals(expected, value)){
+        fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
+    }
+    return equals(expected, value);
+}
