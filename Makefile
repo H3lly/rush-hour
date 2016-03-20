@@ -1,6 +1,14 @@
 CFLAGS = -Wall -g -std=c99
 INCLUDE = -I include/
 
+#%:
+#	@echo Make $@
+#	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$@.c $(INCLUDE) -o $@
+#	@echo Executable $@ generated.
+#	"Make all" will do target "%:" AND target "all:" (but strangely works on the shell)
+#	Also, will do target "%:" all the time, even if you put "potato" or "dogs", will only says that src/dogs.c doesn't exists
+#	Left in commentary for the moment
+
 sub:
 	@echo Make $(MAKEARG).
 	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c $(INCLUDE) -o $(MAKEARG)
@@ -35,7 +43,7 @@ ane-rouge:
 	@make --silent sub MAKEARG=$@
 	
 	
-#marche probablement plus
+#MARCHE PROBABLEMENT PLUS
 lib:
 	@rm -f lib/libgame.a
 	@rm -d -f lib
