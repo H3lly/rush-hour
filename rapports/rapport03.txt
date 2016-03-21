@@ -11,5 +11,7 @@ Camille :
     J'ai enlevé les fuites mémoires de la v1 du jeu.
     J'ai encore une fois, refait la structure du projet après m'être rendue compte que je pouvais quand même fusionner les fichiers de la v1 et de la v2.
     J'ai modifier le makefile pour éviter la redondance de code.
+    J'ai modifié et fini le test_piece2.c, et ai corrigé la fonction intersect en conséquent.
+    J'ai entièrement traduit le code en anglais (harmonisation)
 
 Ny Andry et Alexandre :

@@ -8,7 +8,7 @@
 #define NB_PIECES 7
 
 piece pieces[NB_PIECES];
-/* config de test
+/* test configuration
 1 0 0 2
 1 0 0 2
 3 . . 4

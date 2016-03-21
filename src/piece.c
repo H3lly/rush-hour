@@ -86,23 +86,20 @@ int piece_area(cpiece p){
     return get_width(p)*get_height(p);
 }
 
-// TO_DO
-//Make two arrays that list all the coordinates occupated by the pieces, compare them and return if they have common coordinates
-//ne marche que si les pièces ont une longueur et une largeur strictement inferieur à 10
-//##################################################### A MODIFIER ###############################################################
-
 // @brief Returns a if a>b, returns b otherwise.
 int max_int(int a, int b){
     //I'm not importing a whole library for one function
     return ((a>b)?a:b);
 }
 
+//Make two arrays that list all the coordinates occupated by the pieces, compare them and return if they have common coordinates
 bool intersect(cpiece a, cpiece b){
-    //the tens is the abscissa, the unit is the ordinate
+    //from unit to magnitude(max(ay, by)), ordinates ;
+    //from magnitude(max(ay,by))*10, abscissa
     if (a==b) return true;//if it's the same piece
     int magnitude=max_int(get_y(a), get_y(b));
-    if(magnitude==0) magnitude=1;
-    magnitude=(int)pow(10, (floor(log10(magnitude)))) *10;
+    if (magnitude==0) magnitude=1;//log10(0) is not what you want
+    magnitude=(int)pow(10, (floor(log10(magnitude)))) *10;//gives you the magnitude of the greater number between a's ordinate and b's ordinate times ten
     int ta[piece_area(a)];
     int tb[piece_area(b)];
     int cpt=0;
@@ -149,7 +146,6 @@ bool can_move_y(cpiece p){
 }
 
 //useless in v2
-
 bool is_horizontal(cpiece p){
     return can_move_x(p);
 }

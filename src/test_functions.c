@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "game.h"
 #include "piece.h"
@@ -15,22 +16,17 @@ bool is_small(cpiece p){
     return get_height(p)==2||get_width(p)==2;
 }
 
-//##################################################### A MODIFIER ###############################################################
-//ne marche QUE POUR MOINS DE 11 PIECES
-// TO_DO
-
-//Modifier l'affichage pour que ça paraisse carré (OPT) TO_DO
 void show_grid(game g){
     for (int ord=game_height(g)-1;ord>=0;ord--){
         for (int abs=0;abs<game_width(g);abs++){
             if (game_square_piece(g, abs, ord)== -1)
-                printf(". ");
+                printf(" ·    ");
             else
-                printf("%d ", game_square_piece(g, abs, ord));
+                printf("%2d    ", game_square_piece(g, abs, ord));
         }
-        printf("\n");
+        printf("\n\n\n");
     }
-    printf("\nNombre de mouvements : %d\n----------\n\n", game_nb_moves(g));
+    printf("\nMoves : %d\n----------\n\n", game_nb_moves(g));
 }
 
 bool game_over_an(cgame g){
@@ -55,3 +51,14 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     }
     return expected==value;
 }
+
+//int main(void){
+//    piece list[4];
+//    list[0]=new_piece(0,0,2,3,true,true);
+//    list[1]=new_piece(3,5,2,2,true,true);
+//    list[2]=new_piece(5,6,4,4,true,true);
+//    list[3]=new_piece(3, 8, 2, 2, true, true);
+//    game g=new_game(15, 15, 4, list);
+//    show_grid(g);
+//    return 1;
+//}

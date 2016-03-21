@@ -9,7 +9,7 @@
 #define NB_PIECES 4
 
 piece pieces[NB_PIECES];
-/* configue de test
+/* test configuration
 .....3
 .....3
 ...003
@@ -135,5 +135,6 @@ int main(int argc, char *argv[]){
         printf("Youpi !\n");
         return EXIT_SUCCESS;
     } else
+        printf("Meh\n");
         return EXIT_FAILURE;
 }
