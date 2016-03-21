@@ -30,6 +30,7 @@ void show_grid(game g){
 }
 
 bool game_over_an(cgame g){
+    printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0,get_x(game_piece(g, 0)),get_y(game_piece(g, 0)));
     return (get_x(game_piece(g, 0))==(game_width(g)/2)-1) && (get_y(game_piece(g, 0))==0);
 }
 
@@ -51,14 +52,3 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     }
     return expected==value;
 }
-
-//int main(void){
-//    piece list[4];
-//    list[0]=new_piece(0,0,2,3,true,true);
-//    list[1]=new_piece(3,5,2,2,true,true);
-//    list[2]=new_piece(5,6,4,4,true,true);
-//    list[3]=new_piece(3, 8, 2, 2, true, true);
-//    game g=new_game(15, 15, 4, list);
-//    show_grid(g);
-//    return 1;
-//}

@@ -93,8 +93,8 @@ int main(void){
                 while (fgetc(stdin)!='\n');
             }
         }
-        play_move(game, piece_num, d, distance);
         printf("\e[2J\e[H");
+        play_move(game, piece_num, d, distance);
         show_grid(game);
     }
     printf("Game is over. Score : %d", game_nb_moves(game));

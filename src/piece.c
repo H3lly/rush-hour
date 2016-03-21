@@ -63,7 +63,9 @@ bool movement_is_allowed(cpiece p, dir d){
 }
 
 void move_piece(piece p, dir d, int distance){
-    if (movement_is_allowed(p, d)){
+    if (!movement_is_allowed(p, d))
+        printf("Unauthorized move: Piece orientation doesn't match move direction.\n\n");
+    else{
         switch (d){
             case UP:
                 p->py+=distance;
@@ -82,17 +84,20 @@ void move_piece(piece p, dir d, int distance){
 }
 
 // @brief Returns the number of cells of the piece p.
+
 int piece_area(cpiece p){
     return get_width(p)*get_height(p);
 }
 
 // @brief Returns a if a>b, returns b otherwise.
+
 int max_int(int a, int b){
     //I'm not importing a whole library for one function
     return ((a>b)?a:b);
 }
 
 //Make two arrays that list all the coordinates occupated by the pieces, compare them and return if they have common coordinates
+
 bool intersect(cpiece a, cpiece b){
     //from unit to magnitude(max(ay, by)), ordinates ;
     //from magnitude(max(ay,by))*10, abscissa
@@ -146,6 +151,7 @@ bool can_move_y(cpiece p){
 }
 
 //useless in v2
+
 bool is_horizontal(cpiece p){
     return can_move_x(p);
 }
