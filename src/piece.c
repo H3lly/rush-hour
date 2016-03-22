@@ -92,11 +92,11 @@ int piece_area(cpiece p){
 // @brief Returns a if a>b, returns b otherwise.
 
 int max_int(int a, int b){
-    //I'm not importing a whole library for just one function
+    //I'm not importing a whole library just for one function
     return ((a>b)?a:b);
 }
 
-// @brief Makes two arrays that list all the coordinates occupated by the pieces, compares them and returns whether they have common coordinates or not
+// Makes two arrays that list all the coordinates occupated by the pieces, compares them and returns whether they have common coordinates or not
 
 bool intersect(cpiece a, cpiece b){
     //from unit to magnitude(max(ay, by)), ordinates ;
