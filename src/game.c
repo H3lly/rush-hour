@@ -76,7 +76,7 @@ bool game_over_hr(cgame g){
 // @brief Check if the piece p is out of the grid of the game g.
 
 bool out_of_grid(cpiece p, cgame g){
-    //used only once but enhance readibility 
+    //used only once but enhances readibility 
     return (get_x(p)<0||get_x(p)+get_width(p)>game_width(g)||(get_y(p)<0||get_y(p)+get_height(p)>game_height(g)));
 }
 

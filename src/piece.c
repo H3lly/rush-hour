@@ -57,7 +57,7 @@ void copy_piece(cpiece src, piece dst){
     dst->move_y=src->move_y;
 }
 
-// @brief Returns true if the direction of the movement is compatible with the piece's orientation, return false otherwise.
+// @brief Returns true if the direction of the movement is compatible with the piece's orientation, returns false otherwise.
 bool movement_is_allowed(cpiece p, dir d){
     return ((d==LEFT||d==RIGHT)&&(can_move_x(p)))||((d==UP||d==DOWN)&&(can_move_y(p)));
 }
@@ -92,11 +92,11 @@ int piece_area(cpiece p){
 // @brief Returns a if a>b, returns b otherwise.
 
 int max_int(int a, int b){
-    //I'm not importing a whole library for one function
+    //I'm not importing a whole library for just one function
     return ((a>b)?a:b);
 }
 
-//Make two arrays that list all the coordinates occupated by the pieces, compare them and return if they have common coordinates
+// @brief Makes two arrays that list all the coordinates occupated by the pieces, compares them and returns whether they have common coordinates or not
 
 bool intersect(cpiece a, cpiece b){
     //from unit to magnitude(max(ay, by)), ordinates ;

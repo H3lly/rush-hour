@@ -42,7 +42,7 @@ bool test_play_move(){
     int nbmove=1;
     game g=set_game();
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;//possible movement
+    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// possible movement
     result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move")&&result;
     result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move")&&result;
     result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move")&&result;// 1 is out of the grid
@@ -51,11 +51,11 @@ bool test_play_move(){
     result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ")&&result;// intersection between 2 and 1
     result=test_equality_int(get_x(game_piece(g, 2)), 4, "get_x 3 in test_play_move")&&result;
     result=test_equality_int(get_y(game_piece(g, 2)), 1, "get_y 3 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move")&&result;//intersection between 3 and 2 
+    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move")&&result;// intersection between 3 and 2 
     result=test_equality_int(get_x(game_piece(g, 3)), 5, "get_x 4 in test_play_move")&&result;
     result=test_equality_int(get_y(game_piece(g, 3)), 3, "get_y 4 in test_play_move")&&result;
     result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move")&&result;
-    result=!equals(p_test, game_piece(g, 0))&&result;//this is the only piece that moved
+    result=!equals(p_test, game_piece(g, 0))&&result;// this is the only piece that moved
     delete_piece(p_test);
     delete_game(g);
     return result;
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
         printf("It works c: !\n");
         return EXIT_SUCCESS;
     } else{
-        printf("It doesn't work !\n");
+        printf("Your code sucks !\n");
         return EXIT_FAILURE;
     }
 }

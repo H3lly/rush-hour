@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
     result=result && test_equality_bool(true, test_copy(), "copy");
 
     if (result){
-        printf("Youpi !\n");
+        printf("Yay !\n");
         return EXIT_SUCCESS;
     } else
         printf("Meh\n");

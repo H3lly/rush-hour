@@ -43,32 +43,32 @@ bool test_play_move(){
     int nbmove=1;
     game g=set_game();
     piece p_test=new_piece(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), get_height(game_piece(g, 0)), get_width(game_piece(g, 0)), can_move_x(game_piece(g, 0)), can_move_y(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 5, RIGHT, 1), "play_move 1 in test_play_move") && result; // déplacement possible
+    result=test_equality_bool(true, play_move(g, 5, RIGHT, 1), "play_move 1 in test_play_move") && result; // possible movement
     result=test_equality_int(get_x(game_piece(g, 5)), 1, "get_x 1 in test_play_move") && result;
     result=test_equality_int(get_y(game_piece(g, 5)), 0, "get_y 1 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move") && result; // sortie de la grille de la pièce 6 : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move") && result; // impossible movement: 6 would be out of bounds
     result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 2 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // pièce 2 complètement bloquée: déplacement impossible
+    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ") && result; // intersection between 2 and 1
     result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 2)), 3, "get_y 3 in test_play_move") && result;
-    result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // la pièce 6 peut se déplacer d'une case vers la gauche mais pas deux : déplacement impossible
+    result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // intersection between 6 and 2
     result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 4 in test_play_move") && result;
-    result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result; // on vérifie qu'une seule pièce a bougé
+    result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result; // this is the only piece that moved
     result=!equals(p_test, game_piece(g, 5)) && result; // seule piece ayant fait un déplacement
     delete_game(g);
     return result;
 }
 bool test_copy_game(){
     bool result=true;
-    game g=set_game(); // on crée une grille comme dans la config de test
+    game g=set_game(); // we create the "test configuration" grid
     piece empty_list[0];
-    game gtest=new_game(4, 5, 0, empty_list); // on crée une grille vide
-    copy_game(g, gtest); // on copie la grille de test dans la grille vide
-    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result; // on vérifie que les deux grilles ont bien le même nombre de pièces
+    game gtest=new_game(4, 5, 0, empty_list); // empty grid
+    copy_game(g, gtest); // copy the first grid into the empty grid
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(gtest), "nb_piece in test_copy_game") && result; // we check whether both grids have the same number of pieces
     for (int i=0; i < game_nb_pieces(g); ++i){
-        result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result; // on vérifie que les pièces sont les mêmes
+        result=test_equality_piece(game_piece(gtest, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result; // we check whether both have the same pieces
     }
     delete_game(g);
     delete_game(gtest);
@@ -77,7 +77,7 @@ bool test_copy_game(){
 bool test_game_over(){
     bool result=true;
     game g=set_game();
-    play_move(g, 0, DOWN, 3); //on mène la pièce vers la sortie
+    play_move(g, 0, DOWN, 3); // we bring the piece to the exit
     result=test_equality_bool(true, game_over_an(g), "game_over in test_game_over") && result;
     delete_game(g);
     return result;
@@ -90,10 +90,10 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_game_over(), "test_game_over in main") && result;
 
     if (result){
-        printf("Ca marche c: !\n");
+        printf("It works c: !\n");
         return EXIT_SUCCESS;
     } else{
-        printf("Ton code c'est de la merde !\n");
+        printf("Your code sucks !\n");
         return EXIT_FAILURE;
     }
 }

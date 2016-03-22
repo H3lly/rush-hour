@@ -23,7 +23,7 @@ piece pieces[NB_PIECES];
 void set_up(){
     pieces[0]=new_piece(0, 3, 2, 1, true, true);//Can move horizontaly
     pieces[1]=new_piece(3, 0, 1, 2, true, true);//Can move horizontaly
-    pieces[2]=new_piece(4, 1, 2, 2, true, true);//Can move horizontaly and verticaly
+    pieces[2]=new_piece(4, 1, 2, 2, true, true);//Can move horizontaly and vertically
     pieces[3]=new_piece(0, 0, 2, 3, true, true);//Can't move
 }
 
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_copy(), "test_copy in main")&&result;
 
     if (result){
-        printf("Youpi !\n");
+        printf("Yay !\n");
         return EXIT_SUCCESS;
     } else
         return EXIT_FAILURE;
