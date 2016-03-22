@@ -1,8 +1,18 @@
 CFLAGS = -Wall -g -std=c99
-INCLUDEV1 = -I include/v1
-SRCV1 = src/v1/
-INCLUDEV2 = -I include/v2
-SRCV2 = src/v2/
+INCLUDE = -I include/
+
+#%:
+#	@echo Make $@
+#	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$@.c $(INCLUDE) -o $@
+#	@echo Executable $@ generated.
+#	#"Make all" will do target "%:" AND target "all:" (but strangely works on the shell)
+#	#Also, will do target "%:" all the time, even if you put "potato" or "dogs", will only says that src/dogs.c doesn't exists
+#	#Left in commentary for the moment
+
+sub:
+	@echo Make $(MAKEARG).
+	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c -lm $(INCLUDE) -o $(MAKEARG)
+	@echo Executable $(MAKEARG) generated.
 
 all:
 	@echo Make all start.
@@ -11,44 +21,27 @@ all:
 	@echo 
 	@echo Make all end.
 
-#
-# --------- RUSH-HOUR -----------
-#
 
 test_game1:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)test_game1.c $(SRCV1)piece.c $(INCLUDEV1) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 test_piece1:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)piece.c $(SRCV1)test_piece1.c $(INCLUDEV1) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 rush-hour:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV1)useful_functions.c $(SRCV1)game.c $(SRCV1)piece.c $(SRCV1)grid.c src/rush-hour.c $(INCLUDEV1) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
-#
-# --------- ÂNE ROUGE ----------
-#
-
 test_game2:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)game.c $(SRCV2)test_game2.c $(SRCV2)piece.c $(INCLUDEV2) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 test_piece2:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)piece.c $(SRCV2)test_piece2.c $(INCLUDEV2) -o $@
-	@echo Executable $@ generated.
+	@make --silent sub MAKEARG=$@
 	
 ane-rouge:
-	@echo Make $@.
-	@gcc $(CFLAGS) $(SRCV2)useful_functions.c $(SRCV2)game.c $(SRCV2)piece.c src/ane-rouge.c $(INCLUDEV2) -o $@
-	@echo Executable $@ generated.
-
+	@make --silent sub MAKEARG=$@
+	
+	
+#MARCHE PROBABLEMENT PLUS
 lib:
 	@rm -f lib/libgame.a
 	@rm -d -f lib
