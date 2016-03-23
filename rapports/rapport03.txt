@@ -14,6 +14,8 @@ Camille :
     J'ai modifié le makefile pour éviter la redondance de code.
     J'ai modifié et fini le test_piece2.c, et ai corrigé la fonction intersect en conséquent.
     J'ai entièrement traduit le code en anglais (harmonisation), et j'ai fini la V2 (âne-rouge).
-    J'ai remarqué que l'instruction "make" seule ne marchait pas, et qu'il fallait au moins spécifier "all" ou quelque chose pour que cela fonctionne.
+    J'ai remarqué que l'instruction "make" seule ne marchait pas, et qu'il fallait au moins spécifier "all" ou quelque chose pour que cela fonctionne;
+    Le problème venait du fait que "make" seul execute la première cible qu'il y a dans le fichier Makefile.
+    La première cible dépendant de l'argument, et l'argument étant vide, cela créait un problème, j'ai donc mis la cible all en premier à la place.
 
 Ny Andry et Alexandre :
