@@ -17,6 +17,8 @@ Camille :
     J'ai remarqué que l'instruction "make" seule ne marchait pas, et qu'il fallait au moins spécifier "all" ou quelque chose pour que cela fonctionne;
     Le problème venait du fait que "make" seul execute la première cible qu'il y a dans le fichier Makefile.
     La première cible dépendant de l'argument, et l'argument étant vide, cela créait un problème, j'ai donc mis la cible all en premier à la place.
+    J'ai ajouté, pour les devs, une cible "valgrind" qui fait les valgrind nécessaire jusqu'à modification prochaine de l'arborcence (fusion des test)
+    J'ai remplacé les printf des messages d'erreur du jeu par des fprintf dirigé vers STDERR.
     //Je me suis rendue compte que l'on pouvait fusionner les test, j'ai donc aidé un peu luc à là fusion de test_game1 et test_game2 et piece.
     //J'aiimporter test_piece dans game_test =>un seul test qui vérifie tout.
 
