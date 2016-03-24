@@ -85,7 +85,9 @@ bool test_game_over(){
     return result;
 }
 
-bool test_game_height(){
+/* ce qui suit est très surement inutile
+ 
+    bool test_game_height(){
     game g=set_game();
     bool result=true;
     result=test_equality_int(5, game_height(g), "game_height in test_game_height") && result; 
@@ -99,6 +101,8 @@ bool test_game_width(){
     delete_game(g);
     return result;
 }
+*/
+
 
 bool test_game_square_piece(){
     game g=set_game();
