@@ -30,8 +30,8 @@ game set_game(){
 bool test_new_game(){
     bool result=true;
     game g=set_game();
-    result=test_equality_int(5, game_height(g), "game_height in test_game_height") && result;
-    result=test_equality_int(4, game_width(g), "game_width in test_game_width") && result;
+    result=test_equality_int(5, game_height(g), "game_height in test_new_game") && result;
+    result=test_equality_int(4, game_width(g), "game_width in test_new_game") && result;
     result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game") && result;
     for (int i=0; i < NB_PIECES; i++){
         result=result && equals(pieces[i], game_piece(g, i));
@@ -42,7 +42,6 @@ bool test_new_game(){
 
 bool test_play_move(){
     bool result=true;
-    int nbmove=1;
     game g=set_game();
     piece p_test=new_piece(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), get_height(game_piece(g, 0)), get_width(game_piece(g, 0)), can_move_x(game_piece(g, 0)), can_move_y(game_piece(g, 0)));
     result=test_equality_bool(true, play_move(g, 5, RIGHT, 1), "play_move 1 in test_play_move") && result; // possible movement
@@ -57,14 +56,14 @@ bool test_play_move(){
     result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move") && result; // intersection between 6 and 2
     result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move") && result; 
     result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 4 in test_play_move") && result;
-    result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move") && result; // this is the only piece that moved
-    result=!equals(p_test, game_piece(g, 5)) && result; // seule piece ayant fait un déplacement
+    result=test_equality_int(1, game_nb_moves(g), "game_nb_moves in test_play_move") && result; 
+    result=!equals(p_test, game_piece(g, 5)) && result; // this is the only piece that moved
     delete_game(g);
     return result;
 }
 bool test_copy_game(){
     bool result=true;
-    game g=set_game(); // we create the "test configuration" grid
+    game g=set_game();
     piece empty_list[0];
     game gtest=new_game(4, 5, 0, empty_list); // empty grid
     copy_game(g, gtest); // copy the first grid into the empty grid
@@ -85,31 +84,12 @@ bool test_game_over(){
     return result;
 }
 
-/* ce qui suit est très surement inutile
- 
-    bool test_game_height(){
-    game g=set_game();
-    bool result=true;
-    result=test_equality_int(5, game_height(g), "game_height in test_game_height") && result; 
-    delete_game(g);
-    return result;
-}
-bool test_game_width(){
-    game g=set_game();
-    bool result=true;
-    result=test_equality_int(4, game_width(g), "game_width in test_game_width") && result; 
-    delete_game(g);
-    return result;
-}
-*/
-
-
 bool test_game_square_piece(){
+    //LUC : TESTER AVEC UNE PLUS GRANDE GRILLE (TO_DO)
     game g=set_game();
     bool result=true;
     result=test_equality_int(5, game_square_piece(g, 0, 0), "game_square_piece in test_game_square_piece") && result;
     result=test_equality_int(0, game_square_piece(g, 1, 3), "game_square_piece in test_game_square_piece") && result;
-    // ajouter d'autres tests si besoin
     delete_game(g);
     return result;
 }
@@ -120,8 +100,6 @@ int main(int argc, char *argv[]){
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
     result=test_equality_bool(true, test_game_over(), "test_game_over in main") && result;
-    result=test_equality_bool(true, test_game_height(), "test_game_height in main") && result;
-    result=test_equality_bool(true, test_game_width(), "test_game_width in main") && result;
     result=test_equality_bool(true, test_game_square_piece(), "test_game_square_piece in main") && result;
 
     if (result){
