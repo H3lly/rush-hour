@@ -83,8 +83,6 @@ bool test_game_over(){
     return result;
 }
 
-//AJOUTER LES TESTS GAME_SQUARE
-
 bool test_game_height(){
     game g=set_game();
     bool result=true;
