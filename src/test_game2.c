@@ -82,6 +82,8 @@ bool test_game_over(){
     delete_game(g);
     return result;
 }
+
+//AJOUTER LES TESTS DE GAME_HEIGHT/GAME_WIDTH ET GAME_SQUARE
 int main(int argc, char *argv[]){
     bool result=true;
     result=test_equality_bool(true, test_new_game(), "test_new_game in main") && result;
