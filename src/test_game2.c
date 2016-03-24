@@ -83,13 +83,46 @@ bool test_game_over(){
     return result;
 }
 
-//AJOUTER LES TESTS DE GAME_HEIGHT/GAME_WIDTH ET GAME_SQUARE
+//AJOUTER LES TESTS GAME_SQUARE
+
+bool test_game_height(){
+    game g=set_game();
+    bool result=true;
+    result=test_equality_int(2, get_height(game_piece(g, 0), "game_height in test_game_height") && result; 
+    result=test_equality_int(1, get_height(game_piece(g, 5), "game_height in test_game_height") && result; 
+    // ajouter d'autres tests si besoin
+    delete_game(g);
+    return result;
+}
+bool test_game_width(){
+    game g=set_game();
+    bool result=true;
+    result=test_equality_int(2, get_width(game_piece(g, 0), "game_width in test_game_width") && result; 
+    result=test_equality_int(1, get_width(game_piece(g, 3), "game_width in test_game_width") && result; 
+    // ajouter d'autres tests si besoin
+    delete_game(g);
+    return result;
+}
+
+bool test_game_square_piece(){
+    game g=set_game();
+    bool result=true;
+    result=test_equality_int(5, game_square_piece(g, 0, 0), "game_square_piece in test_game_square_piece") && result;
+    result=test_equality_int(0, game_square_piece(g, 1, 3), "game_square_piece in test_game_square_piece") && result;
+    // ajouter d'autres tests si besoin
+    delete_game(g);
+    return result;
+}
+
 int main(int argc, char *argv[]){
     bool result=true;
     result=test_equality_bool(true, test_new_game(), "test_new_game in main") && result;
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main") && result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main") && result;
     result=test_equality_bool(true, test_game_over(), "test_game_over in main") && result;
+    result=test_equality_bool(true, test_game_height(), "test_game_height in main") && result;
+    result=test_equality_bool(true, test_game_width(), "test_game_width in main") && result;
+    result=test_equality_bool(true, test_game_square_piece(), "test_game_square_piece in main") && result;
 
     if (result){
         printf("It works c: !\n");
