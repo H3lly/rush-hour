@@ -30,7 +30,9 @@ game set_game(){
 bool test_new_game(){
     bool result=true;
     game g=set_game();
-    result=result && test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game");
+    result=test_equality_int(5, game_height(g), "game_height in test_game_height") && result;
+    result=test_equality_int(4, game_width(g), "game_width in test_game_width") && result;
+    result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game") && result;
     for (int i=0; i < NB_PIECES; i++){
         result=result && equals(pieces[i], game_piece(g, i));
     }
@@ -93,7 +95,7 @@ bool test_game_height(){
 bool test_game_width(){
     game g=set_game();
     bool result=true;
-    result=test_equality_int(4, game_width(g, "game_width in test_game_width") && result; 
+    result=test_equality_int(4, game_width(g), "game_width in test_game_width") && result; 
     delete_game(g);
     return result;
 }
