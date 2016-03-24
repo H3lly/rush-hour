@@ -86,18 +86,14 @@ bool test_game_over(){
 bool test_game_height(){
     game g=set_game();
     bool result=true;
-    result=test_equality_int(2, get_height(game_piece(g, 0), "game_height in test_game_height") && result; 
-    result=test_equality_int(1, get_height(game_piece(g, 5), "game_height in test_game_height") && result; 
-    // ajouter d'autres tests si besoin
+    result=test_equality_int(5, game_height(g), "game_height in test_game_height") && result; 
     delete_game(g);
     return result;
 }
 bool test_game_width(){
     game g=set_game();
     bool result=true;
-    result=test_equality_int(2, get_width(game_piece(g, 0), "game_width in test_game_width") && result; 
-    result=test_equality_int(1, get_width(game_piece(g, 3), "game_width in test_game_width") && result; 
-    // ajouter d'autres tests si besoin
+    result=test_equality_int(4, game_width(g, "game_width in test_game_width") && result; 
     delete_game(g);
     return result;
 }
