@@ -14,15 +14,14 @@ struct game_s{
 
 game new_game(int width, int height, int nb_pieces, piece *pieces){
     bool test=false;
-    //CAMILLE : PEUT ÊTRE COMPLETE (TO_DO)
     for (int i=0;i<nb_pieces;++i){
         for (int j=0;j<nb_pieces;++j){
             if (i!=j&&pieces[i]==pieces[j]){
-                fprintf(stderr, "It seems that there is two times the same piece. (piece %d)\n", i);
+                printf("It seems there is the same piece twice. (piece %d)\n", i);
                 test=true;
                 break;
             } else if (i!=j&&intersect(pieces[i], pieces[j])){
-                fprintf(stderr, "It seems that two pieces %d and %d are crossing each other. \n", i, j);
+                printf("It seems that the pieces %d and %d are crossing each other. \n", i, j);
                 test=true;
                 break;
             }

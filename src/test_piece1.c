@@ -35,15 +35,15 @@ bool test_new_piece(){
                 for (bool horizontal=false; !horizontal; horizontal= !horizontal){
                     int size;
                     if (small)
-                        size=2;
+                        size=2; // code non executé selon gcov
                     else
                         size=3;
                     piece p=new_piece_rh(x, y, small, horizontal);
                     result=result && test_equality_int(x, get_x(p), "get_x");
                     result=result && test_equality_int(y, get_y(p), "get_y");
                     if (horizontal){
-                        result=result && test_equality_int(1, get_height(p), "get_height");
-                        result=result && test_equality_int(size, get_width(p), "get_width");
+                        result=result && test_equality_int(1, get_height(p), "get_height"); // code non executé selon gcov
+                        result=result && test_equality_int(size, get_width(p), "get_width"); // code non executé selon gcov
                     } else{
                         result=result && test_equality_int(size, get_height(p), "get_height");
                         result=result && test_equality_int(1, get_width(p), "get_width");
