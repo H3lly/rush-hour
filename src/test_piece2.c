@@ -138,5 +138,5 @@ int main(int argc, char *argv[]){
         printf("Yay !\n");
         return EXIT_SUCCESS;
     } else
-        return EXIT_FAILURE; // code non executé selon gcov
+        return EXIT_FAILURE;
 }

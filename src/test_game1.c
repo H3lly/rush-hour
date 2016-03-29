@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
         printf("It works c: !\n");
         return EXIT_SUCCESS;
     } else{
-        printf("Your code sucks !\n"); // code non executé selon gcov
-        return EXIT_FAILURE; // code non executé selon gcov
+        printf("Your code sucks !\n");
+        return EXIT_FAILURE;
     }
 }
