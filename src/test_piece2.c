@@ -80,25 +80,25 @@ bool test_move(){
             if (can_move_x(pieces[i]))
                 result=test_equality_int(get_x(pieces[i])-dist, get_x(p), "move LEFT 1 in test_move")&&result;
             else
-                result=test_equality_int(get_x(pieces[i]), get_x(p), "move LEFT 2  in test_move")&&result;
+                result=test_equality_int(get_x(pieces[i]), get_x(p), "move LEFT 2  in test_move")&&result; // code non executé selon gcov
             copy_piece(pieces[i], p);
             move_piece(p, RIGHT, dist);
             if (can_move_x(pieces[i]))
                 result=test_equality_int(get_x(pieces[i])+dist, get_x(p), "move RIGHT 1  in test_move")&&result;
             else
-                result=test_equality_int(get_x(pieces[i]), get_x(p), "move RIGHT 2  in test_move")&&result;
+                result=test_equality_int(get_x(pieces[i]), get_x(p), "move RIGHT 2  in test_move")&&result; // code non executé selon gcov
             copy_piece(pieces[i], p);
             move_piece(p, UP, dist);
             if (can_move_y(pieces[i]))
                 result=test_equality_int(get_y(pieces[i])+dist, get_y(p), "move UP 1  in test_move")&&result;
             else
-                result=test_equality_int(get_y(pieces[i]), get_y(p), "move UP 2  in test_move")&&result;
+                result=test_equality_int(get_y(pieces[i]), get_y(p), "move UP 2  in test_move")&&result; // code non executé selon gcov
             copy_piece(pieces[i], p);
             move_piece(p, DOWN, dist);
             if (can_move_y(pieces[i]))
                 result=test_equality_int(get_y(pieces[i])-dist, get_y(p), "move DOWN 1  in test_move")&&result;
             else
-                result=test_equality_int(get_y(pieces[i]), get_y(p), "move DOWN 2  in test_move")&&result;
+                result=test_equality_int(get_y(pieces[i]), get_y(p), "move DOWN 2  in test_move")&&result; // code non executé selon gcov
 
 
         }
@@ -138,5 +138,5 @@ int main(int argc, char *argv[]){
         printf("Yay !\n");
         return EXIT_SUCCESS;
     } else
-        return EXIT_FAILURE;
+        return EXIT_FAILURE; // code non executé selon gcov
 }

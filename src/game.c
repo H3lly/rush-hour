@@ -18,22 +18,22 @@ game new_game(int width, int height, int nb_pieces, piece *pieces){
     for (int i=0;i<nb_pieces;++i){
         for (int j=0;j<nb_pieces;++j){
             if (i!=j&&pieces[i]==pieces[j]){
-                printf("It seems that there is two times the same piece. (piece %d)\n", i);
+                printf("It seems there is the same piece twice. (piece %d)\n", i);
                 test=true;
                 break;
             } else if (i!=j&&intersect(pieces[i], pieces[j])){
-                printf("It seems that two pieces %d and %d are crossing each other. \n", i, j);
+                printf("It seems that the pieces %d and %d are crossing each other. \n", i, j);
                 test=true;
                 break;
             }
         }
         if (get_x(pieces[i])<0||get_x(pieces[i])>=width||get_y(pieces[i])<0||get_y(pieces[i])>=height){
-            printf("It seems that the piece %d of the pieces are out of the grid. \n", i);
+            printf("It seems that the piece %d is out of the grid. \n", i);
             test=true;
             break;
         }
     }
-    if (test) printf("Are you sure that what you wanted to do ?\n");
+    if (test) printf("Are you sure that's what you wanted to do ?\n");
     game g=malloc(sizeof (struct game_s));
     g->width=width;
     g->height=height;
