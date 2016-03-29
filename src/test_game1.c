@@ -1,13 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//#include "game.h"
+//#include "piece.h"
+//#include "test_functions.h"
 
-#include "game.h"
-#include "piece.h"
-#include "test_functions.h"
+//#define NB_PIECES 4
 
-#define NB_PIECES 4
-
-piece pieces[NB_PIECES];
+//piece pieces[NB_PIECES];
 
 /* test configuration
 . . . . . 3
@@ -18,7 +18,7 @@ piece pieces[NB_PIECES];
 . . . 1 . .
  */
 
-game set_game(){
+/*game set_game(){
     pieces[0]=new_piece_rh(3, 3, true, true);
     pieces[1]=new_piece_rh(3, 0, true, false);
     pieces[2]=new_piece_rh(4, 1, true, true);
@@ -59,7 +59,7 @@ bool test_play_move(){
     delete_piece(p_test);
     delete_game(g);
     return result;
-}
+}*/
 
 bool test_copy_game(){
     bool result=true;

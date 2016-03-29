@@ -14,7 +14,6 @@ struct game_s{
 
 game new_game(int width, int height, int nb_pieces, piece *pieces){
     bool test=false;
-    // TO_DO : (camille ; améliorer tout ça plus tard)
     for (int i=0;i<nb_pieces;++i){
         for (int j=0;j<nb_pieces;++j){
             if (i!=j&&pieces[i]==pieces[j]){

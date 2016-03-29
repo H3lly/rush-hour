@@ -52,7 +52,7 @@ bool test_new_piece(){
     return result;
 }
 
-bool test_intersect(){ 
+bool test_intersect(){
     bool result=true;
     set_up();
     for (int i=0;i<NB_PIECES;i++)
