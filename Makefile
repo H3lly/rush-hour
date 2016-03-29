@@ -4,6 +4,8 @@ all:
 	@echo Make all start.
 	@echo
 	@make --silent test_game1 test_piece1 rush-hour test_game2 test_piece2 ane-rouge 
+#when fusion finished replace precedent line by :
+#	@make --silent test rush-hour ane-rouge
 	@echo 
 	@echo Make all end.
 
@@ -30,6 +32,10 @@ test_piece2:
 ane-rouge:
 	@make --silent sub MAKEARG=$@
 	
+#when fusion finished, replace all test_* by
+#test:
+#	@make --silent sub MAKEARG=$@
+	
 lib:
 	@echo Make $@ start.
 	@rm -f lib/libgame.a
@@ -44,3 +50,4 @@ lib:
 clean:
 	@rm -f *.o test_piece1 test_piece2 test_game1 test_game2 rush-hour ane-rouge lib/libgame.a -d lib 
 	@echo Files cleaned.
+	
