@@ -1,6 +1,7 @@
 ??/??/2016 :
 Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
+Adresse du dépôt: https://github.com/H3lly/rush-hour
 
 Luc : J'ai fini le test_game2.c que j'avais précédement commencé. J'ai également traduit les commentaires de celui-ci en anglais.
       J'ai corrigé les fautes des commentaires des différents fichiers ainsi que du rapport.
