@@ -1,4 +1,4 @@
-??/??/2016 :
+04/04/2016 :
 Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
 Adresse du dépôt: https://github.com/H3lly/rush-hour
@@ -25,3 +25,4 @@ Camille :
     //J'aiimporter test_piece dans game_test =>un seul test qui vérifie tout.
 
 Ny Andry et Alexandre :
+	Début des recherches sur la création du solveur.
