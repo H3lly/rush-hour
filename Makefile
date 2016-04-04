@@ -3,7 +3,7 @@ INCLUDE = -I include/
 all:
 	@echo Make all start.
 	@echo
-	@make --silent test_game1 test_piece1 rush-hour test_game2 test_piece2 ane-rouge 
+	@make --silent test_game test_piece1 rush-hour test_piece2 ane-rouge 
 #when fusion finished replace precedent line by :
 #	@make --silent test rush-hour ane-rouge
 	@echo 
@@ -14,16 +14,13 @@ sub:
 	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c -lm $(INCLUDE) -o $(MAKEARG)
 	@echo Executable $(MAKEARG) generated.
 
-test_game1:
+test_game:
 	@make --silent sub MAKEARG=$@
 	
 test_piece1:
 	@make --silent sub MAKEARG=$@
 	
 rush-hour:
-	@make --silent sub MAKEARG=$@
-	
-test_game2:
 	@make --silent sub MAKEARG=$@
 	
 test_piece2:
@@ -48,6 +45,6 @@ lib:
 	@echo Make $@ end.
 
 clean:
-	@rm -f *.o test_piece1 test_piece2 test_game1 test_game2 rush-hour ane-rouge lib/libgame.a -d lib 
+	@rm -f *.o test_piece1 test_piece2 test_game rush-hour ane-rouge lib/libgame.a -d lib 
 	@echo Files cleaned.
 	

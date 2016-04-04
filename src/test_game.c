@@ -52,28 +52,55 @@ game set_game_ar(){
 }
 
 bool test_new_game_rh(){
+    bool rh=true;
+    test_new_game_common();
+    delete_game(g);
+    return result;
+    /* ceci est le code original de la fonction, je le laisse au cas où
     bool result=true;
     game g=set_game_rh();
+    result=test_equality_int(6, game_height(g), "game_height in test_new_game") && result;
+    result=test_equality_int(6, game_width(g), "game_width in test_new_game") && result;
     result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game_hr") && result;
     for (int i=0; i < NB_PIECES; i++){
         result=equals(pieces[i], game_piece(g, i)) && result;
     }
     delete_game(g);
-    return result;
+    return result;*/
 }
 
 bool test_new_game_ar(){
-    bool result=true;
+    bool rh=false;
+    test_new_game_common();
+    delete_game(g);
+    return result;
+    /* ceci est le code original de la fonction, je le laisse au cas où
+    bool result = true;
     game g=set_game_ar();
     result=test_equality_int(5, game_height(g), "game_height in test_new_game") && result;
     result=test_equality_int(4, game_width(g), "game_width in test_new_game") && result;
-    result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game") && result;
+    result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game_ar") && result;
     for (int i=0; i < NB_PIECES; i++){
         result=equals(pieces[i], game_piece(g, i)) && result;
     }
     delete_game(g);
-    return result;
+    return result;*/
 }
+
+void test_new_game_common(){
+    bool result=true;
+    game g;
+    int h,w;
+    if (rh) {g=set_game_rh();} else {g=set_game_ar();}
+    if (rh) {h=6;w=6;} else {h=5;w=4;}
+    result=test_equality_int(h, game_height(g), "game_height in test_new_game") && result;
+    result=test_equality_int(w, game_width(g), "game_width in test_new_game") && result;
+    result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game") && result;
+    for (int i=0; i < NB_PIECES; i++){
+        result=equals(pieces[i], game_piece(g, i)) && result;
+    }
+}
+
 bool test_play_move_rh(){
     bool result=true;
     game g=set_game();
