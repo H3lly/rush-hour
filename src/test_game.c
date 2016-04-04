@@ -19,7 +19,7 @@ test configuration rush hour
 . . . 0 0 3
 . . . . . .
 . . . 1 2 2
-4 . . 1 . .
+. . . 1 . .
 
 test configuration ane rouge 
 1 0 0 2
@@ -147,6 +147,13 @@ bool test_play_move_ar(){
 }
 
 bool test_copy_game_rh(){
+    bool rh=true;
+    test_copy_game_common();
+    delete_game(g);
+    delete_game(g_test);
+    return result;
+    
+    /* ceci est le code original de la fonction, je le laisse au cas où
     bool result=true;
     game g=set_game();
     piece empty_list[0];
@@ -160,10 +167,17 @@ bool test_copy_game_rh(){
     result=test_equality_bool(false, (test_equality_piece(game_piece(g_test, 0), game_piece(g, 0), "pieces comparisons in test_copy_game_rh")) && result; // we check whether both games are different
     delete_game(g);
     delete_game(g_test);
-    return result;
+    return result;*/
 }
 
 bool test_copy_game_ar(){
+    bool rh=false;
+    test_copy_game_common();
+    delete_game(g);
+    delete_game(g_test);
+    return result;
+    
+    /* ceci est le code original de la fonction, je le laisse au cas où
     bool result=true;
     game g=set_game();
     piece empty_list[0];
@@ -177,7 +191,22 @@ bool test_copy_game_ar(){
     result=test_equality_bool(false, (test_equality_piece(game_piece(g_test, 0), game_piece(g, 0), "pieces comparisons in test_copy_game_ar")) && result;
     delete_game(g);
     delete_game(g_test);
-    return result;
+    return result;*/
+}
+
+void test_copy_game_common(){
+    bool result=true;
+    game g=set_game();
+    game g_test;
+    piece empty_list[0];
+    if (rh) {g_test=new_game_hr(0, empty_list);} else {g_test=new_game(4, 5, 0, empty_list);} // empty grid
+    copy_game(g, g_test); // copy the first grid into the empty grid
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_test), "game_nb_pieces in test_copy_game") && result; // we check whether both grids have the same number of pieces
+    for (int i=0; i < game_nb_pieces(g); ++i){
+        result=test_equality_piece(game_piece(g_test, i), game_piece(g, i), "pieces comparisons in test_copy_game") && result; // we check whether both have the same pieces
+    }
+    if (rh) {play_move(g, 0, DOWN, 1);} else {play_move(g, 0, LEFT, 1);}
+    result=test_equality_bool(false, (test_equality_piece(game_piece(g_test, 0), game_piece(g, 0), "pieces comparisons in test_copy_game")) && result; 
 }
 
 bool test_game_over_rh(){
