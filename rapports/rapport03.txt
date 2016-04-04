@@ -4,7 +4,8 @@ Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--
 Adresse du dépôt: https://github.com/H3lly/rush-hour
 
 Luc : J'ai fini le test_game2.c que j'avais précédement commencé. J'ai également traduit les commentaires de celui-ci en anglais.
-      Je me suis occupé de la couverture du code avec gcov, et ai analysé les fichiers ainsi générés. J'ai pu constater qu'il n'y avait pas de code mort.
+      Je me suis occupé de la couverture du code avec gcov, et ai analysé les fichiers ainsi générés. J'ai ainsi pu constater qu'il n'y avait pas de code mort.
+      J'ai commencé à fusionner les fichiers test_game1.c et test_game2.c. Je prévois de faire de même pour test_piece1.c et test_piece2.c.
       J'ai corrigé les fautes des commentaires des différents fichiers ainsi que du rapport.
 
 Camille :
@@ -16,13 +17,12 @@ Camille :
     J'ai modifié le makefile pour éviter la redondance de code.
     J'ai modifié et fini le test_piece2.c, et ai corrigé la fonction intersect en conséquent.
     J'ai entièrement traduit le code en anglais (harmonisation), et j'ai fini la V2 (âne-rouge).
-    J'ai remarqué que l'instruction "make" seule ne marchait pas, et qu'il fallait au moins spécifier "all" ou quelque chose pour que cela fonctionne;
+    J'ai remarqué que l'instruction "make" seule ne marchait pas, et qu'il fallait au moins spécifier "all" ou quelque chose pour que cela fonctionne.
     Le problème venait du fait que "make" seul execute la première cible qu'il y a dans le fichier Makefile.
     La première cible dépendant de l'argument, et l'argument étant vide, cela créait un problème, j'ai donc mis la cible all en premier à la place.
-    J'ai ajouté, pour les devs, une cible "valgrind" qui fait les valgrind nécessaire jusqu'à modification prochaine de l'arborcence (fusion des test)
-    J'ai remplacé les printf des messages d'erreur du jeu par des fprintf dirigé vers STDERR.
-    //Je me suis rendue compte que l'on pouvait fusionner les test, j'ai donc aidé un peu luc à là fusion de test_game1 et test_game2 et piece.
-    //J'aiimporter test_piece dans game_test =>un seul test qui vérifie tout.
+    J'ai ajouté, pour les devs, une cible "valgrind" qui fait les valgrind nécessaires jusqu'à modification prochaine de l'arborescence (fusion des tests).
+    J'ai remplacé les printf des messages d'erreur du jeu par des fprintf dirigés vers STDERR.
+    Je me suis rendue compte que l'on pouvait fusionner les test, j'ai donc aidé un peu Luc à la fusion de test_game1.c et test_game2.c ainsi que test_piece1.c et test_piece2.c (non fini).
 
 Ny Andry et Alexandre :
 	Début des recherches sur la création du solveur.
