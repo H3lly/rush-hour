@@ -22,7 +22,7 @@ Camille :
     La première cible dépendant de l'argument, et l'argument étant vide, cela créait un problème, j'ai donc mis la cible all en premier à la place.
     J'ai ajouté, pour les devs, une cible "valgrind" qui fait les valgrind nécessaires jusqu'à modification prochaine de l'arborescence (fusion des tests).
     J'ai remplacé les printf des messages d'erreur du jeu par des fprintf dirigés vers STDERR.
-    Je me suis rendue compte que l'on pouvait fusionner les test, j'ai donc aidé un peu Luc à la fusion de test_game1.c et test_game2.c ainsi que test_piece1.c et test_piece2.c (non fini).
+    Je me suis rendue compte que l'on pouvait fusionner les tests, j'ai donc aidé un peu Luc à la fusion de test_game1.c et test_game2.c ainsi que test_piece1.c et test_piece2.c (non fini).
 
 Ny Andry et Alexandre :
 	Début des recherches sur la création du solveur.
