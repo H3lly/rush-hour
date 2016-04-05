@@ -65,68 +65,49 @@ bool test_intersect(){
     return result;
 }
 
-bool test_move(){
+bool test_move_piece(){
     bool result=true;
-    piece p=new_piece_rh(0, 0, true, true);
     set_up();
-    for (int dist=1;dist<NB_PIECES;dist++)
-        for (int i=0;i<NB_PIECES;i++){
-            copy_piece(pieces[i], p);
-            move_piece(p, LEFT, dist);
-            if (is_horizontal(pieces[i]))
-                result=result&&test_equality_int(get_x(pieces[i])-dist, get_x(p), "move LEFT");
-            else
-                result=result&&test_equality_int(get_x(pieces[i]), get_x(p), "move LEFT");
-            copy_piece(pieces[i], p);
-            move_piece(p, RIGHT, dist);
-            if (is_horizontal(pieces[i]))
-                result=result&&test_equality_int(get_x(pieces[i])+dist, get_x(p), "move RIGHT");
-            else
-                result=result&&test_equality_int(get_x(pieces[i]), get_x(p), "move RIGHT");
-            copy_piece(pieces[i], p);
-            move_piece(p, UP, dist);
-            if (!is_horizontal(pieces[i]))
-                result=result&&test_equality_int(get_y(pieces[i])+dist, get_y(p), "move UP");
-            else
-                result=result&&test_equality_int(get_y(pieces[i]), get_y(p), "move UP");
-            copy_piece(pieces[i], p);
-            move_piece(p, DOWN, dist);
-            if (!is_horizontal(pieces[i]))
-                result=result&&test_equality_int(get_y(pieces[i])-dist, get_y(p), "move DOWN");
-            else
-                result=result&&test_equality_int(get_y(pieces[i]), get_y(p), "move DOWN");
-
-
-        }
+    move_piece(pieces[0], LEFT, 1);
+    result=test_equality_int(2, get_x(pieces[0]), "move_piece p0 1 in test_move_piece");//moved
+    move_piece(pieces[0], UP, 1);
+    result=test_equality_int(3, get_y(pieces[0]), "move_piece p0 2 in test_move_piece")&&result;//didn't move
+    move_piece(pieces[2], UP, 1);
+    result=test_equality_int(2, get_y(pieces[2]), "move_piece p2 1 in test_move_piece")&&result;//moved
+    move_piece(pieces[2], LEFT, 4);
+    result=test_equality_int(0, get_x(pieces[2]), "move_piece p2 2 in test_move_piece")&&result;//moved
     tear_down();
-    delete_piece(p);
     return result;
-    return false;
 }
 
-bool test_copy(){
-    piece p=new_piece_rh(0, 0, true, true);
-    bool result=true;
+bool test_copy_piece(){
+    piece tmp=new_piece_rh(0, 0, true, true);
+    bool result_final=true;
     set_up();
     for (int i=0;i<NB_PIECES;i++){
-        copy_piece(pieces[i], p);
-        result=result&&test_equality_int(get_height(pieces[i]), get_height(p), "copy get_height");
-        result=result&&test_equality_int(get_width(pieces[i]), get_width(p), "copy get_width");
-        result=result&&test_equality_int(get_x(pieces[i]), get_x(p), "copy get_x");
-        result=result&&test_equality_int(get_y(pieces[i]), get_y(p), "copy get_y");
-        result=result&&test_equality_bool(is_horizontal(pieces[i]), is_horizontal(p), "copy is_horizontal");
+        bool result = true;
+        copy_piece(pieces[i], tmp);
+        result=test_equality_int(get_height(pieces[i]), get_height(tmp), "get_height in test_copy_piece")&&result;
+        result=test_equality_int(get_width(pieces[i]), get_width(tmp), "get_width in test_copy_piece")&&result;
+        result=test_equality_int(get_x(pieces[i]), get_x(tmp), "get_x in test_copy_piece")&&result;
+        result=test_equality_int(get_y(pieces[i]), get_y(tmp), "get_y in test_copy_piece")&&result;
+        result=test_equality_bool(is_horizontal(pieces[i]), is_horizontal(tmp), "is_horizontal in test_copy_piece")&&result;
+        result=test_equality_bool(can_move_x(pieces[i]), can_move_x(tmp), "can_move_x in test_copy_piece")&&result;
+        result=test_equality_bool(can_move_y(pieces[i]), can_move_y(tmp), "can_move_y in test_copy_piece")&&result;
+        if (!result) fprintf(stderr, " -> in iteration %d\n", i);
+        result_final = result_final && result;
     }
     tear_down();
-    delete_piece(p);
-    return result;
+    delete_piece(tmp);
+    return result_final;
 }
 
 int main(int argc, char *argv[]){
     bool result=true;
     result=test_equality_bool(true, test_new_piece(), "test_new_piece in main");
     result=test_equality_bool(true, test_intersect(), "test_intersect in main")&&result;
-    result=test_equality_bool(true, test_move(), "test_move in main")&&result;
-    //result=result&&test_equality_bool(true, test_copy(), "test_copy in main");
+    result=test_equality_bool(true, test_move_piece(), "test_move_piece in main")&&result;
+    result=test_equality_bool(true, test_copy_piece(), "test_copy_piece in main")&&result;
 
     if (result){
         printf("Yay !\n");
