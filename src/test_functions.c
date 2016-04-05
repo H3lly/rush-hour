@@ -30,7 +30,7 @@ void show_grid(game g){
 }
 
 bool game_over_ar(cgame g){
-    printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0, get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
+    //printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0, get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
     return (get_x(game_piece(g, 0))==(game_width(g)/2)-1) && (get_y(game_piece(g, 0))==0);
 }
 

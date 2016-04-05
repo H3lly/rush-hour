@@ -34,7 +34,7 @@ void tear_down(){
     delete_game(g);
 }
 
-void test_new_game(){
+bool test_new_game(){
     bool result=true;
     set_game();
     result=test_equality_int(6, game_height(g), "game_height in test_new_game")&&result;
@@ -49,7 +49,8 @@ void test_new_game(){
 bool test_play_move(){
     bool result=true;
     set_game();
-    piece p0_before, p0_after=malloc(sizeof (struct piece_s));
+    piece p0_before=new_piece(0, 0, 0, 0, false, false);
+    piece p0_after=new_piece(0, 0, 0, 0, false, false);
     copy_piece(game_piece(g, 0), p0_before);//p0_before = 0 piece before any play_move
     result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// intersection between 0 and 1
     result=test_equality_bool(false, play_move(g, 1, UP, 1), "play_move 2 in test_play_move")&&result;// horizontal RH piece
@@ -65,16 +66,16 @@ bool test_play_move(){
     return result;
 }
 
-void test_copy_game(){
+bool test_copy_game(){
     bool result=true;
     set_game();
-    game g_cpy=malloc(sizeof (struct game_s));
+    game g_cpy=new_game(0, 0, 0, NULL);
     copy_game(g, g_cpy);
     result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game")&&result;// we check whether both grids have the same number of pieces
     result=test_equality_piece(game_piece(g, 0), game_piece(g_cpy, 0), "test_equality_piece 1 in test_copy_game")&&result;
     result=test_equality_piece(game_piece(g, 1), game_piece(g_cpy, 1), "test_equality_piece 2 in test_copy_game")&&result;
     play_move(g, 0, RIGHT, 1);
-    result=test_equality_bool(false, (equals(game_piece(g, 0), game_piece(g_cpy, 0), "equals in test_copy_game"))&&result);
+    result=test_equality_bool(false, equals(game_piece(g, 0), game_piece(g_cpy, 0)), "equals in test_copy_game")&&result;
     tear_down();
     delete_game(g_cpy);
     return result;
@@ -98,8 +99,8 @@ bool test_game_square_piece(){
     result=test_equality_int(0, game_square_piece(g, 3, 3), "game_square_piece 2 in test_game_square_piece")&&result;
     result=test_equality_int(1, game_square_piece(g, 0, 3), "game_square_piece 3 in test_game_square_piece")&&result;
     result=test_equality_int(1, game_square_piece(g, 1, 3), "game_square_piece 4 in test_game_square_piece")&&result;
-    result=test_equality_int(-1, game_square_piece(g, 4, 3), "game_square_piece 5 in test_game_square_piece")&&result; //nothing here
-    result=test_equality_int(-1, game_square_piece(g, 0, 2), "game_square_piece 6 in test_game_square_piece")&&result; //nothing here
+    result=test_equality_int(-1, game_square_piece(g, 4, 3), "game_square_piece 5 in test_game_square_piece")&&result;//nothing here
+    result=test_equality_int(-1, game_square_piece(g, 0, 2), "game_square_piece 6 in test_game_square_piece")&&result;//nothing here
     tear_down();
     return result;
 }

@@ -13,7 +13,7 @@ bool equals(cpiece p1, cpiece p2);
 void show_grid(game g);
 
 // @brief TO_DO
-bool game_over_an(cgame g);
+bool game_over_ar(cgame g);
 
 // @brief Returns if the piece is small or not.
 bool is_small(cpiece p);
