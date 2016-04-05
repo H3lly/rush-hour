@@ -43,15 +43,17 @@ void test_new_game(){
 bool test_play_move(){
     bool result=true;
     game g=set_game();
+    piece p_clone;
+    copy_piece(game_piece(g,0),p_clone);
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// possible movement
-    result=test_equality_int(get_x(game_piece(g, 0)), 2, "get_x 1 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 0)), 3, "get_y 1 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move")&&result;// 1 is out of the grid
-    result=test_equality_int(get_x(game_piece(g, 1)), 3, "get_x 2 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 1)), 0, "get_y 2 in test_play_move")&&result;
-
-    result=!equals(p_test, game_piece(g, 0))&&result;// this is the only piece that moved
+    result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// intersection between 0 and 1
+    result=test_equality_bool(false, play_move(g, 1, UP, 1), "play_move 2 in test_play_move")&&result;//horizontal RH piece
+    result=test_equality_bool(true, play_move(g, 0, UP, 1), "play_move 3 in test_play_move")&&result;
+    result=test_equality_int(4, get_y(game_piece(g, 0)), "get_x 1 in test_play_move")&&result;  //checks if the piece moved
+    result=test_equality_bool(true, play_move(g, 1, RIGHT, 1), "play_move 4 in test_play_move")&&result;
+    piece p0;
+    copy_piece(game_piece(g,0), p0);
+    result=test_equality_bool(false, get_x(p0) == get_x(p_clone) && get_y(p0) == get_y(p_clone) && get_width(p0) == get_width(p_clone) && get_height(p0) == get_height(p_clone) && can_move_x(p0) == can_move_x(p_clone) && can_move_y(p0) == can_move_y(p_clone));// this is the only piece that moved
     delete_piece(p_test);
     delete_game(g);
     return result;
