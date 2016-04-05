@@ -20,30 +20,12 @@ test configuration rush hour
 . . . 1 2 2
 . . . 1 . .
 
-test configuration ane rouge
-
-. . . . . .
-. . . . . .
-0 0 . . . .
-3 3 . . 2 2
-3 3 . 1 2 2
-3 3 . 1 . .
-
  */
-
-
-void set_up_rh(){
+void set_up(){
     pieces[0]=new_piece_rh(3, 3, true, true);
-    pieces[1]=new_piece_rh(3, 0, true, false);
-    pieces[2]=new_piece_rh(4, 1, true, true);
-    pieces[3]=new_piece_rh(5, 3, false, false);
-}
-
-void set_up_ar(){
-    pieces[0]=new_piece(0, 3, 2, 1, true, true);
     pieces[1]=new_piece(3, 0, 1, 2, true, true);
-    pieces[2]=new_piece(4, 1, 2, 2, true, true);
-    pieces[3]=new_piece(0, 0, 2, 3, true, true);
+    pieces[2]=new_piece(4, 1, 2, 1, true, true);
+    pieces[3]=new_piece(5, 3, 1, 3, true, true);
 }
 
 void tear_down(){
@@ -51,30 +33,39 @@ void tear_down(){
         delete_piece(pieces[i]);
 }
 bool test_new_piece(){
-    bool result=true;
-    for (int x=0; x < 5; x++)
-        for (int y=0; y < 5; y++)
-            for (bool small=false; !small; small= !small)
-                for (bool horizontal=false; !horizontal; horizontal= !horizontal){
-                    int size;
-                    if (small)
-                        size=2; // code non executé selon gcov
-                    else
-                        size=3;
-                    piece p=new_piece_rh(x, y, small, horizontal);
-                    result=result && test_equality_int(x, get_x(p), "get_x");
-                    result=result && test_equality_int(y, get_y(p), "get_y");
-                    if (horizontal){
-                        result=result && test_equality_int(1, get_height(p), "get_height"); // code non executé selon gcov
-                        result=result && test_equality_int(size, get_width(p), "get_width"); // code non executé selon gcov
-                    } else{
-                        result=result && test_equality_int(size, get_height(p), "get_height");
-                        result=result && test_equality_int(1, get_width(p), "get_width");
-                    }
-                    delete_piece(p);
-                }
-    return result;
+    set_up();
+    bool result = true;
+    result = test_equality_int(3, get_x(piece[0]), "get_x in test_new_piece");
+    result = test_equality_int(3, get_y(piece[0]), "get_y in test_new_piece")&&result;
+    result = test_equality_int(2, get_width(piece[0]), "get_width in test_new_piece")&&result;
+    result = test_equality_int(1, get_height(piece[0]), "get_height in test_new_piece")&&result;
+    result = test_equality_bool(2, get_width(piece[0]), "get_width in test_new_piece")&&result;
 }
+//bool test_new_piece(){
+//    bool result=true;
+//    for (int x=0; x < 5; x++)
+//        for (int y=0; y < 5; y++)
+//            for (bool small=false; !small; small= !small)
+//                for (bool horizontal=false; !horizontal; horizontal= !horizontal){
+//                    int size;
+//                    if (small)
+//                        size=2; // code non executé selon gcov
+//                    else
+//                        size=3;
+//                    piece p=new_piece_rh(x, y, small, horizontal);
+//                    result=result && test_equality_int(x, get_x(p), "get_x");
+//                    result=result && test_equality_int(y, get_y(p), "get_y");
+//                    if (horizontal){
+//                        result=result && test_equality_int(1, get_height(p), "get_height"); // code non executé selon gcov
+//                        result=result && test_equality_int(size, get_width(p), "get_width"); // code non executé selon gcov
+//                    } else{
+//                        result=result && test_equality_int(size, get_height(p), "get_height");
+//                        result=result && test_equality_int(1, get_width(p), "get_width");
+//                    }
+//                    delete_piece(p);
+//                }
+//    return result;
+//}
 bool test_intersect(){
     bool result=true;
     set_up();

@@ -37,7 +37,7 @@ void tear_down(){
 bool test_new_game(){
     bool result=true;
     set_game();
-    result=test_equality_int(6, game_height(g), "game_height in test_new_game")&&result;
+    result=test_equality_int(6, game_height(g), "game_height in test_new_game");
     result=test_equality_int(6, game_width(g), "game_width in test_new_game")&&result;
     result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game")&&result;
     result=test_equality_piece(pieces[0], game_piece(g, 0), "test_equality_piece 1 in test_new_game")&&result;
@@ -52,7 +52,7 @@ bool test_play_move(){
     piece p0_before=new_piece(0, 0, 2, 2, false, false);
     piece p0_after=new_piece(0, 0, 2, 2, false, false);
     copy_piece(game_piece(g, 0), p0_before);//p0_before = 0 piece before any play_move
-    result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// intersection between 0 and 1
+    result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move");// intersection between 0 and 1
     result=test_equality_bool(false, play_move(g, 1, UP, 1), "play_move 2 in test_play_move")&&result;// horizontal RH piece
     result=test_equality_bool(true, play_move(g, 0, UP, 1), "play_move 3 in test_play_move")&&result;
     result=test_equality_int(4, get_y(game_piece(g, 0)), "get_y in test_play_move")&&result;// checks if the piece
@@ -71,7 +71,7 @@ bool test_copy_game(){
     set_game();
     game g_cpy=new_game(0, 0, 0, NULL);
     copy_game(g, g_cpy);
-    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game")&&result;// we check whether both grids have the same number of pieces
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game");// we check whether both grids have the same number of pieces
     result=test_equality_piece(game_piece(g, 0), game_piece(g_cpy, 0), "test_equality_piece 1 in test_copy_game")&&result;
     result=test_equality_piece(game_piece(g, 1), game_piece(g_cpy, 1), "test_equality_piece 2 in test_copy_game")&&result;
     play_move(g, 0, RIGHT, 1);
@@ -85,7 +85,7 @@ bool test_game_over(){
     bool result=true;
     set_game();
     play_move(g, 0, DOWN, 3);
-    result=test_equality_bool(true, game_over_ar(g), "game_over_ar in test_game_over")&&result;
+    result=test_equality_bool(true, game_over_ar(g), "game_over_ar in test_game_over");
     play_move(g, 0, UP, 3);
     play_move(g, 0, RIGHT, 2);
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr in test_game_over")&&result;
@@ -96,7 +96,7 @@ bool test_game_over(){
 bool test_game_square_piece(){
     set_game();
     bool result=true;
-    result=test_equality_int(0, game_square_piece(g, 2, 3), "game_square_piece 1 in test_game_square_piece")&&result;
+    result=test_equality_int(0, game_square_piece(g, 2, 3), "game_square_piece 1 in test_game_square_piece");
     result=test_equality_int(0, game_square_piece(g, 3, 3), "game_square_piece 2 in test_game_square_piece")&&result;
     result=test_equality_int(1, game_square_piece(g, 0, 3), "game_square_piece 3 in test_game_square_piece")&&result;
     result=test_equality_int(1, game_square_piece(g, 1, 3), "game_square_piece 4 in test_game_square_piece")&&result;
@@ -108,7 +108,7 @@ bool test_game_square_piece(){
 
 int main(int argc, char *argv[]){
     bool result=true;
-    result=test_equality_bool(true, test_new_game(), "test_new_game in main")&&result;
+    result=test_equality_bool(true, test_new_game(), "test_new_game in main");
     result=test_equality_bool(true, test_copy_game(), "test_copy_game in main")&&result;
     result=test_equality_bool(true, test_play_move(), "test_play_move in main")&&result;
     result=test_equality_bool(true, test_game_over(), "test_game_over in main")&&result;
