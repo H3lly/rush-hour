@@ -5,71 +5,36 @@
 #include "game.h"
 #include "test_functions.h"
 
-#define NB_PIECES_RH 4
-#define NB_PIECES_AR 7
+#define NB_PIECES 2
 
-piece pieces_ar[NB_PIECES_AR];
-piece pieces_rh[NB_PIECES_RH];
+piece pieces[NB_PIECES];
 
 /* 
 
-test configuration rush hour
-. . . . . 3
-. . . . . 3
-. . . 0 0 3
+ final test configuratrion
 . . . . . .
-. . . 1 2 2
-. . . 1 . .
-
-test configuration ane rouge 
-1 0 0 2
-1 0 0 2
-3 . . 4
-3 . . 4
-5 . . 6
- 
-
+. . . . . .
+1 1 0 0 . .
+. . . . . .
+. . . . . .
+. . . . . .
 
  */
 
-game set_game_rh(){
-    pieces_rh[0]=new_piece_rh(3, 3, true, true);
-    pieces_rh[1]=new_piece_rh(3, 0, true, false);
-    pieces_rh[2]=new_piece_rh(4, 1, true, true);
-    pieces_rh[3]=new_piece_rh(5, 3, false, false);
-
-    return new_game_hr(NB_PIECES_RH, pieces_rh);
+game set_game(){
+    pieces[0]=new_piece(2, 3, 2, 1, true, true);
+    pieces[1]=new_piece_rh(0, 3, true, false);
+    return new_game_hr(NB_PIECES, pieces);
 }
 
-game set_game_ar(){
-    pieces_ar[0]=new_piece(1, 3, 2, 2, true, true);
-    pieces_ar[1]=new_piece(0, 3, 1, 2, true, true);
-    pieces_ar[2]=new_piece(3, 3, 1, 2, true, true);
-    pieces_ar[3]=new_piece(0, 1, 1, 2, true, true);
-    pieces_ar[4]=new_piece(3, 1, 1, 2, true, true);
-    pieces_ar[5]=new_piece(0, 0, 1, 1, true, true);
-    pieces_ar[6]=new_piece(3, 0, 1, 1, true, true);
-
-    return new_game(4, 5, NB_PIECES_AR, pieces_ar);
-}
-
-bool test_new_game_rh(){
-    game g=set_game_rh();
-    return test_equality_bool(test_new_game(g, 6, 6, true), true, "test_new_game in test_new_game_rh");
-}
-
-bool test_new_game_ar(){
-    game g=set_game_ar();
-    return test_equality_bool(test_new_game(g, 4, 5, false), true, "test_new_game in test_new_game_ar");
-}
-
-void test_new_game(game g, int w, int h, bool rh){
+void test_new_game(){
     bool result=true;
-    result=test_equality_int(h, game_height(g), "game_height in test_new_game")&&result;
-    result=test_equality_int(w, game_width(g), "game_width in test_new_game")&&result;
+    game g = set_game();
+    result=test_equality_int(6, game_height(g), "game_height in test_new_game")&&result;
+    result=test_equality_int(6, game_width(g), "game_width in test_new_game")&&result;
     result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game")&&result;
     for (int i=0;i<NB_PIECES;i++){
-        result=equals(pieces[i], game_piece(g, i))&&result;
+        result=test_equality_piece(pieces[i], game_piece(g, i), "test_equality_piece in test_new_game")&&result;
     }
     delete_game(g);
     return result;
