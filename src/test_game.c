@@ -80,28 +80,13 @@ void test_copy_game(){
     return result;
 }
 
-bool test_game_over_rh(){
-    bool result=true;
-    set_game();
-    play_move(g, 0, LEFT, 2);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 0 in test_game_over_rh")&&result;
-    play_move(g, 1, UP, 4);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 1 in test_game_over_rh")&&result;
-    play_move(g, 2, LEFT, 1);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 2 in test_game_over_rh")&&result;
-    play_move(g, 3, DOWN, 3);
-    result=test_equality_bool(false, game_over_hr(g), "game_over_hr 3 in test_game_over_rh")&&result;
-    play_move(g, 0, RIGHT, 3);// we bring the piece to the exit
-    result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_rh")&&result;
-    tear_down();
-    return result;
-}
-
-bool test_game_over_ar(){
+bool test_game_over(){
     bool result=true;
     set_game();
     play_move(g, 0, DOWN, 3);
-    result=test_equality_bool(true, game_over_an(g), "game_over_an in test_game_over_ar")&&result;
+    result=test_equality_bool(true, game_over_ar(g), "game_over_ar in test_game_over")&&result;
+    play_move(g, 1, RIGHT, 4);
+    result=test_equality_bool(true, game_over_hr(g), "game_over_hr in test_game_over")&&result;
     tear_down();
     return result;
 }
@@ -109,30 +94,23 @@ bool test_game_over_ar(){
 bool test_game_square_piece(){
     set_game();
     bool result=true;
-    result=test_equality_int(5, game_square_piece(g, 0, 0), "game_square_piece in test_game_square_piece")&&result;
-    result=test_equality_int(0, game_square_piece(g, 1, 3), "game_square_piece in test_game_square_piece")&&result;
+    result=test_equality_int(0, game_square_piece(g, 2, 3), "game_square_piece 1 in test_game_square_piece")&&result;
+    result=test_equality_int(0, game_square_piece(g, 3, 3), "game_square_piece 2 in test_game_square_piece")&&result;
+    result=test_equality_int(1, game_square_piece(g, 0, 3), "game_square_piece 3 in test_game_square_piece")&&result;
+    result=test_equality_int(1, game_square_piece(g, 1, 3), "game_square_piece 4 in test_game_square_piece")&&result;
+    result=test_equality_int(-1, game_square_piece(g, 4, 3), "game_square_piece 5 in test_game_square_piece")&&result; //nothing here
+    result=test_equality_int(-1, game_square_piece(g, 0, 2), "game_square_piece 6 in test_game_square_piece")&&result; //nothing here
     tear_down();
     return result;
 }
 
 int main(int argc, char *argv[]){
     bool result=true;
-
-    // tests for the rh functions
-
-    result=test_equality_bool(true, test_new_game_rh(), "test_new_game_rh in main")&&result;
-    result=test_equality_bool(true, test_copy_game_rh(), "test_copy_game_rh in main")&&result;
-    result=test_equality_bool(true, test_play_move_rh(), "test_play_move_rh in main")&&result;
-    result=test_equality_bool(true, test_game_over_rh(), "test_game_over_rh in main")&&result;
-
-    // tests for the ar functions
-
-    result=test_equality_bool(true, test_new_game_ar(), "test_new_game_ar in main")&&result;
-    result=test_equality_bool(true, test_copy_game_ar(), "test_copy_game_ar in main")&&result;
-    result=test_equality_bool(true, test_play_move_ar(), "test_play_move_ar in main")&&result;
-    result=test_equality_bool(true, test_game_over_ar(), "test_game_over_ar in main")&&result;
+    result=test_equality_bool(true, test_new_game(), "test_new_game in main")&&result;
+    result=test_equality_bool(true, test_copy_game(), "test_copy_game in main")&&result;
+    result=test_equality_bool(true, test_play_move(), "test_play_move in main")&&result;
+    result=test_equality_bool(true, test_game_over(), "test_game_over in main")&&result;
     result=test_equality_bool(true, test_game_square_piece(), "test_game_square_piece in main")&&result;
-
     if (result){
         printf("It works c: !\n");
         return EXIT_SUCCESS;
