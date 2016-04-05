@@ -40,7 +40,7 @@ void test_new_game(){
     return result;
 }
 
-bool test_play_move_rh(){
+bool test_play_move(){
     bool result=true;
     game g=set_game();
     piece p_test=new_piece_rh(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), is_horizontal(game_piece(g, 0)), is_small(game_piece(g, 0)));
@@ -50,37 +50,9 @@ bool test_play_move_rh(){
     result=test_equality_bool(false, play_move(g, 1, DOWN, 1), "play_move 2 in test_play_move")&&result;// 1 is out of the grid
     result=test_equality_int(get_x(game_piece(g, 1)), 3, "get_x 2 in test_play_move")&&result;
     result=test_equality_int(get_y(game_piece(g, 1)), 0, "get_y 2 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ")&&result;// intersection between 2 and 1
-    result=test_equality_int(get_x(game_piece(g, 2)), 4, "get_x 3 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 2)), 1, "get_y 3 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 3, DOWN, 2), "play_move 4 in test_play_move")&&result;// intersection between 3 and 2 
-    result=test_equality_int(get_x(game_piece(g, 3)), 5, "get_x 4 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 3)), 3, "get_y 4 in test_play_move")&&result;
-    result=test_equality_int(nbmove, game_nb_moves(g), "game_nb_moves in test_play_move")&&result;
+
     result=!equals(p_test, game_piece(g, 0))&&result;// this is the only piece that moved
     delete_piece(p_test);
-    delete_game(g);
-    return result;
-}
-
-bool test_play_move_ar(){
-    bool result=true;
-    game g=set_game();
-    piece p_test=new_piece(get_x(game_piece(g, 0)), get_y(game_piece(g, 0)), get_height(game_piece(g, 0)), get_width(game_piece(g, 0)), can_move_x(game_piece(g, 0)), can_move_y(game_piece(g, 0)));
-    result=test_equality_bool(true, play_move(g, 5, RIGHT, 1), "play_move 1 in test_play_move")&&result;// possible movement
-    result=test_equality_int(get_x(game_piece(g, 5)), 1, "get_x 1 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 5)), 0, "get_y 1 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 6, RIGHT, 1), "play_move 2 in test_play_move")&&result;// impossible movement: 6 would be out of bounds
-    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 2 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 2 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 2, LEFT, 1), "play_move 3 in test_play_move ")&&result;// intersection between 2 and 1
-    result=test_equality_int(get_x(game_piece(g, 2)), 3, "get_x 3 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 2)), 3, "get_y 3 in test_play_move")&&result;
-    result=test_equality_bool(false, play_move(g, 6, LEFT, 2), "play_move 4 in test_play_move")&&result;// intersection between 6 and 2
-    result=test_equality_int(get_x(game_piece(g, 6)), 3, "get_x 4 in test_play_move")&&result;
-    result=test_equality_int(get_y(game_piece(g, 6)), 0, "get_y 4 in test_play_move")&&result;
-    result=test_equality_int(1, game_nb_moves(g), "game_nb_moves in test_play_move")&&result;
-    result=!equals(p_test, game_piece(g, 5))&&result;// this is the only piece that moved
     delete_game(g);
     return result;
 }
