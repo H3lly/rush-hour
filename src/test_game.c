@@ -24,7 +24,7 @@ piece pieces[NB_PIECES];
 
 void set_game(){
     pieces[0]=new_piece(2, 3, 2, 1, true, true);
-    pieces[1]=new_piece_rh(0, 3, true, false);
+    pieces[1]=new_piece_rh(0, 3, true, true);
     g=new_game_hr(NB_PIECES, pieces);
 }
 
@@ -49,8 +49,10 @@ bool test_new_game(){
 bool test_play_move(){
     bool result=true;
     set_game();
-    piece p0_before=new_piece(0, 0, 0, 0, false, false);
-    piece p0_after=new_piece(0, 0, 0, 0, false, false);
+    piece p0_before=new_piece(0, 0, 2, 2, false, false);
+    show_grid(g);
+    piece p0_after=new_piece(0, 0, 2, 2, false, false);
+    show_grid(g);
     copy_piece(game_piece(g, 0), p0_before);//p0_before = 0 piece before any play_move
     result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// intersection between 0 and 1
     result=test_equality_bool(false, play_move(g, 1, UP, 1), "play_move 2 in test_play_move")&&result;// horizontal RH piece
@@ -59,7 +61,7 @@ bool test_play_move(){
     result=test_equality_int(2, get_x(game_piece(g, 0)), "get_x in test_play_move")&&result;// moved properly
     result=test_equality_bool(true, play_move(g, 1, RIGHT, 1), "play_move 4 in test_play_move")&&result;
     copy_piece(game_piece(g, 0), p0_after);//p0_after = 0 piece after play_move ; avoids writing "game_piece(g,0)" multiple times
-    result=test_equality_bool(false, equals(p0_before, p0_after), "equals in test_play_move");
+    result=test_equality_bool(false, equals(p0_before, p0_after), "equals in test_play_move")&&result;
     delete_piece(p0_before);
     delete_piece(p0_after);
     tear_down();
@@ -86,7 +88,8 @@ bool test_game_over(){
     set_game();
     play_move(g, 0, DOWN, 3);
     result=test_equality_bool(true, game_over_ar(g), "game_over_ar in test_game_over")&&result;
-    play_move(g, 1, RIGHT, 4);
+    play_move(g, 0, UP, 3);
+    play_move(g, 0, RIGHT, 2);
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr in test_game_over")&&result;
     tear_down();
     return result;
