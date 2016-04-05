@@ -1,4 +1,4 @@
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
 
@@ -10,7 +10,7 @@
 
 piece pieces[NB_PIECES];
 
-/* test configuration
+ * test configuration
 
 . . . . . .
 . . . . . .
@@ -19,19 +19,14 @@ piece pieces[NB_PIECES];
 3 3 . 1 2 2
 3 3 . 1 . .
 
- */
-void set_up(){
-    pieces[0]=new_piece(0, 3, 2, 1, true, true);//Can move horizontaly
-    pieces[1]=new_piece(3, 0, 1, 2, true, true);//Can move horizontaly
-    pieces[2]=new_piece(4, 1, 2, 2, true, true);//Can move horizontaly and vertically
-    pieces[3]=new_piece(0, 0, 2, 3, true, true);//Can't move
-}
+ * vfdshrtyi_è
+
 
 void tear_down(){
     for (int i=0;i<NB_PIECES;i++)
         delete_piece(pieces[i]);
 }
-
+*/
 bool test_new_piece(){
     bool result=true;
     for (int x=0;x<5;x++)
