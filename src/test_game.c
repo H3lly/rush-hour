@@ -27,6 +27,8 @@ test configuration ane rouge
 3 . . 4
 3 . . 4
 5 . . 6
+ 
+
 
  */
 
@@ -52,28 +54,17 @@ game set_game_ar(){
 }
 
 bool test_new_game_rh(){
-    test_new_game(true);
+    game g=set_game_rh();
+    return test_equality_bool(test_new_game(g, 6, 6, true), true, "test_new_game in test_new_game_rh");
 }
 
 bool test_new_game_ar(){
-    test_new_game(false);
+    game g=set_game_ar();
+    return test_equality_bool(test_new_game(g, 4, 5, false), true, "test_new_game in test_new_game_ar");
 }
 
-void test_new_game(bool rh){
+void test_new_game(game g, int w, int h, bool rh){
     bool result=true;
-    game g;
-    int h, w;
-    if (rh)
-        g=set_game_rh();
-    else
-        g=set_game_ar();
-    if (rh){
-        h=6;
-        w=6;
-    } else{
-        h=5;
-        w=4;
-    }
     result=test_equality_int(h, game_height(g), "game_height in test_new_game")&&result;
     result=test_equality_int(w, game_width(g), "game_width in test_new_game")&&result;
     result=test_equality_int(NB_PIECES, game_nb_pieces(g), "game_nb_pieces in test_new_game")&&result;
