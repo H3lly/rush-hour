@@ -17,6 +17,7 @@ bool is_small(cpiece p){
 }
 
 void show_grid(game g){
+    printf("\n");
     for (int ord=game_height(g)-1;ord>=0;ord--){
         for (int abs=0;abs<game_width(g);abs++){
             if (game_square_piece(g, abs, ord)== -1)
@@ -29,8 +30,8 @@ void show_grid(game g){
     printf("\nMoves : %d\n----------\n\n", game_nb_moves(g));
 }
 
-bool game_over_an(cgame g){
-    printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0,get_x(game_piece(g, 0)),get_y(game_piece(g, 0)));
+bool game_over_ar(cgame g){
+    //printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0, get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
     return (get_x(game_piece(g, 0))==(game_width(g)/2)-1) && (get_y(game_piece(g, 0))==0);
 }
 
@@ -50,5 +51,5 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     if (!equals(expected, value)){
         fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
     }
-    return expected==value;
+    return equals(expected, value);
 }

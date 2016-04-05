@@ -63,9 +63,7 @@ bool movement_is_allowed(cpiece p, dir d){
 }
 
 void move_piece(piece p, dir d, int distance){
-    if (!movement_is_allowed(p, d))
-        fprintf(stderr, "Unauthorized move: Piece orientation doesn't match move direction.\n\n");
-    else{
+    if (movement_is_allowed(p, d)){
         switch (d){
             case UP:
                 p->py+=distance;
