@@ -30,7 +30,7 @@ void show_grid(game g){
 }
 
 bool game_over_an(cgame g){
-    printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0,get_x(game_piece(g, 0)),get_y(game_piece(g, 0)));
+    printf("Exit : (%d,%d)|0: (%d,%d)\n", (game_width(g)/2)-1, 0, get_x(game_piece(g, 0)), get_y(game_piece(g, 0)));
     return (get_x(game_piece(g, 0))==(game_width(g)/2)-1) && (get_y(game_piece(g, 0))==0);
 }
 
@@ -51,4 +51,13 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
         fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
     }
     return expected==value;
+}
+
+bool test_equality_pieces(cgame expected, cgame value, char * msg){
+    bool result=true;
+    for (int i=0;i<game_nb_pieces(expected);++i)
+        result=result && equals(game_piece(expected, i), game_piece(value, i));// we don't need to avoid lazy eval
+    if (!result)
+        fprintf(stderr, "ERR: piece lists are different | Error from : %s\n", msg);
+    return result;
 }
