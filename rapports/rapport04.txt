@@ -3,11 +3,11 @@ Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
 Adresse du dépôt: https://github.com/H3lly/rush-hour
 
-Luc : //anti-duplication
-      //gcov
+Luc :   //anti-duplication
+        //gcov
 
 Camille :
-        meh
+        //valgrind --full memory
 
 Ny Andry et Alexandre :
 	//solveur

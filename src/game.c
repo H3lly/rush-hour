@@ -4,6 +4,9 @@
 #include "piece.h"
 #include "game.h"
 
+#define RH_WIDTH 6
+#define RH_HEIGHT 6
+
 struct game_s{
     int width;
     int height;
@@ -43,7 +46,7 @@ game new_game(int width, int height, int nb_pieces, piece *pieces){
 }
 
 game new_game_hr(int nb_pieces, piece *pieces){
-    return new_game(6, 6, nb_pieces, pieces);
+    return new_game(RH_WIDTH, RH_HEIGHT, nb_pieces, pieces);
 }
 
 void delete_game(game g){
