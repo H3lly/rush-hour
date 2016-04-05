@@ -27,42 +27,42 @@ void tear_down(){
         delete_piece(pieces[i]);
 }
 */
-bool test_new_piece(){
-    bool result=true;
-    for (int x=0;x<5;x++)
-        for (int y=0;y<5;y++)
-            for (int i=0;i<5;i++)
-                for (int j=0;j<5;j++)
-                    for (bool move_x=false;!move_x;move_x=!move_x)
-                        for (bool move_y=false;!move_y;move_y= !move_y){
-                            piece p=new_piece(x, y, i, j, move_x, move_y);
-                            result=test_equality_int(x, get_x(p), "get_x in test_new_piece")&&result;
-                            result=test_equality_int(y, get_y(p), "get_y in test_new_piece")&&result;
-                            result=test_equality_int(i, get_width(p), "get_width in test_new_piece")&&result;
-                            result=test_equality_int(j, get_height(p), "get_height in test_new_piece")&&result;
-                            result=test_equality_bool(move_x, can_move_x(p), "can_move_x in test_new_piece")&&result;
-                            result=test_equality_bool(move_y, can_move_y(p), "can_move_y in test_new_piece")&&result;
-                            delete_piece(p);
-                        }
-    return result;
-}
+//bool test_new_piece(){
+//    bool result=true;
+//    for (int x=0;x<5;x++)
+//        for (int y=0;y<5;y++)
+//            for (int i=0;i<5;i++)
+//                for (int j=0;j<5;j++)
+//                    for (bool move_x=false;!move_x;move_x=!move_x)
+//                        for (bool move_y=false;!move_y;move_y= !move_y){
+//                            piece p=new_piece(x, y, i, j, move_x, move_y);
+//                            result=test_equality_int(x, get_x(p), "get_x in test_new_piece")&&result;
+//                            result=test_equality_int(y, get_y(p), "get_y in test_new_piece")&&result;
+//                            result=test_equality_int(i, get_width(p), "get_width in test_new_piece")&&result;
+//                            result=test_equality_int(j, get_height(p), "get_height in test_new_piece")&&result;
+//                            result=test_equality_bool(move_x, can_move_x(p), "can_move_x in test_new_piece")&&result;
+//                            result=test_equality_bool(move_y, can_move_y(p), "can_move_y in test_new_piece")&&result;
+//                            delete_piece(p);
+//                        }
+//    return result;
+//}
 
-bool test_intersect(){
-    bool result=true;
-    set_up();
-    for (int i=0;i<NB_PIECES;i++)
-        for (int j=0;j<NB_PIECES;j++){
-            result=result&&test_equality_bool(i==j, intersect(pieces[i], pieces[j]), "intersect in test_intersect");
-        }
-    piece pb_piece1=new_piece(0, 1, 1, 1, false, false);
-    piece pb_piece2=new_piece(3, 3, 1, 1, false, false);
-    result=result&&test_equality_bool(true, intersect(pieces[3], pb_piece1), "intersect pb1 in test_intersect");
-    result=result&&test_equality_bool(false, intersect(pb_piece2, pb_piece1), "intersect pb2 in test_intersect");
-    delete_piece(pb_piece1);
-    delete_piece(pb_piece2);
-    tear_down();
-    return result;
-}
+//bool test_intersect(){
+//    bool result=true;
+//    set_up();
+//    for (int i=0;i<NB_PIECES;i++)
+//        for (int j=0;j<NB_PIECES;j++){
+//            result=result&&test_equality_bool(i==j, intersect(pieces[i], pieces[j]), "intersect in test_intersect");
+//        }
+//    piece pb_piece1=new_piece(0, 1, 1, 1, false, false);
+//    piece pb_piece2=new_piece(3, 3, 1, 1, false, false);
+//    result=result&&test_equality_bool(true, intersect(pieces[3], pb_piece1), "intersect pb1 in test_intersect");
+//    result=result&&test_equality_bool(false, intersect(pb_piece2, pb_piece1), "intersect pb2 in test_intersect");
+//    delete_piece(pb_piece1);
+//    delete_piece(pb_piece2);
+//    tear_down();
+//    return result;
+//}
 
 bool test_move(){ 
     bool result=true;

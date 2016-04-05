@@ -51,15 +51,14 @@ bool test_new_piece(){
 bool test_intersect(){
     bool result=true;
     set_up();
-    for (int i=0;i<NB_PIECES;i++)
-        for (int j=0;j<NB_PIECES;j++){
-            result=result&&test_equality_bool(i==j, intersect(pieces[i], pieces[j]), "intersect");
-        }
-
+    for (int i=0;i<NB_PIECES;i++){
+        for (int j=0;j<NB_PIECES;j++)
+            result=result&&test_equality_bool(i==j, intersect(pieces[i], pieces[j]), "intersect loop in test_intersect");
+    }
     piece pb_piece1=new_piece_rh(3, 3, false, false);
     piece pb_piece2=new_piece_rh(3, 1, false, false);
-    result=result&&test_equality_bool(true, intersect(pieces[0], pb_piece1), "intersect pb1");
-    result=result&&test_equality_bool(true, intersect(pb_piece2, pb_piece1), "intersect pb2");
+    result=result&&test_equality_bool(true, intersect(pieces[0], pb_piece1), "intersect 1 in test_intersect");
+    result=result&&test_equality_bool(true, intersect(pb_piece2, pb_piece1), "intersect 2 in test_intersect");
     delete_piece(pb_piece1);
     delete_piece(pb_piece2);
     tear_down();
@@ -124,11 +123,10 @@ bool test_copy(){
 
 int main(int argc, char *argv[]){
     bool result=true;
-
-    result=result&&test_equality_bool(true, test_new_piece(), "new_piece");
-    result=result&&test_equality_bool(true, test_intersect(), "intersect");
-    result=result&&test_equality_bool(true, test_move(), "move");
-    result=result&&test_equality_bool(true, test_copy(), "copy");
+    result=test_equality_bool(true, test_new_piece(), "test_new_piece in main");
+    result=test_equality_bool(true, test_intersect(), "test_intersect in main")&&result;
+    result=test_equality_bool(true, test_move(), "test_move in main")&&result;
+    //result=result&&test_equality_bool(true, test_copy(), "test_copy in main");
 
     if (result){
         printf("Yay !\n");
