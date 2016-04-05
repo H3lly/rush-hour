@@ -29,10 +29,5 @@ bool test_equality_bool(bool expected, bool value, char * msg);
 // @brief Tests if value is equal to expected; if not, displays an error message containing msg to standard error output 
 // @return true if excepted==value
 bool test_equality_piece(cpiece expected, cpiece value, char * msg);
-
-// @brief Tests if value is equal to expected; if not, displays an error message containing msg to standard error output 
-// @return true if excepted==value
-bool test_equality_pieces(cgame expected, cgame value, char * msg);
-
 #endif
 

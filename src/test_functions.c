@@ -50,14 +50,5 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     if (!equals(expected, value)){
         fprintf(stderr, "ERR: Pieces are different | Error from : %s\n", msg);
     }
-    return expected==value;
-}
-
-bool test_equality_pieces(cgame expected, cgame value, char * msg){
-    bool result=true;
-    for (int i=0;i<game_nb_pieces(expected);++i)
-        result=result && equals(game_piece(expected, i), game_piece(value, i));// we don't need to avoid lazy eval
-    if (!result)
-        fprintf(stderr, "ERR: piece lists are different | Error from : %s\n", msg);
-    return result;
+    return equals(expected, value);
 }

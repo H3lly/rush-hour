@@ -29,8 +29,8 @@ void set_game(){
 }
 
 void tear_down(){
-//    for (int i = 0; i < NB_PIECES; i++)
-//        delete_piece(pieces[i]); ??????????????????????????,
+    //    for (int i = 0; i < NB_PIECES; i++)
+    //        delete_piece(pieces[i]); ??????????????????????????
     delete_game(g);
 }
 
@@ -69,11 +69,12 @@ void test_copy_game(){
     bool result=true;
     set_game();
     game g_cpy=malloc(sizeof (struct game_s));
-    copy_game(g, g_cpy);// copy the first grid into the empty grid
+    copy_game(g, g_cpy);
     result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game")&&result;// we check whether both grids have the same number of pieces
-    result=test_equality_pieces(g, g_cpy, "test_equality_pieces in test_copy_game")&&result;
+    result=test_equality_piece(game_piece(g, 0), game_piece(g_cpy, 0), "test_equality_piece 1 in test_copy_game")&&result;
+    result=test_equality_piece(game_piece(g, 1), game_piece(g_cpy, 1), "test_equality_piece 2 in test_copy_game")&&result;
     play_move(g, 0, RIGHT, 1);
-    result=test_equality_bool(false, (equals(game_piece(g_cpy, 0), game_piece(g, 0), "equals in test_copy_game"))&&result);
+    result=test_equality_bool(false, (equals(game_piece(g, 0), game_piece(g_cpy, 0), "equals in test_copy_game"))&&result);
     tear_down();
     delete_game(g_cpy);
     return result;
@@ -81,7 +82,7 @@ void test_copy_game(){
 
 bool test_game_over_rh(){
     bool result=true;
-    game g=set_game();
+    set_game();
     play_move(g, 0, LEFT, 2);
     result=test_equality_bool(false, game_over_hr(g), "game_over_hr 0 in test_game_over_rh")&&result;
     play_move(g, 1, UP, 4);
@@ -92,28 +93,25 @@ bool test_game_over_rh(){
     result=test_equality_bool(false, game_over_hr(g), "game_over_hr 3 in test_game_over_rh")&&result;
     play_move(g, 0, RIGHT, 3);// we bring the piece to the exit
     result=test_equality_bool(true, game_over_hr(g), "game_over_hr 4 in test_game_over_rh")&&result;
-    delete_game(g);
-
+    tear_down();
     return result;
 }
 
 bool test_game_over_ar(){
     bool result=true;
-    game g=set_game();
+    set_game();
     play_move(g, 0, DOWN, 3);
     result=test_equality_bool(true, game_over_an(g), "game_over_an in test_game_over_ar")&&result;
-    delete_game(g);
-
+    tear_down();
     return result;
 }
 
 bool test_game_square_piece(){
-    game g=set_game();
+    set_game();
     bool result=true;
     result=test_equality_int(5, game_square_piece(g, 0, 0), "game_square_piece in test_game_square_piece")&&result;
     result=test_equality_int(0, game_square_piece(g, 1, 3), "game_square_piece in test_game_square_piece")&&result;
-    delete_game(g);
-
+    tear_down();
     return result;
 }
 
