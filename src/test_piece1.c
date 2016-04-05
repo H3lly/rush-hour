@@ -9,20 +9,43 @@
 #define NB_PIECES 4
 
 piece pieces[NB_PIECES];
-/* test configuration
-.....3
-.....3
-...003
-......
-...122
-...1..
+
+/* 
+ 
+test configuration rush hour
+. . . . . 3
+. . . . . 3
+. . . 0 0 3
+. . . . . .
+. . . 1 2 2
+. . . 1 . .
+
+test configuration ane rouge
+
+. . . . . .
+. . . . . .
+0 0 . . . .
+3 3 . . 2 2
+3 3 . 1 2 2
+3 3 . 1 . .
+
  */
-void set_up(){
+
+
+void set_up_rh(){
     pieces[0]=new_piece_rh(3, 3, true, true);
     pieces[1]=new_piece_rh(3, 0, true, false);
     pieces[2]=new_piece_rh(4, 1, true, true);
     pieces[3]=new_piece_rh(5, 3, false, false);
 }
+
+void set_up_ar(){
+    pieces[0]=new_piece(0, 3, 2, 1, true, true);
+    pieces[1]=new_piece(3, 0, 1, 2, true, true);
+    pieces[2]=new_piece(4, 1, 2, 2, true, true);
+    pieces[3]=new_piece(0, 0, 2, 3, true, true);
+}
+
 void tear_down(){
     for (int i=0; i < NB_PIECES; i++)
         delete_piece(pieces[i]);
