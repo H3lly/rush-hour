@@ -50,9 +50,7 @@ bool test_play_move(){
     bool result=true;
     set_game();
     piece p0_before=new_piece(0, 0, 2, 2, false, false);
-    show_grid(g);
     piece p0_after=new_piece(0, 0, 2, 2, false, false);
-    show_grid(g);
     copy_piece(game_piece(g, 0), p0_before);//p0_before = 0 piece before any play_move
     result=test_equality_bool(false, play_move(g, 0, LEFT, 1), "play_move 1 in test_play_move")&&result;// intersection between 0 and 1
     result=test_equality_bool(false, play_move(g, 1, UP, 1), "play_move 2 in test_play_move")&&result;// horizontal RH piece

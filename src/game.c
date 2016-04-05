@@ -58,7 +58,11 @@ void delete_game(game g){
 void copy_game(cgame src, game dst){
     dst->nb_pieces=src->nb_pieces;
     dst->nb_moves=src->nb_moves;
-    dst->piece_list=src->piece_list;
+    dst->piece_list=malloc(sizeof (piece)*src->nb_pieces);
+    for (int i=0;i<src->nb_pieces;i++){
+        dst->piece_list[i]=new_piece_rh(0, 0, false, false);// create a new piece
+        copy_piece(src->piece_list[i], dst->piece_list[i]);// overwrite new piece with the wanted copy
+    }
     dst->width=src->width;
     dst->height=src->height;
 }
@@ -97,15 +101,19 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
             }
             if (intersect(p, game_piece(g, i))){
-                //fprintf(stderr, "Unauthorized move: Piece %d is preventing %d from moving.\n\n", i, piece_num);
+                fprintf(stderr, "Unauthorized move: Piece %d is preventing %d from moving.\n\n", i, piece_num);
                 move_piece(p, d, travel*-1);
                 g->nb_moves-=travel;
                 return false;
             }
             if (out_of_grid(p, g)){
-                //fprintf(stderr, "Unauthorized move: %d would be out of bounds.\n\n", piece_num);
+                fprintf(stderr, "Unauthorized move: %d would be out of bounds.\n\n", piece_num);
                 move_piece(p, d, travel*-1);
                 g->nb_moves-=travel;
+                return false;
+            }
+            if (((d==LEFT||d==RIGHT)&&(!can_move_x(p)))||((d==UP||d==DOWN)&&(!can_move_y(p)))){
+                fprintf(stderr, "Unauthorized move: Piece orientation doesn't match move direction.\n\n");
                 return false;
             }
         }
