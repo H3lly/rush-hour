@@ -168,7 +168,8 @@ int main(int argc, char** argv) {
             }
         }
         printf("\e[2J\e[H");
-        play_move(game, piece_num, d, distance);
+        if (play_move(game, piece_num, d, distance))
+            printf("Piece %d moved.\n\n", piece_num);
         show_grid(game);
     }
     printf("Game is over. Score : %d", game_nb_moves(game));
