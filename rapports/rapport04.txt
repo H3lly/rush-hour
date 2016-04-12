@@ -7,7 +7,10 @@ Luc :   //anti-duplication
         //gcov
 
 Camille :
-        //valgrind --full memory
+        J'ai aidé Luc à faire la fusions des fichiers de test et des fichiers de jeux ; j'ai aidé Ny Andry à concevoir un algorithme papier pour le solveur et une structure TreeGame;
+        J'ai créer une fonction valid_piece_list dans game.c qui retourbe true si la liste de piece est valide (à savoir, si il n'y a pas de pièce qui se croisent ou deux fois la même piece), sinon false;
+        J'ai organisé la liste des choses à faire en créant des issues sur git-hub poiur faciliter la répartition des tâches.
+        J'ai ajouté une résolution automatique pour les deux jeux de bases disponible dans play.c pour qu'on ai pas à rejouer entièrement au jeu quand on fait un valgrind.
 
 Ny Andry et Alexandre :
 	//solveur
