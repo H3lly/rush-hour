@@ -29,8 +29,6 @@ void set_game(){
 }
 
 void tear_down(){
-    //    for (int i = 0; i < NB_PIECES; i++)
-    //        delete_piece(pieces[i]); ??????????????????????????
     delete_game(g);
 }
 
@@ -71,13 +69,13 @@ bool test_copy_game(){
     set_game();
     game g_cpy=new_game(0, 0, 0, NULL);
     copy_game(g, g_cpy);
-    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game");// we check whether both grids have the same number of pieces
+    result=test_equality_int(game_nb_pieces(g), game_nb_pieces(g_cpy), "game_nb_pieces in test_copy_game");
     result=test_equality_piece(game_piece(g, 0), game_piece(g_cpy, 0), "test_equality_piece 1 in test_copy_game")&&result;
     result=test_equality_piece(game_piece(g, 1), game_piece(g_cpy, 1), "test_equality_piece 2 in test_copy_game")&&result;
-    play_move(g, 0, RIGHT, 1);
+    play_move(g_cpy, 0, RIGHT, 1);
     result=test_equality_bool(false, equals(game_piece(g, 0), game_piece(g_cpy, 0)), "equals in test_copy_game")&&result;
-    tear_down();
     delete_game(g_cpy);
+    tear_down();
     return result;
 }
 
