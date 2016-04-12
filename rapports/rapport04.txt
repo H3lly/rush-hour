@@ -3,11 +3,16 @@ Groupe : IN400A1
 Membres : Luc Allio, Camille Aussignac, Ny Andry Raharison, Alexandre Casanova--Franger
 Adresse du dépôt: https://github.com/H3lly/rush-hour
 
-Luc :   //anti-duplication
+Luc :   J'ai fini la fusion de test_game1.c et test_game2.c, pour former un unique fichier test_game. J'ai également fait la fusion de test_piece1.c et test_piece 2.c, qui sont devenus test_piece.c.
+        J'ai aussi fusionné rush-hour.c et ane-rouge.c en un seul fichier play.c. Le tout avec l'aide de Camille.
         //gcov
 
 Camille :
-        //valgrind --full memory
+        J'ai aidé Luc à faire la fusion des fichiers de test et de jeu (rush-hour et ane-rouge).
+        J'ai aidé Ny Andry à concevoir un algorithme papier pour le solveur et une structure TreeGame.
+        J'ai créé une fonction valid_piece_list dans game.c qui retourne true si la liste de pièces est valide (à savoir, si il n'y a pas de pièces qui se croisent ou deux fois la même piece), sinon false;
+        J'ai organisé la liste des choses à faire en créant des issues sur GitHub poiur faciliter la répartition des tâches.
+        J'ai ajouté une résolution automatique pour les deux jeux disponible dans play.c pour que l'on ait pas à rejouer entièrement au jeu quand on utilise valgrind.
 
 Ny Andry et Alexandre :
 	//solveur
