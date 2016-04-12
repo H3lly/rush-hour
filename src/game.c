@@ -7,6 +7,7 @@
 #define RH_WIDTH 6
 #define RH_HEIGHT 6
 
+
 struct game_s{
     int width;
     int height;
@@ -15,35 +16,8 @@ struct game_s{
     piece *piece_list;
 };
 
-bool valid_piece_list(piece* list, int length, int game_width, int game_height){
-    bool isValid=true;
-//    char* msg;
-//    for (int i=0;i<length;++i){
-//        for (int j=0;j<length;++j){
-//            if (i!=j){
-//                if (pieces[i]==pieces[j]){
-//                    fprintf(msg, "It seems there is the same piece twice. (piece %d)\n", i);
-//                    isValid=false;
-//                    break;
-//                } else if (intersect(pieces[i], pieces[j])){
-//                    fprintf(stderr, "It seems that the pieces %d and %d are crossing each other. \n", i, j);
-//                    isValid=false;
-//                    break;
-//                }
-//            }
-//        }
-//        if (get_x(pieces[i])<0||get_x(pieces[i])>=game_width||get_y(pieces[i])<0||get_y(pieces[i])>=game_height){
-//            fprintf(stderr, "It seems that the piece %d is out of the grid. \n", i);
-//            isValid=false;
-//            break;
-//        }
-//    }
-//    if (!isValid) fprintf(stderr, "Are you sure that what you wanted to do ?\n");
-    return isValid;
-}
-
 game new_game(int width, int height, int nb_pieces, piece *pieces){
-    if (!valid_piece_list(pieces, nb_pieces, width, height)) printf("All of this doesn't really seem valid.");
+    //if (!valid_piece_list(pieces, nb_pieces, width, height)) printf("All of this doesn't really seem valid.");
     game g=malloc(sizeof (struct game_s));
     g->width=width;
     g->height=height;

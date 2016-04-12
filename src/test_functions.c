@@ -53,3 +53,28 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg){
     }
     return equals(expected, value);
 }
+
+bool valid_piece_list(piece* list, int length, int game_width, int game_height){
+    bool isValid=true;
+    for (int i=0;i<length;++i){
+        for (int j=i;j<length;++j){
+            if (i!=j){
+                if (list[i]==list[j]){
+                    if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+                    fprintf(stderr, "- It seems there is the same piece twice : piece %d and %d. \n", i, j);
+                    isValid=false;
+                } else if (intersect(list[i], list[j])){
+                    if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+                    fprintf(stderr, "- It seems that the pieces %d and %d are crossing each other. \n", i, j);
+                    isValid=false;
+                }
+            }
+        }
+        if (get_x(list[i])<0||get_x(list[i])>=game_width||get_y(list[i])<0||get_y(list[i])>=game_height){
+            if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+            fprintf(stderr, "- It seems that the piece %d is out of the grid. \n", i);
+            isValid=false;
+        }
+    }
+    return isValid;
+}
