@@ -45,7 +45,7 @@ int main(int argc, char** argv){
         dir d;
         int num;
         int distance;
-        int test;
+        bool test;
         while (!(game_over_ar(game))){
             piece_num=-1;
             d=-1;
