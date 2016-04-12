@@ -40,6 +40,6 @@ lib:
 	@echo Make $@ end.
 
 clean:
-	@rm -f *.o test_piece test_game rush-hour ane-rouge lib/libgame.a -d lib 
+	@rm -f *.o test_piece test_game rush-hour ane-rouge lib/libgame.a -d lib
 	@echo Files cleaned.
 	
