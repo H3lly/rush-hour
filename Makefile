@@ -3,7 +3,7 @@ INCLUDE = -I include/
 all:
 	@echo Make all start.
 	@echo
-	@make --silent test_piece test_game play solveur
+	@make --silent test_piece test_game play
 	@echo 
 	@echo Make all end.
 
