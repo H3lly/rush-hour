@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "solveur.h"
 #include "piece.h"
 #include "game.h"
 #include "test_functions.h"
@@ -50,8 +51,8 @@ bool has_child(tree_game t){
 }
 
 
-game solve(tree_game t, dir* prev){
-	game gc;
+game sub_solve(tree_game t, dir* prev){
+	game gc = NULL;
 	cgame g = get_node(t);
 	for (int p = 0; p<g->nb_pieces; ++p){
 		if (can_move_x(g->piece_list[p])){
@@ -98,19 +99,19 @@ game solve(tree_game t, dir* prev){
 	}
 	if (has_child(t)){
 		for (int ge = 0; ge < t->ind_children+2; ++ge){
-			solve(t, prev);
+			sub_solve(t, prev);
 		}
 	}
 	return NULL;
 }
 
 
-int result_solve(game g){
+int solve(game g){
 	tree_game t;
 	t = create_tree(g);
 	dir prev[4] = {RIGHT, LEFT, LEFT, LEFT};
 	game solved = NULL;
-	solved = solve(t, prev);
+	solved = sub_solve(t, prev);
 	if (solved == NULL){
 		return -1;
 	}

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "solveur.h"
+
 #include "piece.h"
 #include "game.h"
 #include "test_functions.h"
@@ -103,6 +105,10 @@ int main(int argc, char** argv){
             delete_game(game);
             return 1;
         }
+    }
+    if (argc==2&& !strcmp(argv[1], "solve")){
+            int s = solve(game);
+            printf("Solve : %d\n", s);
     }
     printf("\e[2J\e[H");//clean the shell
     printf("***** Welcome in RushHour ! *****\nYou need to drive the 0 car to the right !\nGood luck !\n\n");
