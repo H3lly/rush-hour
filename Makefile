@@ -9,7 +9,7 @@ all:
 
 sub:
 	@echo Make $(MAKEARG).
-	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/$(MAKEARG).c -lm $(INCLUDE) -o $(MAKEARG)
+	@gcc $(CFLAGS) src/piece.c src/game.c src/test_functions.c src/solveur.c src/$(MAKEARG).c -lm $(INCLUDE) -o $(MAKEARG)
 	@echo Executable $(MAKEARG) generated.
 
 test_piece:
@@ -19,9 +19,6 @@ test_game:
 	@make --silent sub MAKEARG=$@
 	
 play:
-	@make --silent sub MAKEARG=$@
-	
-solveur:
 	@make --silent sub MAKEARG=$@
 	
 #when fusion finished, replace all test_* by

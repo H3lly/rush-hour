@@ -17,5 +17,6 @@ bool has_child(tree_game t);
 game sub_solve(tree_game t, dir* prev);
 int solve(game g);
 
-#endif	/* SOLVEUR_H */
+#endif	
+/* SOLVEUR_H */
 

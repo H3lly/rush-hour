@@ -7,7 +7,6 @@
 #include "game.h"
 #include "test_functions.h"
 
-typedef struct tree_game_s* tree_game;
 
 
 struct tree_game_s{
@@ -15,6 +14,7 @@ struct tree_game_s{
 	game *children;
 	int ind_children;
 };
+
 
 struct game_s{
     int width;
@@ -107,11 +107,17 @@ game sub_solve(tree_game t, dir* prev){
 
 
 int solve(game g){
+	printf("1");
 	tree_game t;
+	printf("2");
 	t = create_tree(g);
+	printf("3");
 	dir prev[4] = {RIGHT, LEFT, LEFT, LEFT};
+	printf("4");
 	game solved = NULL;
+	printf("5");
 	solved = sub_solve(t, prev);
+	printf("6");
 	if (solved == NULL){
 		return -1;
 	}
