@@ -3,7 +3,7 @@ INCLUDE = -I include/
 all:
 	@echo Make all start.
 	@echo
-	@make --silent test_piece test_game play
+	@make --silent test_piece test_game play solveur
 	@echo 
 	@echo Make all end.
 
@@ -19,6 +19,9 @@ test_game:
 	@make --silent sub MAKEARG=$@
 	
 play:
+	@make --silent sub MAKEARG=$@
+	
+solveur:
 	@make --silent sub MAKEARG=$@
 	
 #when fusion finished, replace all test_* by

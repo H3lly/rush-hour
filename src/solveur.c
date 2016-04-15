@@ -6,32 +6,113 @@
 #include "game.h"
 #include "test_functions.h"
 
-/*
-int solve (cgame g, int nb_pieces, int piece_num, int height, int width){
-	if (piece_num == nb_pieces){
-		return g->nb_moves;
-	}
-	piece p = g->piece_list[piece_num];
-	if (can_move_x(p)){
-		for (int i = 5; i<=0; --i){
-			piece p = g->piece_list[piece_num];
-			play_move(g, piece_num, LEFT, i);
-			solve (g, nb_pieces, piece_num, height, width)
+typedef struct tree_game_s* tree_game;
 
+
+struct tree_game_s{
+	game node;
+	game *children;
+	int ind_children;
+};
+
+struct game_s{
+    int width;
+    int height;
+    int nb_pieces;
+    int nb_moves;
+    piece *piece_list;
+};
+
+tree_game create_tree(game g){
+	tree_game t = malloc(sizeof (struct tree_game_s));
+	t->node = g;
+	t->children = NULL;
+	t->ind_children = -1;
+	return t;
+}
+
+game get_node(tree_game t){
+	return t->node;
+}
+
+void add_child(tree_game t, game g){
+	if (t->ind_children == -1){
+		t->children = malloc(sizeof (struct game_s));
+	}
+	else{
+		t->children = realloc(t->children, (t->ind_children+2)*sizeof(struct game_s));
+	}
+	t->children[++t->ind_children] = g;
+}
+
+bool has_child(tree_game t){
+	return (t->ind_children != -1);
+}
+
+
+game solve(tree_game t, dir* prev){
+	game gc;
+	cgame g = get_node(t);
+	for (int p = 0; p<g->nb_pieces; ++p){
+		if (can_move_x(g->piece_list[p])){
+			if (prev[0] != LEFT){
+				copy_game(g, gc);
+				play_move(gc, p, LEFT, 1);
+				add_child(t, gc);
+				if (game_over_hr(gc)){		//game over pour ane rouge?
+					return gc;
+				}
+				prev[0] = LEFT;
+			}
+			if (prev[1] != RIGHT){
+				copy_game(g, gc);
+				play_move(gc, p, RIGHT, 1);
+				add_child(t, gc);
+				if (game_over_hr(gc)){		//game over pour ane rouge?
+					return gc;
+				}
+				prev[1] = RIGHT;
+
+			}
+		}
+		if (can_move_y(g->piece_list[p])){
+			if (prev[2] != UP){
+				copy_game(g, gc);
+				play_move(gc, p, UP, 1);
+				add_child(t, gc);
+				if (game_over_hr(gc)){		//game over pour ane rouge?
+					return gc;
+				}
+				prev[2] = UP;
+			}
+			if (prev[3] != DOWN){
+				copy_game(g, gc);
+				play_move(gc, p, DOWN, 1);
+				add_child(t, gc);
+				if (game_over_hr(gc)){		//game over pour ane rouge?
+					return gc;
+				}
+				prev[3] = DOWN;
+			}
 		}
 	}
-	if (can_move_y(p)){
-
+	if (has_child(t)){
+		for (int ge = 0; ge < t->ind_children+2; ++ge){
+			solve(t, prev);
+		}
 	}
+	return NULL;
 }
 
 
-int result_solve (cgame g, int nb_pieces){
-	int result;//contains the optimal number of movements
-	for (int i = 0; piece_num<nb_pieces; ++piece_num){
-		result = solve (g, bn_pieces, i, game_height(g), game_width(g))
-
+int result_solve(game g){
+	tree_game t;
+	t = create_tree(g);
+	dir prev[4] = {RIGHT, LEFT, LEFT, LEFT};
+	game solved = NULL;
+	solved = solve(t, prev);
+	if (solved == NULL){
+		return -1;
 	}
-	return result
+	return solved->nb_moves;
 }
-*/
