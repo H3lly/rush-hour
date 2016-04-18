@@ -17,4 +17,4 @@ Camille :
         J'ai fait en sorte que si on fait ./play solve, le solveur s'execute sur le jeu choisis plus tard.
 
 Ny Andry et Alexandre :
-	//solveur
+	//solveur,
