@@ -72,7 +72,7 @@ int main(int argc, char** argv){
     }
 
     //solves automatically if you need to use valgrind and don't want to play
-    if (argc==2&& !strcmp(argv[1], "test")){
+    if (argc==2 && !strcmp(argv[1], "test")){
         if (choice==1){
             play_move(game, 7, UP, 2);
             play_move(game, 6, UP, 3);
@@ -106,9 +106,10 @@ int main(int argc, char** argv){
             return 1;
         }
     }
-    if (argc==2&& !strcmp(argv[1], "solve")){
+    if (argc==2 && !strcmp(argv[1], "solve")){
             int s = solve(game);
             printf("Solve : %d\n", s);
+            return 1;
     }
     printf("\e[2J\e[H");//clean the shell
     printf("***** Welcome in RushHour ! *****\nYou need to drive the 0 car to the right !\nGood luck !\n\n");
