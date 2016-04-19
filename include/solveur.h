@@ -14,7 +14,7 @@ tree_game create_tree(game g);
 game get_node(tree_game t);
 void add_child(tree_game t, game g);
 bool has_child(tree_game t);
-game sub_solve(tree_game t, dir* prev);
+game sub_solve(tree_game t, game g, int ind);
 int solve(game g);
 
 #endif	

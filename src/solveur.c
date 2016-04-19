@@ -100,6 +100,7 @@ game sub_solve(tree_game t, game g, int ind){
 	}
 	int ind_next = ind+1;
 	sub_solve(t, t->children[ind_next], ind_next);
+        return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
 }
 
 void usage(char *name) {

@@ -120,13 +120,18 @@ int main(int argc, char** argv){
     int num;
     int distance;
     int test;
+    
     while (!(game_over_hr(game))){
         piece_num= -1;
         d= -1;
         distance= -1;
         test=false;
-        printf("Please input the number of the piece you want to move :\n");
+        printf("Please input the number of the piece you want to move:\n");
         while (!test){
+            /*if (scanf("%d", &piece_num)==1){
+                if (piece_num == 666){
+                    break;
+                }*/
             if (scanf("%d", &piece_num)==1){
                 if (piece_num>=0&&piece_num<game_nb_pieces(game))
                     test=true;
