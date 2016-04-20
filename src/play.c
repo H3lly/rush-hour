@@ -33,7 +33,7 @@ int main(int argc, char** argv){
             toSolve[0]=new_piece_rh(2, 3, true, true);
             toSolve[1]=new_piece_rh(5, 3, false, false);
             toSolve[2]=new_piece_rh(4, 1, true, false);
-            game testToSolve = new_game_hr(8, toSolve);
+            game testToSolve = new_game_hr(3, toSolve);
             int s = solve(testToSolve);
             printf("Solve : %d\n", s);
             return 1;
@@ -141,7 +141,7 @@ int main(int argc, char** argv){
         while (!test){
             if (scanf("%d", &piece_num)==1){
                 if (piece_num == -666){
-                    delete_game(g);
+                    delete_game(game);
                     return;
                 }
                 if (piece_num>=0&&piece_num<game_nb_pieces(game))
