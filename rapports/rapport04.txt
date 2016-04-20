@@ -12,7 +12,7 @@ Luc :   J'ai fini la fusion de test_game1.c et test_game2.c, pour former un uniq
         //gcov
 
 Camille :
-        J'ai aidé Luc à faire la fusion des fichiers de test et de jeu (rush-hour et ane-rouge).
+        J'ai aidé Luc à faire la fusion des fichiers de test et de jeu (rush-hour, ane-rouge et play).
         J'ai aidé Ny Andry à concevoir un algorithme papier pour le solveur et une structure TreeGame.
         J'ai créé une fonction valid_piece_list dans game.c qui retourne true si la liste de pièces est valide (à savoir, si il n'y a pas de pièces qui se croisent ou deux fois la même piece), sinon false;
         J'ai organisé la liste des choses à faire en créant des issues sur GitHub poiur faciliter la répartition des tâches.
