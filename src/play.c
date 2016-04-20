@@ -39,7 +39,8 @@ int main(int argc, char** argv){
             printf("Solve : %d\n", s);
             return 1;
     }
-    //foeijozeijzefoij
+
+
     //asks the user which game he wants to play
     printf("\e[2J\e[H");//clean the shell
     printf("Which game do you want to play? Press 1 for Rush Hour, press 2 for Ane Rouge \n");
