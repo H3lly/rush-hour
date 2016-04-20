@@ -34,15 +34,12 @@ int main(int argc, char** argv){
             toSolve[1]=new_piece_rh(5, 3, false, false);
             toSolve[2]=new_piece_rh(4, 1, true, false);
             game testToSolve = new_game_hr(3, toSolve);
+            //foeijozeijzefoij
             int s = solve(testToSolve);
             printf("Solve : %d\n", s);
             return 1;
     }
-
-
-
-
-
+    //foeijozeijzefoij
     //asks the user which game he wants to play
     printf("\e[2J\e[H");//clean the shell
     printf("Which game do you want to play? Press 1 for Rush Hour, press 2 for Ane Rouge \n");
