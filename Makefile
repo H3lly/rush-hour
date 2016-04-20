@@ -3,7 +3,7 @@ INCLUDE = -I include/
 all:
 	@echo Make all start.
 	@echo
-	@make --silent test_piece test_game play solveur
+	@make --silent test_piece test_game play
 	@echo 
 	@echo Make all end.
 
@@ -21,8 +21,6 @@ test_game:
 play:
 	@make --silent sub MAKEARG=$@
 	
-solveur:
-	@make --silent sub MAKEARG=$@
 	
 #when fusion finished, replace all test_* by
 #test:
@@ -40,6 +38,7 @@ lib:
 	@echo Make $@ end.
 
 clean:
+	@rm -f -r *.dSYM
 	@rm -f *.o test_piece test_game play solveur lib/libgame.a -d lib 
 	@echo Files cleaned.
 	
