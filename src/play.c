@@ -142,7 +142,7 @@ int main(int argc, char** argv){
             if (scanf("%d", &piece_num)==1){
                 if (piece_num == -666){
                     delete_game(game);
-                    return;
+                    return 0;
                 }
                 if (piece_num>=0&&piece_num<game_nb_pieces(game))
                     test=true;
