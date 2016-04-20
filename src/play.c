@@ -134,10 +134,10 @@ int main(int argc, char** argv){
         d= -1;
         distance= -1;
         test=false;
-        printf("Please input the number of the piece you want to move (press -666 to quit):\n");
+        printf("Please input the number of the piece you want to move (press -1 to quit):\n");
         while (!test){
             if (scanf("%d", &piece_num)==1){
-                if (piece_num == -666){
+                if (piece_num == -1){
                     delete_game(game);
                     return 0;
                 }
