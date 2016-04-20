@@ -38,6 +38,7 @@ lib:
 	@echo Make $@ end.
 
 clean:
+	@rm -f -r *.dSYM
 	@rm -f *.o test_piece test_game play solveur lib/libgame.a -d lib 
 	@echo Files cleaned.
 	
