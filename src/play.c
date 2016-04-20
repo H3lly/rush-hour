@@ -141,8 +141,8 @@ int main(int argc, char** argv){
         while (!test){
             if (scanf("%d", &piece_num)==1){
                 if (piece_num == -666){
-                    delete_game(g);
-                    return;
+                    delete_game(game);
+                    return 0;
                 }
                 if (piece_num>=0&&piece_num<game_nb_pieces(game))
                     test=true;
