@@ -29,14 +29,13 @@ int main(int argc, char** argv){
      */
 
     if (argc==2 && !strcmp(argv[1], "solve")){
-            piece toSolve [3];
-            toSolve[0]=new_piece_rh(2, 3, true, true);
-            toSolve[1]=new_piece_rh(5, 3, false, false);
-            toSolve[2]=new_piece_rh(4, 1, true, false);
-            game testToSolve = new_game_hr(3, toSolve);
-            //foeijozeijzefoij
+            piece toSolve [2];
+            toSolve[0]=new_piece(0, 1, 1, 1, true, true);
+            toSolve[1]=new_piece(0, 0, 1, 1, true, true);
+            game testToSolve = new_game(2, 2, 2, toSolve);
+            show_grid(testToSolve);
             int s = solve(testToSolve);
-            printf("Solve : %d\n", s);
+            printf("\nSolve : %d\n", s);
             return 1;
     }
 
