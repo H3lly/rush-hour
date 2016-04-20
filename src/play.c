@@ -28,6 +28,21 @@ int main(int argc, char** argv){
     
      */
 
+    if (argc==2 && !strcmp(argv[1], "solve")){
+            piece toSolve [3];
+            toSolve[0]=new_piece_rh(2, 3, true, true);
+            toSolve[1]=new_piece_rh(5, 3, false, false);
+            toSolve[2]=new_piece_rh(4, 1, true, false);
+            game testToSolve = new_game_hr(8, toSolve);
+            int s = solve(testToSolve);
+            printf("Solve : %d\n", s);
+            return 1;
+    }
+
+
+
+
+
     //asks the user which game he wants to play
     printf("\e[2J\e[H");//clean the shell
     printf("Which game do you want to play? Press 1 for Rush Hour, press 2 for Ane Rouge \n");
@@ -106,11 +121,7 @@ int main(int argc, char** argv){
             return 1;
         }
     }
-    if (argc==2 && !strcmp(argv[1], "solve")){
-            int s = solve(game);
-            printf("Solve : %d\n", s);
-            return 1;
-    }
+    
     printf("\e[2J\e[H");//clean the shell
     printf("***** Welcome in RushHour ! *****\nYou need to drive the 0 car to the right !\nGood luck !\n\n");
     show_grid(game);

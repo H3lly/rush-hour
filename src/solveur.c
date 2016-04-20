@@ -52,64 +52,67 @@ game sub_solve(tree_game t, game g, int ind){
 	if (ind == 100){
 		return NULL;
 	}
-	game gc = new_game(0, 0, 0, NULL);
+	game gL = new_game(0, 0, 0, NULL);
+	game gR = new_game(0, 0, 0, NULL);
+	game gU = new_game(0, 0, 0, NULL);
+	game gD = new_game(0, 0, 0, NULL);
 	printf("\nchildren n°%d \n", t->ind_children);
 	printf("ind n°%d \n", ind);
 	for (int p = 0; p<g->nb_pieces; ++p){
 		if (can_move_x(g->piece_list[p])){
-			copy_game(g, gc);
-			if (play_move(gc, p, LEFT, 1)){
-				play_move(gc, p, LEFT, 1);
+			copy_game(g, gL);
+			if (play_move(gL, p, LEFT, 1)){
+				play_move(gL, p, LEFT, 1);
 				printf(" %d L ", p);
-				add_child(t, gc);
-				if (game_over_hr(gc)){
-					return gc;
+				add_child(t, gL);
+				if (game_over_hr(gL)){
+					return gL;
 				}			
 			}
-			copy_game(g, gc);
-			if (play_move(gc, p, RIGHT, 1)){
-				play_move(gc, p, RIGHT, 1);
+			copy_game(g, gR);
+			if (play_move(gR, p, RIGHT, 1)){
+				play_move(gR, p, RIGHT, 1);
 				printf(" %d R ", p);
-				add_child(t, gc);
-				if (game_over_hr(gc)){
-					return gc;
+				add_child(t, gR);
+				if (game_over_hr(gR)){
+					return gR;
 				}		
 			}				
 		}
 		if (can_move_y(g->piece_list[p])){
-			copy_game(g, gc);
-			if (play_move(gc, p, UP, 1)){
-				play_move(gc, p, UP, 1);
-				printf(" %d L ", p);
-				add_child(t, gc);
-				if (game_over_hr(gc)){
-					return gc;
+			copy_game(g, gU);
+			if (play_move(gU, p, UP, 1)){
+				play_move(gU, p, UP, 1);
+				printf(" %d U ", p);
+				add_child(t, gU);
+				if (game_over_hr(gU)){
+					return gU;
 				}	
 			}
-			copy_game(g, gc);
-			if (play_move(gc, p, DOWN, 1)){
-				play_move(gc, p, DOWN, 1);
-				printf(" %d R ", p);
-				add_child(t, gc);
-				if (game_over_hr(gc)){
-					return gc;
+			copy_game(g, gD);
+			if (play_move(gD, p, DOWN, 1)){
+				play_move(gD, p, DOWN, 1);
+				printf(" %d D ", p);
+				add_child(t, gD);
+				if (game_over_hr(gD)){
+					return gD;
 				}	
 			}						
 		}
 		printf(" | ");
 	}
-	int ind_next = ind+1;
-	sub_solve(t, t->children[ind_next], ind_next);
-        return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
-}
+	for (int i = 0; i <= t->ind_children;++i)
+		sub_solve(t, t->children[i], t->ind_children);
+    return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
+    }
 
-void usage(char *name) {
-	fprintf(stderr, "Usage: %s <a|r> <filename>\n", name);
-	exit(1);
-}
+    void usage(char *name) {
+    	fprintf(stderr, "Usage: %s <a|r> <filename>\n", name);
+    	exit(1);
+    }
 
-int main(int argc, char *argv[]){
-	if(argc != 3){
+    int solve(game g){
+/*	if(argc != 3){
 		usage(argv[0]);
 	}
 
@@ -142,6 +145,7 @@ int main(int argc, char *argv[]){
 	}
 	game g = new_game(grid_width, grid_height, nbPieces, t_piece);
 	fclose(file);
+	*/
 	tree_game t;
 	t = create_tree(g);
 	game solved = NULL;
@@ -149,5 +153,5 @@ int main(int argc, char *argv[]){
 	if (solved == NULL){
 		return -1;
 	}
-	printf("Resultat : %d\n", game_nb_moves(solved));
+	return game_nb_moves(solved);
 }
