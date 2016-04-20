@@ -6,6 +6,7 @@ Adresse du dépôt: https://github.com/H3lly/rush-hour
 Luc :   J'ai fini la fusion de test_game1.c et test_game2.c, pour former un unique fichier test_game. J'ai également fait la fusion de test_piece1.c et test_piece 2.c, qui sont devenus test_piece.c.
         J'ai aussi fusionné rush-hour.c et ane-rouge.c en un seul fichier play.c. Le tout avec l'aide de Camille.
         J'ai corrigé quelques erreurs liées au solveur.
+        J'ai ajouté une fonctionnalité dans play.c permettant de quitter la partie une fois celle-ci lancée.
         J'ai fait la mise en page du rapport final en LaTeX. 
         //gcov
 
