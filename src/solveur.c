@@ -9,12 +9,6 @@
 
 //Ne fonctionne pas
 
-struct tree_game_s{
-	game node;
-	tree_game *children;
-	int ind_children;
-};
-
 
 struct game_s{
 	int width;
@@ -24,109 +18,587 @@ struct game_s{
 	piece *piece_list;
 };
 
-tree_game create_tree(game g){
-	tree_game t = malloc(sizeof (struct tree_game_s));
-	t->node = g;
-	t->children = malloc(4*game_nb_pieces(g)*sizeof (struct game_s));
-	t->ind_children = -1;
-	return t;
-}
-
-game get_node(tree_game t){
-	return t->node;
-}
-
-tree_game get_child(tree_game t, int i){
-	return t->children[i];
-}
-
-void add_child(tree_game t, game g){
-	tree_game addTmp = create_tree(g);
-	t->ind_children += 1;
-	t->children[t->ind_children] = addTmp;
-}
-
-bool has_child(tree_game t){
-	return (t->ind_children > -1);
-}
 
 
-int get_nb_children(tree_game t){
-	return t->ind_children+1;
-}
-
-
-game sub_solve(tree_game t, int ind){
-	game g = new_game(0,0,0,NULL);
-	copy_game(get_node(t), g);
-	if (ind >= 10){
-		printf("Boucle infini. ind = %d", ind);
+game sub_solve(game* t, game g, int ind, int ind_tab, dir* t0, dir* t1, dir* t2, dir* t3, dir* t4, dir* t5, dir* t6, dir* t7){
+	if (ind == 10000){
 		return NULL;
 	}
-	game gL = new_game(0, 0, 0, NULL);
-	game gR = new_game(0, 0, 0, NULL);
-	game gU = new_game(0, 0, 0, NULL);
-	game gD = new_game(0, 0, 0, NULL);
-	printf("(%d) ", ind);
-	for (int p = 0; p < game_nb_pieces(g); ++p){
-			copy_game(g, gL);
-			copy_game(g, gR);
-			copy_game(g, gU);
-			copy_game(g, gD);
+	
+	
+	
+	printf("\nchildren n°%d \n", ind_tab);
+	printf("ind n°%d \n", ind);
+	/*int iL = 0;
+	int iR = 0;
+	int iU = 0;
+	int iD = 0;
+	game* tmp = malloc(sizeof (struct game_s));
+	int ind_tmp = 0;*/
+	int p;
 
-
-			if (play_move(gL, p, LEFT, 1)){
-				printf(" %d L ", p);
-				add_child(t, gL);
-				if (game_over_hr(gL)){
-					show_grid(gL);
-					return gL;
-				}			
-			}
-			if (play_move(gR, p, RIGHT, 1)){
-				printf(" %d R ", p);
-				add_child(t, gR);
-				if (game_over_hr(gR)){
-					show_grid(gR);
-					return gR;
-				}		
-			}				
-			if (play_move(gU, p, UP, 1)){
-				printf(" %d U ", p);
-				add_child(t, gU);
-				if (game_over_hr(gU)){
-					show_grid(gU);
-					return gU;
-				}	
-			}
-			if (play_move(gD, p, DOWN, 1)){
-				printf(" %d D ", p);
-				add_child(t, gD);
-				if (game_over_hr(gD)){
-					show_grid(gD);
-					return gD;
-				}	
-			}				
-
-
-		
-		printf(" | ");
-
-	}
-	if(ind==1) 	return NULL;
-	printf("\n\n\n");
-	if(has_child(t)){
-		printf("t %d has %d child(ren).", ind, get_nb_children(t));
-		ind++;
-		for (int i = 0; i < get_nb_children(t);++i){
-			printf("\nChild n°%d : ", i);
-			sub_solve(t->children[i], ind);
+	p = 0;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t0[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t0[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
 		}
-    }
+		else{
+			t0[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t0[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t0[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}		
+		else{
+			t0[0] = UP;
+		}		
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t0[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t0[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t0[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t0[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t0[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}	
+		else{
+			t0[2] = LEFT;
+		}						
+	}
+
+	
+	p = 1;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t1[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t1[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t1[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t1[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t1[1] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}		
+		else{
+			t1[0] = UP;
+		}			
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t1[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t1[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t1[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t1[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t1[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}			
+		else{
+			t1[2] = LEFT;
+		}				
+	}
+
+	
+	p = 2;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t2[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t2[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t2[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t2[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t2[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}	
+		else{
+			t2[0] = UP;
+		}				
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t2[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t2[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t2[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t2[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t2[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}	
+		else{
+			t2[2] = LEFT;
+		}						
+	}
+
+	
+	p = 3;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t3[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t3[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t3[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t3[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t3[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}		
+		else{
+			t3[0] = UP;
+		}			
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t3[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t3[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t3[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t3[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t3[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}			
+		else{
+			t3[2] = LEFT;
+		}				
+	}
+
+	
+	p = 4;
+	if (can_move_x(g->piece_list[p]) && t4[0] != RIGHT){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1)){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t4[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t4[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t4[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t4[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}	
+		else{
+			t4[0] = UP;
+		}				
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t4[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t4[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t4[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t4[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t4[2] = UP;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}			
+		else{
+			t4[2] = LEFT;
+		}				
+	}
+
+	
+	p = 5;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t5[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t5[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t5[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t5[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t5[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}		
+		else{
+			t5[0] = UP;
+		}			
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t5[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t5[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t5[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t5[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t5[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}		
+		else{
+			t5[2] = LEFT;
+		}					
+	}
+
+	
+	p = 6;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t6[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t6[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t6[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t6[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t6[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}		
+		else{
+			t6[0] = UP;
+		}			
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t6[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t6[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t6[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t6[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t6[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}			
+		else{
+			t6[2] = LEFT;
+		}				
+	}
+
+	
+	p = 7;
+	if (can_move_x(g->piece_list[p])){
+		game gL = new_game(0, 0, 0, NULL);
+		game gR = new_game(0, 0, 0, NULL);
+		copy_game(g, gL);
+		if (play_move(gL, p, LEFT, 1) && t7[0] != RIGHT){
+			printf(" %d L \n", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gL;
+			ind_tab++;
+			t7[1] = LEFT;
+			if (game_over_ar(gL)){
+				return gL;
+			}			
+		}
+		else{
+			t7[1] = UP;
+		}
+		copy_game(g, gR);
+		if (play_move(gR, p, RIGHT, 1) && t7[1] != LEFT){
+			printf(" %d R ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gR;
+			ind_tab++;
+			t7[0] = RIGHT;
+			if (game_over_ar(gR)){
+				return gR;
+			}		
+		}	
+		else{
+			t7[0] = UP;
+		}				
+	}
+	if (can_move_y(g->piece_list[p])){
+		game gU = new_game(0, 0, 0, NULL);
+		game gD = new_game(0, 0, 0, NULL);
+		copy_game(g, gU);
+		if (play_move(gU, p, UP, 1) && t7[2] != DOWN){
+			printf(" %d U ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gU;
+			ind_tab++;
+			t7[3] = UP;
+			if (game_over_ar(gU)){
+				return gU;
+			}	
+		}
+		else{
+			t7[3] = LEFT;
+		}	
+		copy_game(g, gD);
+		if (play_move(gD, p, DOWN, 1) && t7[3] != UP){
+			printf(" %d D ", p);
+			t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
+			t[ind_tab] = gD;
+			ind_tab++;
+			t7[2] = DOWN;
+			if (game_over_ar(gD)){
+				return gD;
+			}	
+		}			
+		else{
+			t7[2] = LEFT;
+		}				
+	}
+/*
+	int add = 0;
+	if (iL != 0){
+		t[ind_tab+add] = tmp[add];
+		add++;
+	}
+	if (iR != 0){
+		t[ind_tab+add] = tmp[add];
+		add++;
+	}
+	if (iU != 0){
+		t[ind_tab+add] = tmp[add];
+		add++;
+	}
+	if (iD != 0){
+		t[ind_tab+add] = tmp[add];
+		add++;
+	}
+	*/
+	//ind_tab += add;
+	printf("\n");
+	printf(" (%d : %d) ", p, ind_tab);
+	printf("\nnb moves : %d", game_nb_moves(g));
+	show_grid(g);
+	int ind_next = ind+1;
+	sub_solve(t, t[ind_next], ind_next, ind_tab, t0, t1, t2, t3, t4, t5, t6, t7);
     return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
 }
-
-
 
 void usage(char *name) {
 	fprintf(stderr, "Usage: %s <a|r> <filename>\n", name);
@@ -168,11 +640,20 @@ int solve(game g){
 	game g = new_game(grid_width, grid_height, nbPieces, t_piece);
 	fclose(file);
 	*/
-	tree_game t;
-	t = create_tree(g);
-	game solved = NULL;
-	solved = sub_solve(t, -1);
+	game* t = malloc (sizeof (struct game_s));
+	dir t0[4] = {UP, UP, LEFT, LEFT};
+	dir t1[4] = {UP, UP, LEFT, LEFT};
+	dir t2[4] = {UP, UP, LEFT, LEFT};
+	dir t3[4] = {UP, UP, LEFT, LEFT};
+	dir t4[4] = {UP, UP, LEFT, LEFT};
+	dir t5[4] = {UP, UP, LEFT, LEFT};
+	dir t6[4] = {UP, UP, LEFT, LEFT};
+	dir t7[4] = {UP, UP, LEFT, LEFT};
+	game solved = new_game(0, 0, 0, NULL);
+	solved = sub_solve(t, g, -1, 0, t0, t1, t2, t3, t4, t5, t6, t7);
+	printf("fini");
 	if (solved == NULL){
+		printf("dans le if ?");
 		return -1;
 	}
 	return game_nb_moves(solved);
