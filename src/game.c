@@ -16,6 +16,7 @@ struct game_s{
     int nb_pieces;
     int nb_moves;
     piece *piece_list;
+    int *dir_prev;
 };
 
 game new_game(int width, int height, int nb_pieces, piece *pieces){
@@ -26,6 +27,7 @@ game new_game(int width, int height, int nb_pieces, piece *pieces){
     g->nb_pieces=nb_pieces;
     g->nb_moves=0;
     g->piece_list=pieces;
+    g->dir_prev = NULL;
     return g;
 }
 
@@ -49,6 +51,10 @@ void copy_game(cgame src, game dst){
     }
     dst->width=src->width;
     dst->height=src->height;
+    dst->dir_prev=malloc(sizeof(int)*src->nb_pieces);
+    for (int i=0;i<src->nb_pieces;i++){
+        dst->dir_prev[i]=src->dir_prev[i];
+    }
 }
 
 int game_nb_pieces(cgame g){
