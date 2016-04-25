@@ -198,7 +198,7 @@ if (argc==2 && !strcmp(argv[1], "solve")){
                     printf("Piece %d moved.\n\n", piece_num);
                 show_grid(game);
             }
-            printf("Game is over. Score : %d", game_nb_moves(game));
+            printf("Game is over. Score : %d\n", game_nb_moves(game));
             delete_game(game);
             return EXIT_SUCCESS;
         }
