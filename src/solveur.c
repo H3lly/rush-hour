@@ -34,7 +34,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 	
 	
 	
-	printf("\nchildren n°%d \n", ind_tab);
+	//printf("\nchildren n°%d \n", ind_tab);
 	printf("ind n°%d \n", ind);
 	/*int iL = 0;
 	int iR = 0;
