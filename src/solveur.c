@@ -42,9 +42,9 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 	int iD = 0;
 	game* tmp = malloc(sizeof (struct game_s));
 	int ind_tmp = 0;*/
-	int p;
-	p = 0;
+	
 	for (int p = 0; p<game_nb_pieces(g); ++p){
+		int reinit = 0;
 		if (can_move_x(g->piece_list[p])){
 			game gL = new_game(0, 0, 0, NULL);
 			game gR = new_game(0, 0, 0, NULL);
@@ -54,6 +54,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gL;
 				ind_tab++;
+				reinit++;
 				set_dir_prev(gL, p, 1);
 				if (game_over_ar(gL)){
 					return gL;
@@ -65,13 +66,14 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gR;
 				ind_tab++;
+				reinit++;
 				set_dir_prev(gR, p, 2);
 				if (game_over_ar(gR)){
 					return gR;
 				}		
 			}				
 		}
-		else if (can_move_y(g->piece_list[p])){
+		if (can_move_y(g->piece_list[p])){
 			game gU = new_game(0, 0, 0, NULL);
 			game gD = new_game(0, 0, 0, NULL);
 			copy_game(g, gU);
@@ -80,6 +82,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gU;
 				ind_tab++;
+				reinit++;
 				set_dir_prev(gU, p, 3);
 				if (game_over_ar(gU)){
 					return gU;
@@ -92,6 +95,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gD;
 				ind_tab++;
+				reinit++;
 				set_dir_prev(gD, p, 4);
 				if (game_over_ar(gD)){
 					return gD;
@@ -99,7 +103,9 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			}	
 		}						
 
-		else set_dir_prev(g, p, 0);
+		if(reinit == 0){
+			set_dir_prev(g, p, 0);
+		}
 	}
 
 	
