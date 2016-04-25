@@ -23,26 +23,15 @@ int get_dir_prev(game g, int ind){
 	return g->dir_prev[ind];
 }
 
-void set_dir_prev(game g, int ind, int dir){	//0:pas de prev_dir; 1:Left; 2:Right; 3:Up; 4;:Down
+void set_dir_prev(game g, int ind, int dir){//0:no prev_dir; 1:Left; 2:Right; 3:Up; 4;:Down
 	g->dir_prev[ind] = dir;
 }
 
-game sub_solve(game* t, game g, int ind, int ind_tab){
+game sub_solve(game* t, game g, unsigned long ind, unsigned long ind_tab){//if the game can be solved, it will return the game solved
 	if (ind == 100000){
 		return NULL;
 	}
-	
-	
-	
-	//printf("\nchildren n°%d \n", ind_tab);
-	//printf("ind n°%d \n", ind);
-	/*int iL = 0;
-	int iR = 0;
-	int iU = 0;
-	int iD = 0;
-	game* tmp = malloc(sizeof (struct game_s));
-	int ind_tmp = 0;*/
-	
+	printf("ind n°%lu \n", ind);
 	for (int p = 0; p<game_nb_pieces(g); ++p){
 		int reinit = 0;
 		if (can_move_x(g->piece_list[p])){
@@ -50,13 +39,12 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			game gR = new_game(0, 0, 0, NULL);
 			copy_game(g, gL);
 			if (play_move(gL, p, LEFT, 1) && get_dir_prev(gL,p) != 2){
-				//printf(" %d L \n", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gL;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gL, p, 1);
-				if (can_move_y(g->piece_list[0])){
+				if (can_move_y(g->piece_list[0])){//piece 0 can only move UP or DOWN in l'âne rouge
 					if (game_over_ar(gL)){
 						return gL;
 					}			
@@ -67,19 +55,18 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			}
 			copy_game(g, gR);
 			if (play_move(gR, p, RIGHT, 1) && get_dir_prev(gR, p) != 1){
-				//printf(" %d R ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gR;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gR, p, 2);
 				if (can_move_y(g->piece_list[0])){
-					if (game_over_ar(gL)){
-						return gL;
+					if (game_over_ar(gR)){
+						return gR;
 					}			
 				}
-				else if (game_over_hr(gL)){
-					return gL;
+				else if (game_over_hr(gR)){
+					return gR;
 				}
 			}				
 		}
@@ -88,72 +75,44 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			game gD = new_game(0, 0, 0, NULL);
 			copy_game(g, gU);
 			if (play_move(gU, p, UP, 1) && get_dir_prev(gU, p) != 4){
-				//printf(" %d U ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gU;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gU, p, 3);
 				if (can_move_y(g->piece_list[0])){
-					if (game_over_ar(gL)){
-						return gL;
+					if (game_over_ar(gU)){
+						return gU;
 					}			
 				}
-				else if (game_over_hr(gL)){
-					return gL;
+				else if (game_over_hr(gU)){
+					return gU;
 				}
 			}
 
 			copy_game(g, gD);
 			if (play_move(gD, p, DOWN, 1) && get_dir_prev(gD, p) != 3){
-				//printf(" %d D ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gD;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gD, p, 4);
 				if (can_move_y(g->piece_list[0])){
-					if (game_over_ar(gL)){
-						return gL;
+					if (game_over_ar(gD)){
+						return gD;
 					}			
 				}
-				else if (game_over_hr(gL)){
-					return gL;
+				else if (game_over_hr(gD)){
+					return gD;
 				}
 			}	
 		}						
 
-		if(reinit == 0){
+		if(reinit == 0){//if the piece can't move, initialization of prev_dir
 			set_dir_prev(g, p, 0);
 		}
 	}
-
-	
-/*
-	int add = 0;
-	if (iL != 0){
-		t[ind_tab+add] = tmp[add];
-		add++;
-	}
-	if (iR != 0){
-		t[ind_tab+add] = tmp[add];
-		add++;
-	}
-	if (iU != 0){
-		t[ind_tab+add] = tmp[add];
-		add++;
-	}
-	if (iD != 0){
-		t[ind_tab+add] = tmp[add];
-		add++;
-	}
-	*/
-	//ind_tab += add;
-	//printf("\n");
-	//printf(" (%d : %d) ", p, ind_tab);
-	//printf("\nnb moves : %d", game_nb_moves(g));
-	//show_grid(g);
-	int ind_next = ind+1;
+	unsigned long ind_next = ind+1;
 	sub_solve(t, t[ind_next], ind_next, ind_tab);
     return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
 }
@@ -201,7 +160,7 @@ int solve(game g){
 	game* t = malloc (sizeof (struct game_s));
 	game solved = new_game(0, 0, 0, NULL);
 	g->dir_prev = malloc(sizeof (int)*game_nb_pieces(g));
-	for (int i = 0; i<game_nb_pieces(g); ++i){
+	for (int i = 0; i<game_nb_pieces(g); ++i){//initialization of all prev_dir for each piece
 		set_dir_prev(g, i, 0);
 	}
 	solved = sub_solve(t, g, -1, 0);
