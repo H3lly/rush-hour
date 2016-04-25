@@ -35,7 +35,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 	
 	
 	//printf("\nchildren n°%d \n", ind_tab);
-	printf("ind n°%d \n", ind);
+	//printf("ind n°%d \n", ind);
 	/*int iL = 0;
 	int iR = 0;
 	int iU = 0;
@@ -50,27 +50,37 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			game gR = new_game(0, 0, 0, NULL);
 			copy_game(g, gL);
 			if (play_move(gL, p, LEFT, 1) && get_dir_prev(gL,p) != 2){
-				printf(" %d L \n", p);
+				//printf(" %d L \n", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gL;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gL, p, 1);
-				if (game_over_ar(gL)){
+				if (can_move_y(g->piece_list[0])){
+					if (game_over_ar(gL)){
+						return gL;
+					}			
+				}
+				else if (game_over_hr(gL)){
 					return gL;
-				}			
+				}
 			}
 			copy_game(g, gR);
 			if (play_move(gR, p, RIGHT, 1) && get_dir_prev(gR, p) != 1){
-				printf(" %d R ", p);
+				//printf(" %d R ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gR;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gR, p, 2);
-				if (game_over_ar(gR)){
-					return gR;
-				}		
+				if (can_move_y(g->piece_list[0])){
+					if (game_over_ar(gL)){
+						return gL;
+					}			
+				}
+				else if (game_over_hr(gL)){
+					return gL;
+				}
 			}				
 		}
 		if (can_move_y(g->piece_list[p])){
@@ -78,28 +88,38 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 			game gD = new_game(0, 0, 0, NULL);
 			copy_game(g, gU);
 			if (play_move(gU, p, UP, 1) && get_dir_prev(gU, p) != 4){
-				printf(" %d U ", p);
+				//printf(" %d U ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gU;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gU, p, 3);
-				if (game_over_ar(gU)){
-					return gU;
-				}	
+				if (can_move_y(g->piece_list[0])){
+					if (game_over_ar(gL)){
+						return gL;
+					}			
+				}
+				else if (game_over_hr(gL)){
+					return gL;
+				}
 			}
 
 			copy_game(g, gD);
 			if (play_move(gD, p, DOWN, 1) && get_dir_prev(gD, p) != 3){
-				printf(" %d D ", p);
+				//printf(" %d D ", p);
 				t = realloc(t, (ind_tab+1)*sizeof(struct game_s));
 				t[ind_tab] = gD;
 				ind_tab++;
 				reinit++;
 				set_dir_prev(gD, p, 4);
-				if (game_over_ar(gD)){
-					return gD;
-				}	
+				if (can_move_y(g->piece_list[0])){
+					if (game_over_ar(gL)){
+						return gL;
+					}			
+				}
+				else if (game_over_hr(gL)){
+					return gL;
+				}
 			}	
 		}						
 
@@ -132,7 +152,7 @@ game sub_solve(game* t, game g, int ind, int ind_tab){
 	//printf("\n");
 	//printf(" (%d : %d) ", p, ind_tab);
 	//printf("\nnb moves : %d", game_nb_moves(g));
-	show_grid(g);
+	//show_grid(g);
 	int ind_next = ind+1;
 	sub_solve(t, t[ind_next], ind_next, ind_tab);
     return NULL; //this line is here only to avoid errors due to the fact that returns are only in "if" loops
@@ -185,9 +205,7 @@ int solve(game g){
 		set_dir_prev(g, i, 0);
 	}
 	solved = sub_solve(t, g, -1, 0);
-	printf("fini");
 	if (solved == NULL){
-		printf("dans le if ?");
 		return -1;
 	}
 	return game_nb_moves(solved);
