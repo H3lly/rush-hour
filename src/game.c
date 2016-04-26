@@ -19,8 +19,34 @@ struct game_s{
     int *dir_prev;//contain the previous movement of each piece
 };
 
+// @brief Tests if the piece list is valid : no intersection, no twins, etc.
+bool valid_piece_list(piece* list, int length, int game_width, int game_height){
+    bool isValid=true;
+    for (int i=0;i<length;++i){
+        for (int j=i;j<length;++j){
+            if (i!=j){
+                if (list[i]==list[j]){
+                    if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+                    fprintf(stderr, "- It seems there is the same piece twice : piece %d and %d. \n", i, j);
+                    isValid=false;
+                } else if (intersect(list[i], list[j])){
+                    if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+                    fprintf(stderr, "- It seems that the pieces %d and %d are crossing each other. \n", i, j);
+                    isValid=false;
+                }
+            }
+        }
+        if (get_x(list[i])<0||get_x(list[i])>=game_width||get_y(list[i])<0||get_y(list[i])>=game_height){
+            if(isValid) fprintf(stderr, "The list you gave isn't valid : \n");
+            fprintf(stderr, "- It seems that the piece %d is out of the grid. \n", i);
+            isValid=false;
+        }
+    }
+    return isValid;
+}
+
 game new_game(int width, int height, int nb_pieces, piece *pieces){
-    //if (!valid_piece_list(pieces, nb_pieces, width, height)) printf("All of this doesn't really seem valid.");
+    if (!valid_piece_list(pieces, nb_pieces, width, height)) printf("All of this doesn't really seem valid.");
     game g=malloc(sizeof (struct game_s));
     g->width=width;
     g->height=height;
@@ -70,7 +96,6 @@ bool game_over_hr(cgame g){
 }
 
 // @brief Check if the piece p is out of the grid of the game g.
-
 bool out_of_grid(cpiece p, cgame g){
     //used only once but enhances readibility 
     return (get_x(p)<0||get_x(p)+get_width(p)>game_width(g)||(get_y(p)<0||get_y(p)+get_height(p)>game_height(g)));
@@ -91,19 +116,19 @@ bool play_move(game g, int piece_num, dir d, int distance){
                     break;
             }
             if (intersect(p, game_piece(g, i))){
-                //fprintf(stderr, "Unauthorized move: Piece %d is preventing %d from moving.\n\n", i, piece_num);
+                fprintf(stderr, "Unauthorized move: Piece %d is preventing %d from moving.\n\n", i, piece_num);
                 move_piece(p, d, travel*-1);
                 g->nb_moves-=travel;
                 return false;
             }
             if (out_of_grid(p, g)){
-                //fprintf(stderr, "Unauthorized move: %d would be out of bounds.\n\n", piece_num);
+                fprintf(stderr, "Unauthorized move: %d would be out of bounds.\n\n", piece_num);
                 move_piece(p, d, travel*-1);
                 g->nb_moves-=travel;
                 return false;
             }
             if (((d==LEFT||d==RIGHT)&&(!can_move_x(p)))||((d==UP||d==DOWN)&&(!can_move_y(p)))){
-                //fprintf(stderr, "Unauthorized move: Piece orientation doesn't match move direction.\n\n");
+                fprintf(stderr, "Unauthorized move: Piece orientation doesn't match move direction.\n\n");
                 return false;
             }
         }

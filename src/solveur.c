@@ -7,9 +7,6 @@
 #include "game.h"
 #include "test_functions.h"
 
-//Ne fonctionne pas
-
-
 struct game_s{
 	int width;
 	int height;
@@ -123,40 +120,6 @@ void usage(char *name) {
 }
 
 int solve(game g){
-/*	if(argc != 3){
-		usage(argv[0]);
-	}
-
-	FILE * file;
-	file = fopen(argv[2], "r");
-
-	if (file == NULL){
-		printf("Impossible d'ouvrir ce fichier.");
-		exit(EXIT_FAILURE);
-	}
-	int grid_width, grid_height, nbPieces, x, y, width, height, can_move_x, can_move_y;
-	bool move_x, move_y;
-	fscanf(file,"%d %d %d ",&grid_width, &grid_height, &nbPieces);
-	piece t_piece[nbPieces];
-	for(int i = 0; i<nbPieces; ++i){
-		fscanf(file, "%d %d %d %d %d %d", &x, &y, &width, &height, &can_move_x, &can_move_y);
-		if (can_move_x==0){
-			move_x = false;
-		}
-		else{
-			move_x = true;
-		}
-		if (can_move_y==0){
-			move_y = false;
-		}
-		else{
-			move_y = true;
-		}
-		t_piece[i] = new_piece(x, y, width, height, move_x, move_y);
-	}
-	game g = new_game(grid_width, grid_height, nbPieces, t_piece);
-	fclose(file);
-	*/
 	game* t = malloc (sizeof (struct game_s));
 	game solved = new_game(0, 0, 0, NULL);
 	g->dir_prev = malloc(sizeof (int)*game_nb_pieces(g));

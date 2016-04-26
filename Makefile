@@ -21,11 +21,6 @@ test_game:
 play:
 	@make --silent sub MAKEARG=$@
 	
-	
-#when fusion finished, replace all test_* by
-#test:
-#	@make --silent sub MAKEARG=$@
-	
 lib:
 	@echo Make $@ start.
 	@rm -f lib/libgame.a

@@ -28,18 +28,17 @@ int main(int argc, char** argv){
     
      */
 
-        if (argc==2 && !strcmp(argv[1], "solve")){
-                piece toSolve [2];
-                toSolve[0]=new_piece(0, 1, 1, 1, true, true);
-                toSolve[1]=new_piece(0, 0, 1, 1, true, true);
-                game testToSolve = new_game(2, 2, 2, toSolve);
-                show_grid(testToSolve);
-                int s = solve(testToSolve);
-                printf("\nSolve : %d\n", s);
-                return 1;
-        }
-      
-
+    //the input ./play testsolve will test the solver on a small configuration
+    if (argc==2&& !strcmp(argv[1], "testsolve")){
+        piece toSolve [2];
+        toSolve[0]=new_piece(0, 1, 1, 1, true, true);
+        toSolve[1]=new_piece(0, 0, 1, 1, true, true);
+        game testToSolve=new_game(2, 2, 2, toSolve);
+        show_grid(testToSolve);
+        int s=solve(testToSolve);
+        printf("\nSolve : %d\n", s);
+        return 1;
+    } 
     //asks the user which game he wants to play
     printf("\e[2J\e[H");//clean the shell
     printf("Which game do you want to play? Press 1 for Rush Hour, press 2 for Ane Rouge \n");
@@ -69,7 +68,6 @@ int main(int argc, char** argv){
         list[5]=new_piece_rh(3, 1, true, false);
         list[6]=new_piece_rh(4, 0, false, false);
         list[7]=new_piece_rh(5, 2, true, false);
-        //list[8]=new_piece_rh(0, 5, false, true);
 
         game=new_game_hr(8, list);
 
@@ -84,7 +82,7 @@ int main(int argc, char** argv){
         game=new_game(4, 5, 5, list);
     }
 
-    //solves automatically if you need to use valgrind and don't want to play
+    //./play solve will solve automatically (useful for valgrind)
     if (argc==2&& !strcmp(argv[1], "test")){
         if (choice==1){
             play_move(game, 7, UP, 2);
@@ -141,7 +139,7 @@ int main(int argc, char** argv){
     int distance;
     int test;
 
-    while (((choice==1)&&!(game_over_hr(game)))|| ((choice==2)&&!(game_over_ar(game)))){
+    while (((choice==1)&&!(game_over_hr(game)))||((choice==2)&&!(game_over_ar(game)))){
         piece_num= -1;
         d= -1;
         distance= -1;

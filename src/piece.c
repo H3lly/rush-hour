@@ -58,7 +58,6 @@ void copy_piece(cpiece src, piece dst) {
 }
 
 // @brief Returns true if the direction of the movement is compatible with the piece's orientation, returns false otherwise.
-
 bool movement_is_allowed(cpiece p, dir d) {
     return ((d == LEFT || d == RIGHT)&&(can_move_x(p))) || ((d == UP || d == DOWN)&&(can_move_y(p)));
 }
@@ -83,20 +82,17 @@ void move_piece(piece p, dir d, int distance) {
 }
 
 // @brief Returns the number of cells of the piece p.
-
 int piece_area(cpiece p) {
     return get_width(p) * get_height(p);
 }
 
 // @brief Returns a if a>b, returns b otherwise.
-
 int max_int(int a, int b) {
     //I'm not importing a whole library just for one function
     return ((a > b) ? a : b);
 }
 
 // Makes two arrays that list all the coordinates occupated by the pieces, compares them and returns whether they have common coordinates or not
-
 bool intersect(cpiece a, cpiece b) {
     if (a == b) return true; //if it's the same piece
     return (get_x(a) < get_x(b) + get_width(b) && get_x(a) + get_width(a) > get_x(b) && get_y(a) < get_y(b) + get_height(b) && get_height(a) + get_y(a) > get_y(b));
@@ -127,7 +123,6 @@ bool can_move_y(cpiece p) {
 }
 
 //useless in v2
-
 bool is_horizontal(cpiece p) {
     return can_move_x(p);
 }
