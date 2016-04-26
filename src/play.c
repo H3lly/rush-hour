@@ -28,7 +28,7 @@ int main(int argc, char** argv){
     
      */
 
-    /*    if (argc==2 && !strcmp(argv[1], "solve")){
+        if (argc==2 && !strcmp(argv[1], "solve")){
                 piece toSolve [2];
                 toSolve[0]=new_piece(0, 1, 1, 1, true, true);
                 toSolve[1]=new_piece(0, 0, 1, 1, true, true);
@@ -38,7 +38,7 @@ int main(int argc, char** argv){
                 printf("\nSolve : %d\n", s);
                 return 1;
         }
-     */
+      
 
     //asks the user which game he wants to play
     printf("\e[2J\e[H");//clean the shell
