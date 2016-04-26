@@ -33,5 +33,7 @@ bool test_equality_piece(cpiece expected, cpiece value, char * msg);
 
 // @brief Tests if the piece list is valid : no intersection, no twins, etc.
 bool valid_piece_list(piece* list, int length, int game_width, int game_height);
-#endif
 
+// @brief Fill a 1D tab with its game's pieces.
+void tableau_1D(int *t, game g);
+#endif

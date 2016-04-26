@@ -79,3 +79,24 @@ bool valid_piece_list(piece* list, int length, int game_width, int game_height){
     }
     return isValid;
 }
+
+void tableau_1D(int *t, game g){
+    int taille_tab = game_height(g)*game_width(g);
+    for (int i = 0; i<taille_tab; ++i){
+        t[i] = -1;
+    }
+    for (int num_piece = 0; num_piece<game_nb_pieces(g); ++num_piece){
+        cpiece p=game_piece(g, num_piece);
+        t[get_x(p)+(get_y(p)*6)] = num_piece;
+        if (get_width(p)>1){
+            for (int i = 1; i<get_width(p); ++i){
+                t[get_x(p)+(get_y(p)*6)+i] = num_piece;
+            }
+        }
+        if (get_height(p)>1){
+            for (int j = 1; j<get_height(p); ++j){
+                t[get_x(p)+((get_y(p)*6)+(j*6))] = num_piece;
+            }
+        }
+    }
+}

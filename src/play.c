@@ -60,7 +60,7 @@ int main(int argc, char** argv){
 }
 game game=NULL;
 if (choice==1){
-    piece list [8];
+    piece list [9];
     list[0]=new_piece_rh(0, 3, true, true);
     list[1]=new_piece_rh(0, 2, true, true);
     list[2]=new_piece_rh(0, 0, true, false);
@@ -69,8 +69,9 @@ if (choice==1){
     list[5]=new_piece_rh(3, 1, true, false);
     list[6]=new_piece_rh(4, 0, false, false);
     list[7]=new_piece_rh(5, 2, true, false);
+    list[8]=new_piece_rh(0, 5, false, true);
 
-    game=new_game_hr(8, list);
+    game=new_game_hr(9, list);
 
 } else{
     piece list [5];
@@ -123,7 +124,13 @@ if (argc==2 && !strcmp(argv[1], "solve")){
     printf("Solve : %d\n", s);
     return 1;
 }
-
+int* t = malloc (sizeof (int)*(game_width(game)*game_height(game)));
+tableau_1D(t, game);
+printf("[");
+    for (int i = 0; i<game_width(game)*game_height(game); ++i){
+        printf("%d, ",t[i]); 
+    }
+    printf("]");
     printf("\e[2J\e[H");//clean the shell
         printf("***** Welcome in RushHour ! *****\nYou need to drive the 0 car to the right !\nGood luck !\n\n");
         show_grid(game);
