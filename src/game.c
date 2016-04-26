@@ -45,7 +45,6 @@ bool valid_piece_list(piece* list, int length, int game_width, int game_height){
     return isValid;
 }
 
-
 game new_game(int width, int height, int nb_pieces, piece *pieces){
     if (!valid_piece_list(pieces, nb_pieces, width, height)) printf("All of this doesn't really seem valid.");
     game g=malloc(sizeof (struct game_s));
