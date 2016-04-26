@@ -16,7 +16,7 @@ struct game_s{
     int nb_pieces;
     int nb_moves;
     piece *piece_list;
-    int *dir_prev;
+    int *dir_prev;//contain the previous movement of each piece
 };
 
 game new_game(int width, int height, int nb_pieces, piece *pieces){
