@@ -6,6 +6,8 @@ all:
 	@make --silent test_piece test_game play
 	@echo 
 	@echo Make all end.
+	
+	
 
 sub:
 	@echo Make $(MAKEARG).
