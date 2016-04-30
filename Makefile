@@ -6,6 +6,9 @@ all:
 	@make --silent test_piece test_game play
 	@echo 
 	@echo Make all end.
+#caca
+#pipi
+#yolo
 
 sub:
 	@echo Make $(MAKEARG).
